@@ -19,4 +19,9 @@ public class GoatPickupReceiver extends Component {
     public String getID() {
         return "GoatPickupReceiver";
     }
+
+    @Override
+    public Component cloneComponent() {
+        return new GoatPickupReceiver();
+    }
 }

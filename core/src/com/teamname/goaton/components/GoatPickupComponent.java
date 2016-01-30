@@ -9,6 +9,11 @@ import com.teamname.goaton.*;
  */
 public class GoatPickupComponent extends Component {
 
+    @Override
+    public Component cloneComponent() {
+        return new GoatPickupComponent();
+    }
+
     protected void create() {
         PolygonShape arc = new PolygonShape();
         Vector2 verticies[] = new Vector2[8];

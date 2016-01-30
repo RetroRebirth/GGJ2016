@@ -28,6 +28,10 @@ public class GoatPhysicsComponent extends Component {
         circle.dispose();
     }
 
+    @Override
+    public Component cloneComponent() {
+        return new GoatPhysicsComponent();
+    }
 
     @Override
     public String getID() {

@@ -45,11 +45,7 @@ public abstract class Component implements Cloneable {
         gameObject.install(handler);
     }
 
-    @Override
-    public Object clone() throws CloneNotSupportedException
-    {
-        return super.clone();
-    }
+    public abstract Component cloneComponent();
 
     public GameObject gameObject;
 
