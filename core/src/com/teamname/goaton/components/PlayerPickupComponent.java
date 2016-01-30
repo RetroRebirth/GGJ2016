@@ -94,9 +94,11 @@ public class PlayerPickupComponent extends Component {
                     PolygonShape shape = (PolygonShape)f.getShape();
                     Vector2 verticies[] = new Vector2[8];
                     verticies[0] = new Vector2(0, 0);
-                    System.out.println("Found the fixture");
                     for (int i = 0; i < 7; i++) {
-                        float angle = i / 6.0f * (float)Math.toRadians(90.) + this.gameObject.getBody().getLinearVelocity().angle();
+                        float angle = (i - 3f) / 6.0f * (float)Math.toRadians(90.) + this.gameObject.getBody().getLinearVelocity().angle() * (float)Math.PI/180f;
+                        if (i == 3){
+                            System.out.println(angle);
+                        }
                         verticies[i + 1] = new Vector2((float)Math.cos(angle) * PICKUP_RADIUS, (float)Math.sin(angle) * PICKUP_RADIUS);
                     }
                     shape.set(verticies);
