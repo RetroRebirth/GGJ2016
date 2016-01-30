@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.teamname.goaton.GameObject;
 import com.teamname.goaton.Input.ControllerInputSorce;
 import com.teamname.goaton.Input.KeyboardInputSource;
+import com.teamname.goaton.Prefabs.Goat;
+import com.teamname.goaton.Prefabs.Player;
 import com.teamname.goaton.Scene;
 import com.teamname.goaton.GoatonWorld;
 import com.teamname.goaton.components.*;
@@ -19,14 +21,7 @@ public class TestScene extends Scene {
     private GameObject player;
     private GameObject createPlayer()
     {
-        GameObject player = new GameObject();
-        player.addComponent(new PlayerMovementComponent(new KeyboardInputSource()));
-        player.addComponent(new SpriteRenderComponent(
-                new Sprite(new Texture(Gdx.files.internal(Assets.player)))));
-        player.addComponent(new PlayerPhysicsComponent());
-        GameObject testSprite = new GameObject();
-
-
+        GameObject player = new Player();
         return player;
     }
 
@@ -45,10 +40,8 @@ public class TestScene extends Scene {
     }
 
     private void createGoats() {
-        GameObject goat = new GameObject();
-        goat.addComponent(new GoatMovementComponent());
-        goat.addComponent(new GoatSpriteComponent(new Sprite(new Texture(Gdx.files.internal(Assets.goat)))));
-        goat.addComponent(new GoatPhysicsComponent());
+        GameObject goat = new Goat();
+
 
         for(int i = 0; i < 100; i++)
         {

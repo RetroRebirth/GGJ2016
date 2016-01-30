@@ -19,14 +19,19 @@ public class GameObject {
     public List<String> tags;
 
     private Queue<Message> messages = new LinkedList<Message>();
-    private List<MsgHandler> handlers = new LinkedList<MsgHandler>();
-
+    protected List<MsgHandler> handlers = new LinkedList<MsgHandler>();
+    public List<GameObject> children = new ArrayList<GameObject>();
+    public GameObject parent = null;
 
 
     public GameObject()
     {
         this.components = new HashMap<String, Component>();
     }
+
+
+
+
 
     public GameObject(GameObject other)
     {
@@ -56,6 +61,20 @@ public class GameObject {
         return newGameObject;
     }
 
+    public void addChild(GameObject child) throws Exception
+    {
+        if (child.parent != null) {
+            throw new Exception("Child already is a child of an object");
+        }
+        this.children.add(child);
+        child.parent = this;
+    }
+    public void removeChild(GameObject child) {
+        if (children.contains(child)) {
+            child.parent = null;
+            this.children.remove(child);
+        }
+    }
 
     public void addComponent(Component c)
     {
@@ -81,6 +100,10 @@ public class GameObject {
         while(!messages.isEmpty())
         {
             Message m = messages.remove();
+            for (GameObject child : children)
+            {
+                child.send(m);
+            }
             for (MsgHandler h : handlers)
             {
                 if(h.getMsg().equals(m.getMessage()))
