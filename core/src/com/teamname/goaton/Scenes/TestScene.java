@@ -33,7 +33,7 @@ public class TestScene extends Scene {
     }
 
     private void createGoats() {
-        GameObject goat = GoatFactory.Create();
+        GameObject goat = GoatFactory.create();
 
 
         for(int i = 0; i < 100; i++)

@@ -28,7 +28,7 @@ public class GoatAnimatedSpriteComponent extends AnimatedSpriteRenderComponent {
     @Override
     protected void create() {
 
-        sprite.setColor(colors[GoatonWorld.Random.nextInt(colors.length)]);
+//        currentSprite.setColor(colors[GoatonWorld.Random.nextInt(colors.length)]);
 
         this.on("throw",new MsgHandler() {
             @Override
@@ -46,18 +46,18 @@ public class GoatAnimatedSpriteComponent extends AnimatedSpriteRenderComponent {
         {
             throwTimer -= dt;
             float offset = (float)Math.abs(Math.sin(  Math.PI*2 * (1 - throwTimer/ GoatFactory.THROWTIME)) * throwTimer);
-            sprite.setScale(1.0f + 1.5f*offset);
-            sprite.setPosition(gameObject.getPosition().x, gameObject.getPosition().y + 15 * offset );
+            currentSprite.setScale(1.0f + 1.5f*offset);
+            currentSprite.setPosition(gameObject.getPosition().x, gameObject.getPosition().y + 15 * offset );
         }
         else
         {
-            sprite.setScale(1.0f);
+            currentSprite.setScale(1.0f);
         }
         super.update(dt);
     }
 
     @Override
     public Component cloneComponent() {
-        return new GoatAnimatedSpriteComponent(new Sprite(sprite));
+        return new GoatAnimatedSpriteComponent(this.sprites);
     }
 }
