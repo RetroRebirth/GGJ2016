@@ -10,6 +10,7 @@ import com.teamname.goaton.Prefabs.Player;
 import com.teamname.goaton.Scene;
 import com.teamname.goaton.GoatonWorld;
 import com.teamname.goaton.components.*;
+import com.teamname.goaton.Assets;
 
 /**
  * Created by kpidding on 1/30/16.
@@ -19,8 +20,6 @@ public class TestScene extends Scene {
     private GameObject createPlayer()
     {
         GameObject player = new Player();
-
-
         return player;
     }
 
@@ -39,6 +38,7 @@ public class TestScene extends Scene {
 
     private void createGoats() {
         GameObject goat = new Goat();
+
 
         for(int i = 0; i < 100; i++)
         {
