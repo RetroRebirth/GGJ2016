@@ -2,6 +2,7 @@ package com.teamname.goaton;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.sun.corba.se.impl.protocol.giopmsgheaders.MessageHandler;
 import com.teamname.goaton.Component;
 
@@ -15,10 +16,12 @@ public class GameObject {
     public Vector2 position = new Vector2();
 
     public HashMap<String, Component> components;
-
+    public List<String> tags;
 
     private Queue<Message> messages = new LinkedList<Message>();
     private List<MsgHandler> handlers = new LinkedList<MsgHandler>();
+
+    public Body body = null;
 
     public GameObject() {
         this.components = new HashMap<String, Component>();
@@ -28,6 +31,7 @@ public class GameObject {
         this.components = new HashMap<String, Component>(other.components);
         this.messages = new LinkedList<Message>();
         this.handlers = new LinkedList<MsgHandler>();
+        other.tags = this.tags;
         for(Map.Entry<String, Component> e : other.components.entrySet())
         {
             try {
@@ -45,6 +49,7 @@ public class GameObject {
     public static GameObject Instantiate(GameObject targ)
     {
         GameObject newGameObject = new GameObject(targ);
+
         World.addObject(newGameObject);
         return newGameObject;
     }
@@ -64,6 +69,10 @@ public class GameObject {
 
     void update(float dt)
     {
+        if(body != null)
+        {
+            position = new Vector2(body.getPosition());
+        }
         for(Map.Entry<String, Component> e : components.entrySet())
         {
             e.getValue().update(dt);
@@ -79,6 +88,7 @@ public class GameObject {
                 }
             }
         }
+
 
     }
 

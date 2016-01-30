@@ -1,6 +1,10 @@
 package com.teamname.goaton;
 
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.physics.box2d.World;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -24,11 +28,14 @@ public class Scene {
             obj.send(msg);
         }
     }
-    public void updateRender(float dt, SpriteBatch sb)
+    public void updateRender(float dt, SpriteBatch sb, Camera camera)
     {
         while(!addList.isEmpty())
         {
-            objects.add(addList.remove());
+            GameObject obj = addList.remove();
+            obj.create();
+            objects.add(obj);
+
         }
 
         for(GameObject obj : objects)
@@ -36,7 +43,15 @@ public class Scene {
             obj.update(dt);
             obj.render(sb);
         }
+
     }
+    protected void doCollision()
+    {
+
+
+
+    }
+
     public void create()
     {
         while(!addList.isEmpty())

@@ -8,7 +8,7 @@ import com.teamname.goaton.Component;
  * Created by kpidding on 1/30/16.
  */
 public class SpriteRenderComponent extends Component {
-    private  Sprite sprite;
+    protected Sprite sprite;
     public SpriteRenderComponent(Sprite sprite)
     {
         this.sprite = sprite;
