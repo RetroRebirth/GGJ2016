@@ -9,7 +9,7 @@
 	<inherits name='Box2DLights' />
 
 	<inherits name='MainGame' />
-	<entry-point class='com.mygdx.game.client.HtmlLauncher' />
+	<entry-point class='com.teamname.goaton.client.HtmlLauncher' />
 	
 	<set-configuration-property name="gdx.assetpath" value="../core/assets" />
 </module>

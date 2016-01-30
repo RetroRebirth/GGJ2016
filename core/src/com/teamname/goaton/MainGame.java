@@ -1,4 +1,4 @@
-package com.teamname.game;
+package com.teamname.goaton;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
