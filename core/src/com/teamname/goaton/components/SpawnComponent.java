@@ -9,16 +9,16 @@ import com.teamname.goaton.MsgHandler;
 /**
  * Created by kpidding on 1/30/16.
  */
-public class ShooterComponent extends Component{
+public class SpawnComponent extends Component{
     GameObject toClone;
-    public ShooterComponent(GameObject shoot)
+    public SpawnComponent(GameObject shoot)
     {
         toClone = shoot;
     }
 
     @Override
     protected void create() {
-        final ShooterComponent thisCmp = this;
+        final SpawnComponent thisCmp = this;
         on("shoot",new MsgHandler() {
             @Override
             public void handle(Message msg) {
@@ -30,11 +30,11 @@ public class ShooterComponent extends Component{
 
     @Override
     public Object clone() throws CloneNotSupportedException {
-        return new ShooterComponent(toClone);
+        return new SpawnComponent(toClone);
     }
 
     @Override
     public String getID() {
-        return "ShooterComponent";
+        return "SpawnComponent";
     }
 }
