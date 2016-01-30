@@ -2,7 +2,7 @@ package com.teamname.goaton.Scenes;
 
 import com.teamname.goaton.GameObject;
 import com.teamname.goaton.Prefabs.GoatFactory;
-import com.teamname.goaton.Prefabs.Player;
+import com.teamname.goaton.Prefabs.PlayerFactory;
 import com.teamname.goaton.Scene;
 
 /**
@@ -12,7 +12,7 @@ public class TestScene extends Scene {
     private GameObject player;
     private GameObject createPlayer()
     {
-        GameObject player = new Player();
+        GameObject player = PlayerFactory.Create();
         return player;
     }
 
