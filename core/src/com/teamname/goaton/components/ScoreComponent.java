@@ -21,14 +21,13 @@ public class ScoreComponent extends Component {
             @Override
             public void handle(Message msg) {
                 System.out.println("Added " + msg.getArg().toString() + "From " + comp.toString());
-                GameObject.instantiate(comp.gameObject);
             }
         });
     }
 
     @Override
     public String getID() {
-        return "ScoreCompoent";
+        return "ScoreComponent";
     }
 
 
