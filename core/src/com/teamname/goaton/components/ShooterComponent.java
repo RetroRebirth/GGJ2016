@@ -28,7 +28,7 @@ public class ShooterComponent extends Component{
             @Override
             public void handle(Message msg) {
                 GameObject newObj = GameObject.Instantiate(thisCmp.toClone);
-                newObj.position = new Vector2(thisCmp.gameObject.position);
+                newObj.setPosition(thisCmp.gameObject.getPosition());
             }
         });
     }

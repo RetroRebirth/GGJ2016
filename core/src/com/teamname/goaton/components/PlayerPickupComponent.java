@@ -17,7 +17,7 @@ public class PlayerPickupComponent extends Component {
     protected void create() {
         PolygonShape arc = new PolygonShape();
         Vector2 verticies[] = new Vector2[8];
-        float radius = 20f;
+        float radius = 50f;
         verticies[0] = new Vector2(0f, 0f);
         for (int i = 0; i < 7; i++) {
             float angle = i / 6.0f * (float)Math.toRadians(90.);
@@ -76,5 +76,11 @@ public class PlayerPickupComponent extends Component {
     @Override
     public String getID() {
         return "PlayerPickupComponent";
+    }
+
+    @Override
+    public Component cloneComponent() {
+        return new PlayerPhysicsComponent();
+
     }
 }

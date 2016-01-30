@@ -39,7 +39,9 @@ public class GoatSpriteComponent extends SpriteRenderComponent {
         if(throwTimer > 0)
         {
             throwTimer -= dt;
-            sprite.setScale(1.0f + 1.5f*(float)Math.abs(Math.sin(  Math.PI*2 * (1 - throwTimer/Goat.THROWTIME)) * throwTimer));
+            float offset = (float)Math.abs(Math.sin(  Math.PI*2 * (1 - throwTimer/Goat.THROWTIME)) * throwTimer);
+            sprite.setScale(1.0f + 1.5f*offset);
+            sprite.setPosition(gameObject.getPosition().x, gameObject.getPosition().y + 15 * offset );
         }
         else
         {

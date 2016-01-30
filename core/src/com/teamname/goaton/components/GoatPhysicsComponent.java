@@ -13,14 +13,18 @@ public class GoatPhysicsComponent extends Component {
     protected void create() {
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
-        bodyDef.position.set(this.gameObject.position);
+        bodyDef.position.set(this.gameObject.getPosition());
         this.gameObject.addPhysicsBody(GoatonWorld.world.createBody(bodyDef));
         CircleShape circle = new CircleShape();
         circle.setRadius(8f);
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = circle;
         fixtureDef.filter.categoryBits = ObjectTypes.GOAT;
-        fixtureDef.filter.maskBits = ObjectTypes.GOAT | ObjectTypes.BOUNDARY | ObjectTypes.PIT | ObjectTypes.DEMON;
+        fixtureDef.filter.maskBits = ObjectTypes.GOAT |
+                                    ObjectTypes.BOUNDARY |
+                                    ObjectTypes.PIT |
+                                    ObjectTypes.DEMON |
+                                    ObjectTypes.PICKUP_DETECTOR;
         fixtureDef.restitution = 0;
 
         Fixture fixture = this.gameObject.getBody().createFixture(fixtureDef);
