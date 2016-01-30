@@ -47,7 +47,7 @@ public class PlayerPickupComponent extends Component {
                 }
                 System.out.println("Attempt to pickup");
                 if (closestGoat != null) {
-                    closestGoat.send(new Message("throw"));
+                    gameObject.send(new Message("pickupGoat",closestGoat));
                 }
             }
         });

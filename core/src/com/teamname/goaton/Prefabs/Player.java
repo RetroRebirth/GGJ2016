@@ -10,10 +10,7 @@ import com.teamname.goaton.Assets;
 import com.teamname.goaton.Component;
 import com.teamname.goaton.GameObject;
 import com.teamname.goaton.Input.KeyboardInputSource;
-import com.teamname.goaton.components.PlayerMovementComponent;
-import com.teamname.goaton.components.PlayerPhysicsComponent;
-import com.teamname.goaton.components.PlayerPickupComponent;
-import com.teamname.goaton.components.StaticSpriteRenderComponent;
+import com.teamname.goaton.components.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,6 +31,7 @@ public class Player extends GameObject {
                 new Sprite(new Texture(Gdx.files.internal(Assets.player)))));
         this.addComponent(new PlayerPhysicsComponent());
         this.addComponent(new PlayerPickupComponent());
+        this.addComponent(new GoatStackComponent());
     }
 
     /**

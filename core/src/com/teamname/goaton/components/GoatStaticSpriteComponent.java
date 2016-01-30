@@ -19,15 +19,23 @@ public class GoatStaticSpriteComponent extends StaticSpriteRenderComponent {
         super(sprite);
     }
     private float throwTimer = 0;
+    private boolean held;
     @Override
     protected void create() {
 
         sprite.setColor(colors[GoatonWorld.Random.nextInt(colors.length)]);
-
+        this.on("pickup", new MsgHandler() {
+            @Override
+            public void handle(Message msg) {
+                sprite.setScale(1.25f);
+                held = true;
+            }
+        });
         this.on("throw",new MsgHandler() {
             @Override
             public void handle(Message msg) {
                 throwTimer = GoatFactory.THROWTIME;
+                held = false;
             }
         });
         super.create();
@@ -42,8 +50,12 @@ public class GoatStaticSpriteComponent extends StaticSpriteRenderComponent {
             float offset = (float)Math.abs(Math.sin(  Math.PI*2 * (1 - throwTimer/ GoatFactory.THROWTIME)) * throwTimer);
             sprite.setScale(1.0f + 1.5f*offset);
             sprite.setPosition(gameObject.getPosition().x, gameObject.getPosition().y + 15 * offset );
+            if(throwTimer <= 0)
+            {
+                gameObject.send(new Message("onGround"));
+            }
         }
-        else
+        else if(!held)
         {
             sprite.setScale(1.0f);
         }

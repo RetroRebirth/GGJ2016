@@ -8,7 +8,7 @@ import com.teamname.goaton.*;
  * Created by Simon on 1/30/2016.
  */
 public class GoatPhysicsComponent extends Component {
-
+    Fixture gFix;
     @Override
     protected void create() {
         BodyDef bodyDef = new BodyDef();
@@ -29,9 +29,31 @@ public class GoatPhysicsComponent extends Component {
                                     ObjectTypes.PICKUP_DETECTOR;
         fixtureDef.restitution = 0;
 
-        Fixture fixture = this.gameObject.getBody().createFixture(fixtureDef);
+        gFix = this.gameObject.getBody().createFixture(fixtureDef);
 
         circle.dispose();
+
+        this.on("pickup", new MsgHandler() {
+            @Override
+            public void handle(Message msg) {
+                Filter heldFilter = gFix.getFilterData();
+                heldFilter.maskBits = ObjectTypes.DEMON | ObjectTypes.PIT;
+                gFix.setFilterData(heldFilter);
+            }
+        });
+        this.on("onGround", new MsgHandler() {
+            @Override
+            public void handle(Message msg) {
+                Filter groundFilter = gFix.getFilterData();
+                groundFilter.maskBits =
+                        ObjectTypes.GOAT |
+                        ObjectTypes.BOUNDARY |
+                        ObjectTypes.PIT |
+                        ObjectTypes.DEMON |
+                        ObjectTypes.PICKUP_DETECTOR;
+                gFix.setFilterData(groundFilter);
+            }
+        });
     }
 
     @Override

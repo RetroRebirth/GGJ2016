@@ -4,6 +4,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.teamname.goaton.Component;
 import com.teamname.goaton.GoatonWorld;
+import com.teamname.goaton.Message;
+import com.teamname.goaton.MsgHandler;
 
 /**
  * Created by kpidding on 1/30/16.
@@ -22,10 +24,24 @@ public class GoatMovementComponent extends Component {
     private float maxMoveTime = 3.f;
     private float minMoveTime = 0.5f;
     private float moveSpeed = 50f;
-
+    boolean update = true;
     @Override
     protected void create() {
+
         moveTimer = GoatonWorld.Random.nextFloat() * maxMoveTime;
+        this.on("pickup", new MsgHandler() {
+            @Override
+            public void handle(Message msg) {
+                update = false;
+                gameObject.getBody().setLinearVelocity(0,0);
+            }
+        });
+        this.on("onGround", new MsgHandler() {
+            @Override
+            public void handle(Message msg) {
+                update = true;
+            }
+        });
     }
 
     @Override
@@ -36,41 +52,39 @@ public class GoatMovementComponent extends Component {
     @Override
     protected void update(float dt) {
         super.update(dt);
-        moveTimer -= dt;
-        if(moveTimer < 0)
-        {
-            //Higher weight to stop moving.
-            if(direction != Direction.NONE & GoatonWorld.Random.nextFloat() > 0.5)
-            {
-                direction = Direction.NONE;
-            }
-            {
+        if(update) {
+            moveTimer -= dt;
+            if (moveTimer < 0) {
+                //Higher weight to stop moving.
+                if (direction != Direction.NONE & GoatonWorld.Random.nextFloat() > 0.5) {
+                    direction = Direction.NONE;
+                }
+                {
 
-                direction = GoatonWorld.RandomEnum(Direction.class);
+                    direction = GoatonWorld.RandomEnum(Direction.class);
+                }
+                moveTimer = GoatonWorld.Random.nextFloat() * (maxMoveTime - minMoveTime) + minMoveTime;
             }
-            moveTimer = GoatonWorld.Random.nextFloat() * (maxMoveTime-minMoveTime) + minMoveTime;
-        }
-        Vector2 mov = new Vector2();
-        switch (direction)
-        {
-            case UP:
-                mov.y += moveSpeed;
-                break;
-            case DOWN:
-                mov.y -= moveSpeed;
-                break;
-            case LEFT:
-                mov.x -= moveSpeed;
-                break;
-            case RIGHT:
-                mov.x += moveSpeed;
-                break;
-            case NONE:
+            Vector2 mov = new Vector2();
+            switch (direction) {
+                case UP:
+                    mov.y += moveSpeed;
+                    break;
+                case DOWN:
+                    mov.y -= moveSpeed;
+                    break;
+                case LEFT:
+                    mov.x -= moveSpeed;
+                    break;
+                case RIGHT:
+                    mov.x += moveSpeed;
+                    break;
+                case NONE:
 
-                break;
-            default:
-                break;
-        }
+                    break;
+                default:
+                    break;
+            }
         /*
         if(mov.len() == 0)
         {
@@ -80,8 +94,8 @@ public class GoatMovementComponent extends Component {
         }
         */
 
-        gameObject.getBody().setLinearVelocity(mov.x, mov.y);//;applyLinearImpulse(mov.x,mov.y,gameObject.position.x, gameObject.position.y,true);
-
+            gameObject.getBody().setLinearVelocity(mov.x, mov.y);//;applyLinearImpulse(mov.x,mov.y,gameObject.position.x, gameObject.position.y,true);
+        }
 
     }
 
