@@ -34,7 +34,8 @@ public class PlayerMovementComponent extends Component {
         }
         if(src.isThrowButtonPressed())
         {
-            GoatonWorld.sendGlobalMessage(new Message("throw"));
+            //GoatonWorld.sendGlobalMessage(new Message("throw"));
+            this.gameObject.send(new Message("pickup"));
         }
         movement.scl(speed);
         gameObject.getBody().setLinearVelocity(movement.x, movement.y);
