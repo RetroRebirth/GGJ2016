@@ -41,14 +41,10 @@ public class GameObject {
         other.tags = this.tags;
         for(Map.Entry<String, Component> e : other.components.entrySet())
         {
-            try {
-                Component newComp = (Component)e.getValue().clone();
-                addComponent(newComp);
-            }
-            catch (CloneNotSupportedException exc)
-            {
-                System.err.println("Clone not supported for " + e.getValue().getClass().toString());
-            }
+            Component newComp = e.getValue().cloneComponent();
+
+            addComponent(newComp);
+
         }
     }
 

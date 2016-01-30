@@ -26,6 +26,11 @@ public class ScoreComponent extends Component {
     }
 
     @Override
+    public Component cloneComponent() {
+        return new ScoreComponent();
+    }
+
+    @Override
     public String getID() {
         return "ScoreComponent";
     }

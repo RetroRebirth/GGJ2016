@@ -17,6 +17,11 @@ public class ShooterComponent extends Component{
     }
 
     @Override
+    public Component cloneComponent() {
+        return new ShooterComponent(toClone);
+    }
+
+    @Override
     protected void create() {
         final ShooterComponent thisCmp = this;
         on("shoot",new MsgHandler() {

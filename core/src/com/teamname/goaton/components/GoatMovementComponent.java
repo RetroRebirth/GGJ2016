@@ -29,6 +29,11 @@ public class GoatMovementComponent extends Component {
     }
 
     @Override
+    public Component cloneComponent() {
+        return new GoatMovementComponent();
+    }
+
+    @Override
     protected void update(float dt) {
         super.update(dt);
         moveTimer -= dt;

@@ -3,6 +3,7 @@ package com.teamname.goaton.components;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
+import com.teamname.goaton.Component;
 import com.teamname.goaton.GoatonWorld;
 import com.teamname.goaton.Message;
 import com.teamname.goaton.MsgHandler;
@@ -48,8 +49,7 @@ public class GoatSpriteComponent extends SpriteRenderComponent {
     }
 
     @Override
-    public Object clone() throws CloneNotSupportedException {
-        GoatSpriteComponent gsp = new GoatSpriteComponent(new Sprite(sprite));
-        return gsp;
+    public Component cloneComponent() {
+        return new GoatSpriteComponent(new Sprite(sprite));
     }
 }

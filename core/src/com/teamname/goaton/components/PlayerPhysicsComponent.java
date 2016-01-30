@@ -11,6 +11,11 @@ import com.teamname.goaton.ObjectTypes;
 public class PlayerPhysicsComponent extends Component {
 
     @Override
+    public Component cloneComponent() {
+        return new PlayerPhysicsComponent();
+    }
+
+    @Override
 
     protected void create() {
         BodyDef bodyDef = new BodyDef();

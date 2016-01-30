@@ -19,6 +19,11 @@ public class PlayerMovementComponent extends Component {
     }
 
     @Override
+    public Component cloneComponent() {
+        return new PlayerMovementComponent(src);
+    }
+
+    @Override
     protected void update(float dt) {
         Vector2 movement = new Vector2();
         movement.x += src.getMovementOnAxis(GameInputSource.Axis.X_AXIS);
