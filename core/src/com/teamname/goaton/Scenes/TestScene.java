@@ -1,6 +1,9 @@
 package com.teamname.goaton.Scenes;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.utils.Array;
 import com.teamname.goaton.GameObject;
 import com.teamname.goaton.Prefabs.GoatFactory;
 import com.teamname.goaton.Prefabs.PitFactory;
@@ -22,6 +25,46 @@ public class TestScene extends Scene {
     public TestScene()
     {
 
+    }
+
+    @Override
+    public void updateRender(float dt, SpriteBatch sb) {
+        /*for (int i = 0; i < NUM_LAYERS; i++)
+        {
+            while (!addList[i].isEmpty())
+            {
+                GameObject obj = addList[i].remove();
+                obj.create();
+                objects.add(obj);
+                layers[i].add(obj);
+            }
+        }*/
+            //doing physics here?
+        camera.position.set(player.getScreenPosition().x, player.getScreenPosition().y, 0);
+        camera.update();
+            while (!addList.isEmpty())
+            {
+                GameObject obj = addList.remove();
+                obj.create();
+                objects.add(obj);
+            }
+
+            for(GameObject obj : objects)
+            {
+                obj.update(dt);
+                obj.render(sb);
+            }
+
+            GoatonWorld.world.step(dt, 6, 2);
+            Array<Body> bodies = new Array<Body>();
+            GoatonWorld.world.getBodies(bodies);
+            for(Body b : bodies)
+            {
+                GameObject go = (GameObject)b.getUserData();
+                go.setPosition(b.getPosition());
+            }
+
+            //debugRenderer.render(GoatonWorld.world, camera.combined);
     }
 
     @Override
