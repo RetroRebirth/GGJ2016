@@ -18,7 +18,7 @@ import java.util.Map;
  */
 public class GoatAnimatedSpriteComponent extends AnimatedSpriteRenderComponent {
 
-    private static final Color[] colors = {Color.BLACK,Color.BLUE,Color.CYAN,Color.GOLD};
+    private static final Color[] colors = {Color.GRAY,Color.CYAN,Color.GOLD,Color.WHITE};
     private static final String firstSprite = Assets.goat_D;
     public static final float WALKTIME = 0.3f;
 
@@ -29,6 +29,8 @@ public class GoatAnimatedSpriteComponent extends AnimatedSpriteRenderComponent {
     private float walkDuration = 0.0f;
     private int walkCycleLoop = 3;
     private GoatMovementComponent.Direction prevDir = GoatMovementComponent.Direction.NONE;
+
+    private Color color;
     
     public GoatAnimatedSpriteComponent(HashMap<String, Sprite> sprites) {
 
@@ -42,8 +44,12 @@ public class GoatAnimatedSpriteComponent extends AnimatedSpriteRenderComponent {
 
     @Override
     protected void create() {
+        // Pick a color and color all the goat sprites
+        color = colors[GoatonWorld.Random.nextInt(colors.length)];
+        for (Map.Entry<String, Sprite> entry : sprites.entrySet()) {
+            entry.getValue().setColor(color);
+        }
 
-//        currentSprite.setColor(colors[GoatonWorld.Random.nextInt(colors.length)]);
         this.on("pickup", new MsgHandler() {
             @Override
             public void handle(Message msg) {
@@ -162,6 +168,7 @@ public class GoatAnimatedSpriteComponent extends AnimatedSpriteRenderComponent {
         {
             currentSprite.setScale(1.0f);
         }
+
         super.update(dt);
     }
 
