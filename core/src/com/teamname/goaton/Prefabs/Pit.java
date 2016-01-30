@@ -9,7 +9,7 @@ import java.util.Random;
 /**
  * Created by pya on 1/30/16.
  */
-public class Pit extends GameObject {
+public class Pit {
     public Pit() {
 
 
