@@ -58,9 +58,7 @@ public class GoatMovementComponent extends Component {
                 //Higher weight to stop moving.
                 if (direction != Direction.NONE & GoatonWorld.Random.nextFloat() > 0.5) {
                     direction = Direction.NONE;
-                }
-                {
-
+                } else {
                     direction = GoatonWorld.RandomEnum(Direction.class);
                 }
                 moveTimer = GoatonWorld.Random.nextFloat() * (maxMoveTime - minMoveTime) + minMoveTime;
