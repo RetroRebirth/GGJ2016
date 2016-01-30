@@ -1,19 +1,28 @@
 package com.teamname.goaton;
 
+import aurelienribon.tweenengine.Tween;
+import aurelienribon.tweenengine.TweenManager;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.teamname.goaton.TweenWrappers.SpriteAccessor;
+
 
 public class MainGame extends ApplicationAdapter {
 	SpriteBatch batch;
-	Texture img;
-	
+
+	Sprite img;
+    static TweenManager mgr = new TweenManager();
 	@Override
 	public void create () {
-		batch = new SpriteBatch();
-		img = new Texture(Gdx.files.internal("badlogic.jpg"));
+        Tween.registerAccessor(Sprite.class, new SpriteAccessor());
+        batch = new SpriteBatch();
+		img = new Sprite(new Texture(Gdx.files.internal("badlogic.jpg")));
+
+        Tween.to(img,SpriteAccessor.TWEEN_XY,1.0f).target(100,100).repeatYoyo(10,0).start(mgr);
 	}
 
 	@Override
@@ -21,7 +30,8 @@ public class MainGame extends ApplicationAdapter {
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
-		batch.draw(img, 0, 0);
+		img.draw(batch);
+        mgr.update(1/60.0f);
 		batch.end();
 	}
 }
