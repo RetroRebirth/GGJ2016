@@ -6,20 +6,15 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.physics.box2d.Box2D;
 import com.teamname.goaton.Scenes.TestScene;
 import com.teamname.goaton.Shaders.ShaderLoader;
-import com.badlogic.gdx.utils.viewport.FillViewport;
-import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.teamname.goaton.TweenWrappers.SpriteAccessor;
-import com.teamname.goaton.components.InputComponent;
-import com.teamname.goaton.components.ScoreComponent;
 
 
 public class MainGame extends ApplicationAdapter {
@@ -35,7 +30,8 @@ public class MainGame extends ApplicationAdapter {
     GameObject go1, go2;
 
 	@Override
-	public void create () {
+	public void create ()
+	{
         Box2D.init();
         Tween.registerAccessor(Sprite.class, new SpriteAccessor());
         batch = new SpriteBatch();
@@ -49,11 +45,12 @@ public class MainGame extends ApplicationAdapter {
 		camera.position.set(camera.viewportWidth/2,camera.viewportHeight/2,0);
 
         Scene scene = new TestScene();
-        World.setScene(scene);
+        GoatonWorld.setScene(scene);
 	}
 
 	@Override
-	public void render () {
+	public void render ()
+	{
 
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -62,7 +59,7 @@ public class MainGame extends ApplicationAdapter {
         update();
 		batch.begin();
 
-        World.updateRender(1/60.f, batch,camera);
+        GoatonWorld.updateRender(1/60.f, batch,camera);
         batch.end();
 
 
@@ -75,7 +72,8 @@ public class MainGame extends ApplicationAdapter {
 	}
 
 	@Override
-	public void resize(int width, int height){
+	public void resize(int width, int height)
+	{
 		viewport.update(width,height);
 		camera.position.set(camera.viewportWidth/2,camera.viewportHeight/2,0);
 	}

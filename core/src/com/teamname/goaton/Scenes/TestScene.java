@@ -3,11 +3,10 @@ package com.teamname.goaton.Scenes;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.utils.viewport.Viewport;
 import com.teamname.goaton.GameObject;
 import com.teamname.goaton.Input.KeyboardInputSource;
 import com.teamname.goaton.Scene;
-import com.teamname.goaton.World;
+import com.teamname.goaton.GoatonWorld;
 import com.teamname.goaton.components.*;
 
 /**
@@ -21,6 +20,7 @@ public class TestScene extends Scene {
         player.addComponent(new PlayerMovementComponent(new KeyboardInputSource()));
         player.addComponent(new SpriteRenderComponent(
                 new Sprite(new Texture(Gdx.files.internal("art/player.png")))));
+        player.addComponent(new PlayerPhysicsComponent());
         GameObject testSprite = new GameObject();
 
 
@@ -44,12 +44,13 @@ public class TestScene extends Scene {
         GameObject goat = new GameObject();
         goat.addComponent(new GoatMovementComponent());
         goat.addComponent(new GoatSpriteComponent(new Sprite(new Texture(Gdx.files.internal("art/goat.png")))));
+        goat.addComponent(new GoatPhysicsComponent());
 
         for(int i = 0; i < 100; i++)
         {
             GameObject newGoat = GameObject.Instantiate(goat);
-            newGoat.position.x = World.Random.nextFloat()* 500;
-            newGoat.position.y = World.Random.nextFloat()* 500;
+            newGoat.position.x = GoatonWorld.Random.nextFloat()* 500;
+            newGoat.position.y = GoatonWorld.Random.nextFloat()* 500;
 
         }
     }

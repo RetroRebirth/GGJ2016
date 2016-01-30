@@ -3,17 +3,16 @@ package com.teamname.goaton;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.sun.corba.se.impl.protocol.giopmsgheaders.MessageHandler;
-import com.teamname.goaton.Component;
 
 import java.util.*;
-import java.util.logging.Handler;
 
 /**
  * Created by pya on 1/30/16.
  */
 public class GameObject {
+    //public Body body = null;
     public Vector2 position = new Vector2();
+    public float radius = 1f;
 
     public HashMap<String, Component> components;
     public List<String> tags;
@@ -21,7 +20,7 @@ public class GameObject {
     private Queue<Message> messages = new LinkedList<Message>();
     private List<MsgHandler> handlers = new LinkedList<MsgHandler>();
 
-    public Body body = null;
+
 
     public GameObject() {
         this.components = new HashMap<String, Component>();
@@ -45,12 +44,11 @@ public class GameObject {
         }
     }
 
-
     public static GameObject Instantiate(GameObject targ)
     {
         GameObject newGameObject = new GameObject(targ);
 
-        World.addObject(newGameObject);
+        GoatonWorld.addObject(newGameObject);
         return newGameObject;
     }
 
@@ -69,10 +67,7 @@ public class GameObject {
 
     void update(float dt)
     {
-        if(body != null)
-        {
-            position = new Vector2(body.getPosition());
-        }
+
         for(Map.Entry<String, Component> e : components.entrySet())
         {
             e.getValue().update(dt);

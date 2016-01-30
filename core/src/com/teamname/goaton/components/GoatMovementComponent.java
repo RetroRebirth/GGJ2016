@@ -1,7 +1,7 @@
 package com.teamname.goaton.components;
 
 import com.teamname.goaton.Component;
-import com.teamname.goaton.World;
+import com.teamname.goaton.GoatonWorld;
 
 /**
  * Created by kpidding on 1/30/16.
@@ -23,7 +23,7 @@ public class GoatMovementComponent extends Component {
 
     @Override
     protected void create() {
-        moveTimer = World.Random.nextFloat() * maxMoveTime;
+        moveTimer = GoatonWorld.Random.nextFloat() * maxMoveTime;
     }
 
     @Override
@@ -33,15 +33,15 @@ public class GoatMovementComponent extends Component {
         if(moveTimer < 0)
         {
             //Higher weight to stop moving.
-            if(direction != Direction.NONE & World.Random.nextFloat() > 0.5)
+            if(direction != Direction.NONE & GoatonWorld.Random.nextFloat() > 0.5)
             {
                 direction = Direction.NONE;
             }
             {
 
-                direction = World.RandomEnum(Direction.class);
+                direction = GoatonWorld.RandomEnum(Direction.class);
             }
-            moveTimer = World.Random.nextFloat() * (maxMoveTime-minMoveTime) + minMoveTime;
+            moveTimer = GoatonWorld.Random.nextFloat() * (maxMoveTime-minMoveTime) + minMoveTime;
         }
         switch (direction)
         {
