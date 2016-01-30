@@ -7,9 +7,14 @@ import com.teamname.goaton.Component;
  */
 public class PitPositionComponent extends PositionComponent {
 
+    public PitPositionComponent() {
+        super();
+    }
 
     @Override
     public Component cloneComponent() {
+        System.out.println(gameObject.getPosition().x);
+        System.out.println(gameObject.getPosition().y);
         return new PitPositionComponent();
     }
 

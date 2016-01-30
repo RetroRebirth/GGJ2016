@@ -18,10 +18,10 @@ public class PitPhysicsComponent extends Component {
 
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
-//        bodyDef.position.set(this.gameObject.position);
+        bodyDef.position.set(this.gameObject.getPosition());
         this.gameObject.addPhysicsBody(GoatonWorld.world.createBody(bodyDef));
 
-        CircleShape circle = new CircleShape();
+        /*CircleShape circle = new CircleShape();
         circle.setRadius(8f);
 
         FixtureDef fixtureDef = new FixtureDef();
@@ -32,7 +32,7 @@ public class PitPhysicsComponent extends Component {
 
         Fixture fixture = this.gameObject.getBody().createFixture(fixtureDef);
 
-        circle.dispose();
+        circle.dispose();*/
     }
 
     @Override

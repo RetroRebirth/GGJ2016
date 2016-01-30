@@ -38,10 +38,12 @@ public class GoatonWorld {
     public static void setScene(Scene newScene)
     {
         GoatonWorld.scene = newScene;
-        newScene.create();
-        world.setContactListener(new CollisionListener());
         GoatonWorld.worldHeight = scene.getCamera().viewportHeight;
         GoatonWorld.worldWidth = scene.getCamera().viewportWidth;
+        newScene.create();
+        world.setContactListener(new CollisionListener());
+
+
     }
 
 }

@@ -15,16 +15,16 @@ import java.util.HashMap;
 public class GoatFactory {
     public static final float THROWTIME = 0.75f;
 
-    public static GameObject create() {
+    public static GameObject Create() {
         GameObject go = new GameObject();
         go.addComponent(new GoatMovementComponent());
-        go.addComponent(new GoatAnimatedSpriteComponent(loadSprites()));
+        go.addComponent(new GoatAnimatedSpriteComponent(LoadSprites()));
         go.addComponent(new GoatPhysicsComponent());
-        go.addComponent(new PositionComponent());
+        go.addComponent(new GoatPositionComponent());
         return go;
     }
 
-    protected static HashMap<String, Sprite> loadSprites() {
+    protected static HashMap<String, Sprite> LoadSprites() {
         HashMap<String, Sprite> sprites = new HashMap<String, Sprite>();
 
         sprites.put(Assets.goat_D, new Sprite(new Texture(Gdx.files.internal(Assets.goat_D))));

@@ -6,6 +6,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.utils.Array;
 import com.teamname.goaton.GameObject;
 import com.teamname.goaton.Prefabs.GoatFactory;
+import com.teamname.goaton.Prefabs.PitFactory;
 import com.teamname.goaton.Prefabs.PlayerFactory;
 import com.teamname.goaton.Scene;
 import com.teamname.goaton.GoatonWorld;
@@ -71,12 +72,13 @@ public class TestScene extends Scene {
         this.player = createPlayer();
         addObject(this.player);
         createGoats();
+        createPits();
         super.create();
 
     }
 
     private void createGoats() {
-        GameObject goat = GoatFactory.create();
+        GameObject goat = GoatFactory.Create();
 
 
         for(int i = 0; i < 100; i++)
@@ -86,5 +88,14 @@ public class TestScene extends Scene {
             /*newGoat.position.x = GoatonWorld.Random.nextFloat()* 500;
             newGoat.position.y = GoatonWorld.Random.nextFloat()* 500;*/
         }
+    }
+
+    private void createPits() {
+        GameObject pit = PitFactory.Create();
+
+        for (int i = 0; i < 50; i++) {
+            GameObject newPit = GameObject.Instantiate(pit);
+        }
+
     }
 }

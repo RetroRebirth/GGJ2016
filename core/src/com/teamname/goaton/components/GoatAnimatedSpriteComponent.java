@@ -20,9 +20,16 @@ public class GoatAnimatedSpriteComponent extends AnimatedSpriteRenderComponent {
 
     private static final Color[] colors = {Color.BLACK,Color.BLUE,Color.CYAN,Color.GOLD};
     private static final String firstSprite = Assets.goat_D;
+    public static final float WALKTIME = 0.3f;
+
     private float throwTimer = 0;
     private boolean onGround;
 
+    private int walkCycle = 0;
+    private float walkDuration = 0.0f;
+    private int walkCycleLoop = 3;
+    private GoatMovementComponent.Direction prevDir = GoatMovementComponent.Direction.NONE;
+    
     public GoatAnimatedSpriteComponent(HashMap<String, Sprite> sprites) {
 
         super(sprites, sprites.get(firstSprite));
@@ -56,25 +63,85 @@ public class GoatAnimatedSpriteComponent extends AnimatedSpriteRenderComponent {
 
     @Override
     protected void update(float dt) {
+        // Read which direction the goat is moving
         GoatMovementComponent.Direction dir = ((GoatMovementComponent) this.gameObject.getComponent("GoatMovementComponent")).getDirection();
 
-        switch (dir) {
-        case UP:
-            currentSprite = sprites.get(Assets.goat_U);
-            break;
-        case DOWN:
-            currentSprite = sprites.get(Assets.goat_D);
-            break;
-        case LEFT:
-            currentSprite = sprites.get(Assets.goat_L);
-            break;
-        case RIGHT:
-            currentSprite = sprites.get(Assets.goat_R);
-            break;
-        case NONE:
-            break;
-        default:
-            break;
+        // Keep track of which frame of the cycle we should render
+        if (dir == GoatMovementComponent.Direction.NONE) {
+            walkCycle = 0;
+            walkDuration = 0.0f;
+        } else {
+            if (walkDuration >= WALKTIME) {
+                walkCycle = ++walkCycle % walkCycleLoop;
+                walkDuration = 0.0f;
+            } else {
+                walkDuration += dt;
+            }
+        }
+
+        // Render the sprite based on the direction and walk cycle
+        switch (prevDir) {
+            case UP:
+                switch (walkCycle) {
+                    case 0:
+                        currentSprite = sprites.get(Assets.goat_U);
+                        break;
+                    case 1:
+                        currentSprite = sprites.get(Assets.goat_UL);
+                        break;
+                    case 2:
+                        currentSprite = sprites.get(Assets.goat_UR);
+                        break;
+                }
+                break;
+            case DOWN:
+                switch (walkCycle) {
+                    case 0:
+                        currentSprite = sprites.get(Assets.goat_D);
+                        break;
+                    case 1:
+                        currentSprite = sprites.get(Assets.goat_DL);
+                        break;
+                    case 2:
+                        currentSprite = sprites.get(Assets.goat_DR);
+                        break;
+                }
+                break;
+            case LEFT:
+                switch (walkCycle) {
+                    case 0:
+                        currentSprite = sprites.get(Assets.goat_L);
+                        break;
+                    case 1:
+                        currentSprite = sprites.get(Assets.goat_LI);
+                        break;
+                    case 2:
+                        currentSprite = sprites.get(Assets.goat_LO);
+                        break;
+                }
+                break;
+            case RIGHT:
+                switch (walkCycle) {
+                    case 0:
+                        currentSprite = sprites.get(Assets.goat_R);
+                        break;
+                    case 1:
+                        currentSprite = sprites.get(Assets.goat_RI);
+                        break;
+                    case 2:
+                        currentSprite = sprites.get(Assets.goat_RO);
+                        break;
+                }
+                break;
+            case NONE:
+                break;
+            default:
+                break;
+        }
+
+        // Keep track of the previous direction so we can have the goats stand when they stop moving
+        if (dir != GoatMovementComponent.Direction.NONE) {
+            prevDir = dir;
         }
 
         if(throwTimer > 0)

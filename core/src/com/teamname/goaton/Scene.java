@@ -70,8 +70,41 @@ public abstract class Scene {
             obj.send(msg);
         }
     }
-    public abstract void updateRender(float dt, SpriteBatch sb);
 
+    public void updateRender(float dt, SpriteBatch sb) {
+        /*for (int i = 0; i < NUM_LAYERS; i++)
+        {
+            while (!addList[i].isEmpty())
+            {
+                GameObject obj = addList[i].remove();
+                obj.create();
+                objects.add(obj);
+                layers[i].add(obj);
+            }
+        }*/
+        //doing physics here?
+
+        while (!addList.isEmpty()) {
+            GameObject obj = addList.remove();
+            obj.create();
+            objects.add(obj);
+        }
+
+        for (GameObject obj : objects) {
+            obj.update(dt);
+            obj.render(sb);
+        }
+
+        GoatonWorld.world.step(dt, 6, 2);
+        Array<Body> bodies = new Array<Body>();
+        GoatonWorld.world.getBodies(bodies);
+        for (Body b : bodies) {
+            GameObject go = (GameObject) b.getUserData();
+            go.setPosition(b.getPosition());
+        }
+
+        //debugRenderer.render(GoatonWorld.world, camera.combined);
+    }
 
     public void updatePhysics(float dt) {
         float frameTime = Math.min(dt, 0.5f);

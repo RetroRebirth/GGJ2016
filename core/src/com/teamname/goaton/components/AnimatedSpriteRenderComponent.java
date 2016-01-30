@@ -10,8 +10,8 @@ import java.util.HashMap;
  * Created by kpidding on 1/30/16.
  */
 public class AnimatedSpriteRenderComponent extends Component {
-    protected Sprite currentSprite;
     protected HashMap<String, Sprite> sprites;
+    protected Sprite currentSprite;
 
     public AnimatedSpriteRenderComponent(HashMap<String, Sprite> sprites, Sprite currentSprite)
     {
