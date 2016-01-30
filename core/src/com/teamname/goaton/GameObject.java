@@ -57,18 +57,23 @@ public class GameObject {
         return newGameObject;
     }
 
-    public void addChild(GameObject child) throws Exception
+    public void addChild(GameObject child) throws RuntimeException
     {
         if (child.parent != null) {
-            throw new Exception("Child already is a child of an object");
+            throw new RuntimeException("Child already is a child of an object");
         }
         this.children.add(child);
         child.parent = this;
+
     }
     public void removeChild(GameObject child) {
         if (children.contains(child)) {
             child.parent = null;
             this.children.remove(child);
+        }
+        else
+        {
+            System.err.println("Could not find child");
         }
     }
 
@@ -178,13 +183,18 @@ public class GameObject {
     }
 
     public Vector2 getPosition() {
+        Vector2 pOffset = new Vector2();
+        if(parent != null)
+        {
+            pOffset = parent.getPosition();
+        }
         if(body != null)
         {
-            return body.getPosition();
+            return new Vector2(body.getPosition()).add(pOffset);
         }
         else
         {
-            return position;
+            return new Vector2(position).add(pOffset);
         }
     }
 }

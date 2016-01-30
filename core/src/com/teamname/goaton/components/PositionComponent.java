@@ -23,6 +23,7 @@ public class PositionComponent extends Component {
         boundedWidth = GoatonWorld.Random.nextFloat() * GoatonWorld.worldWidth;
         boundedHeight = GoatonWorld.Random.nextFloat() * GoatonWorld.worldHeight;
         gameObject.getBody().setTransform(new Vector2(boundedWidth, boundedHeight), 0);
+
     }
 
     @Override

@@ -6,6 +6,7 @@ import com.teamname.goaton.Component;
 import com.teamname.goaton.GoatonWorld;
 import com.teamname.goaton.Input.GameInputSource;
 import com.teamname.goaton.Message;
+import com.teamname.goaton.MsgHandler;
 
 /**
  * Created by kpidding on 1/30/16.
@@ -16,6 +17,17 @@ public class PlayerMovementComponent extends Component {
     public PlayerMovementComponent(GameInputSource src)
     {
         this.src = src;
+    }
+    private boolean holdingGoat = false;
+    @Override
+    protected void create() {
+        this.on("pickupGoat",new MsgHandler() {
+                @Override
+                public void handle(Message msg) {
+                    holdingGoat = true;
+                }
+        });
+
     }
 
     @Override
@@ -34,8 +46,17 @@ public class PlayerMovementComponent extends Component {
         }
         if(src.isThrowButtonPressed())
         {
-            //GoatonWorld.sendGlobalMessage(new Message("throw"));
-            this.gameObject.send(new Message("pickup"));
+            if(holdingGoat)
+            {
+                this.gameObject.send(new Message("throwGoat"));
+                holdingGoat = false;
+            }
+            else
+            {
+                //GoatonWorld.sendGlobalMessage(new Message("throw"));
+                this.gameObject.send(new Message("pickup"));
+
+            }
         }
         movement.scl(speed);
         gameObject.getBody().setLinearVelocity(movement.x, movement.y);
@@ -47,8 +68,4 @@ public class PlayerMovementComponent extends Component {
         return "PlayerMovementComponent";
     }
 
-    @Override
-    public Object clone() throws CloneNotSupportedException {
-        return new PlayerMovementComponent(src);
-    }
 }

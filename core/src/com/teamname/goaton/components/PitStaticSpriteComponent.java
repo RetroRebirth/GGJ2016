@@ -2,10 +2,9 @@ package com.teamname.goaton.components;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.teamname.goaton.components.SpriteRenderComponent;
 
-public class PitSpriteComponent extends SpriteRenderComponent {
-    public PitSpriteComponent(Sprite sprite) {
+public class PitStaticSpriteComponent extends StaticSpriteRenderComponent {
+    public PitStaticSpriteComponent(Sprite sprite) {
         super(sprite);
     }
 
@@ -17,7 +16,7 @@ public class PitSpriteComponent extends SpriteRenderComponent {
 
     @Override
     public Object clone() throws CloneNotSupportedException {
-        PitSpriteComponent psp = new PitSpriteComponent(new Sprite(sprite));
+        PitStaticSpriteComponent psp = new PitStaticSpriteComponent(new Sprite(sprite));
         return psp;
     }
 }

@@ -18,7 +18,7 @@ public class PitPhysicsComponent extends Component {
 
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
-        bodyDef.position.set(this.gameObject.getPosition());
+//        bodyDef.position.set(this.gameObject.position);
         this.gameObject.addPhysicsBody(GoatonWorld.world.createBody(bodyDef));
 
         CircleShape circle = new CircleShape();

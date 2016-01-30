@@ -8,7 +8,7 @@ import com.teamname.goaton.GameObject;
 import com.teamname.goaton.GoatonWorld;
 import com.teamname.goaton.components.PitPhysicsComponent;
 import com.teamname.goaton.components.PitPositionComponent;
-import com.teamname.goaton.components.PitSpriteComponent;
+import com.teamname.goaton.components.PitStaticSpriteComponent;
 
 import java.util.Random;
 
@@ -16,10 +16,10 @@ import java.util.Random;
  * Created by pya on 1/30/16.
  */
 
-public class PitFactory  {
+public class PitFactory {
     public static GameObject Create() {
         GameObject go = new GameObject();
-        go.addComponent(new PitSpriteComponent(new Sprite(new Texture(Assets.pit)))));
+        go.addComponent(new PitStaticSpriteComponent(new Sprite(new Texture(Assets.pit))));
         go.addComponent(new PitPositionComponent());
         go.addComponent(new PitPhysicsComponent());
 
