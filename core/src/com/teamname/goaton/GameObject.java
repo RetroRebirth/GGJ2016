@@ -3,6 +3,7 @@ package com.teamname.goaton;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.Contact;
 
 import java.util.*;
 
@@ -10,7 +11,7 @@ import java.util.*;
  * Created by pya on 1/30/16.
  */
 public class GameObject {
-    public Body body = null;
+    private Body body = null;
     public Vector2 position = new Vector2();
     public float radius = 1f;
 
@@ -19,12 +20,17 @@ public class GameObject {
 
     private Queue<Message> messages = new LinkedList<Message>();
     protected List<MsgHandler> handlers = new LinkedList<MsgHandler>();
-
     public List<GameObject> children = new ArrayList<GameObject>();
     public GameObject parent = null;
-    public GameObject() {
+
+
+    public GameObject()
+    {
         this.components = new HashMap<String, Component>();
     }
+
+
+
 
 
     public GameObject(GameObject other)
@@ -51,6 +57,7 @@ public class GameObject {
         GameObject newGameObject = new GameObject(targ);
 
         GoatonWorld.addObject(newGameObject);
+
         return newGameObject;
     }
 
@@ -84,9 +91,8 @@ public class GameObject {
     void update(float dt)
     {
 
-        if (body != null) {
-            this.position = new Vector2(body.getPosition());
-        }
+
+
         for(Map.Entry<String, Component> e : components.entrySet())
         {
             e.getValue().update(dt);
@@ -139,5 +145,27 @@ public class GameObject {
     }
 
 
+    public void addPhysicsBody(Body body) {
+        this.body = body;
+        this.body.setUserData(this);
+    }
 
+    public void onCollisionEnter(Contact c, GameObject other)
+    {
+        for(Map.Entry<String, Component> e : components.entrySet())
+        {
+            e.getValue().onCollisionEnter(c, other);
+        }
+    }
+    public void onCollisionExit(Contact c, GameObject other)
+    {
+        for(Map.Entry<String, Component> e : components.entrySet())
+        {
+            e.getValue().onCollisionExit(c, other);
+        }
+    }
+
+    public Body getBody() {
+        return body;
+    }
 }

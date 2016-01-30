@@ -25,7 +25,7 @@ public class GoatPickupComponent extends Component {
         fixtureDef.filter.categoryBits = ObjectTypes.PICKUP_DETECTOR;
         fixtureDef.filter.maskBits = ObjectTypes.GOAT;
 
-        Fixture fixture = this.gameObject.body.createFixture(fixtureDef);
+        Fixture fixture = this.gameObject.getBody().createFixture(fixtureDef);
 
         arc.dispose();
         final GoatPickupComponent thisCmp = this;

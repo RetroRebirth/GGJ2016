@@ -1,9 +1,11 @@
 package com.teamname.goaton.Scenes;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.teamname.goaton.GameObject;
+import com.teamname.goaton.Input.ControllerInputSorce;
 import com.teamname.goaton.Input.KeyboardInputSource;
 import com.teamname.goaton.Prefabs.Goat;
 import com.teamname.goaton.Prefabs.Player;
@@ -34,6 +36,7 @@ public class TestScene extends Scene {
         addObject(this.player);
         createGoats();
         super.create();
+
     }
 
     private void createGoats() {

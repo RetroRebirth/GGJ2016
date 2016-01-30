@@ -11,11 +11,12 @@ import com.teamname.goaton.ObjectTypes;
 public class PlayerPhysicsComponent extends Component {
 
     @Override
+
     protected void create() {
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         bodyDef.position.set(this.gameObject.position);
-        this.gameObject.body = GoatonWorld.world.createBody(bodyDef);
+        this.gameObject.addPhysicsBody(GoatonWorld.world.createBody(bodyDef));
         CircleShape circle = new CircleShape();
         circle.setRadius(8f);
         FixtureDef fixtureDef = new FixtureDef();
@@ -23,8 +24,8 @@ public class PlayerPhysicsComponent extends Component {
         fixtureDef.filter.categoryBits = ObjectTypes.PLAYER;
         fixtureDef.filter.maskBits = ObjectTypes.PLAYER | ObjectTypes.BOUNDARY | ObjectTypes.PIT | ObjectTypes.DEMON;
         fixtureDef.restitution = 0;
-        Fixture fixture = this.gameObject.body.createFixture(fixtureDef);
-
+        fixtureDef.density = 0.1f;
+        Fixture fixture = this.gameObject.getBody().createFixture(fixtureDef);
         circle.dispose();
     }
 

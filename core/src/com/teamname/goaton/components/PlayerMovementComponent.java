@@ -1,7 +1,9 @@
 package com.teamname.goaton.components;
 
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.teamname.goaton.Component;
+import com.teamname.goaton.GoatonWorld;
 import com.teamname.goaton.Input.GameInputSource;
 import com.teamname.goaton.Message;
 
@@ -25,12 +27,13 @@ public class PlayerMovementComponent extends Component {
         {
             movement = movement.nor();
         }
-        gameObject.position.add(movement.scl(speed * dt));
-
         if(src.isThrowButtonPressed())
         {
-           gameObject.send(new Message("shoot"));
+            GoatonWorld.sendGlobalMessage(new Message("throw"));
         }
+        movement.scl(speed);
+        gameObject.getBody().setLinearVelocity(movement.x, movement.y);
+
     }
 
     @Override
