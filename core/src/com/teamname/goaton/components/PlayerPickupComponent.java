@@ -1,6 +1,7 @@
 package com.teamname.goaton.components;
 
 import com.badlogic.gdx.graphics.Cursor;
+import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.teamname.goaton.*;
@@ -14,14 +15,14 @@ import java.util.List;
 public class PlayerPickupComponent extends Component {
 
     List<GameObject> legalGoats = new LinkedList<GameObject>();
+    public static final float PICKUP_RADIUS = 50f;
     protected void create() {
         PolygonShape arc = new PolygonShape();
         Vector2 verticies[] = new Vector2[8];
-        float radius = 50f;
         verticies[0] = new Vector2(0f, 0f);
         for (int i = 0; i < 7; i++) {
-            float angle = i / 6.0f * (float)Math.toRadians(90.);
-            verticies[i + 1] = new Vector2((float)Math.cos(angle) * radius, (float)Math.sin(angle) * radius);
+            float angle = (i - 3) / 6.0f * (float)Math.toRadians(90.);
+            verticies[i + 1] = new Vector2((float)Math.cos(angle) * PICKUP_RADIUS, (float)Math.sin(angle) * PICKUP_RADIUS);
         }
         arc.set(verticies);
         FixtureDef fixtureDef = new FixtureDef();
@@ -37,7 +38,7 @@ public class PlayerPickupComponent extends Component {
         on("pickup",new MsgHandler() {
             @Override
             public void handle(Message msg) {
-                float minDist = 1000f;
+                float minDist = 10000000f;
                 GameObject closestGoat = null;
                 for (GameObject goat : legalGoats) {
                     if (thisCmp.gameObject.getBody().getPosition().dst2(goat.getBody().getPosition()) < minDist) {
@@ -73,6 +74,26 @@ public class PlayerPickupComponent extends Component {
         }
     }
 
+    @Override
+    protected void update(float dt) {
+        if (this.gameObject.getBody().getLinearVelocity().len() > 0) {
+            for(Fixture f : this.gameObject.getBody().getFixtureList()) {
+                if (f.getShape().getType() == Shape.Type.Polygon)
+                {
+                    PolygonShape shape = (PolygonShape)f.getShape();
+                    Vector2 verticies[] = new Vector2[8];
+                    verticies[0] = new Vector2(0, 0);
+                    System.out.println("Found the fixture");
+                    for (int i = 0; i < 7; i++) {
+                        float angle = i / 6.0f * (float)Math.toRadians(90.) + this.gameObject.getBody().getLinearVelocity().angle();
+                        verticies[i + 1] = new Vector2((float)Math.cos(angle) * PICKUP_RADIUS, (float)Math.sin(angle) * PICKUP_RADIUS);
+                    }
+                    shape.set(verticies);
+                }
+            }
+
+        }
+    }
     @Override
     public String getID() {
         return "PlayerPickupComponent";
