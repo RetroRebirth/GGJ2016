@@ -12,10 +12,10 @@ import com.teamname.goaton.Prefabs.GoatFactory;
 /**
  * Created by kpidding on 1/30/16.
  */
-public class GoatSpriteComponent extends SpriteRenderComponent {
+public class GoatStaticSpriteComponent extends StaticSpriteRenderComponent {
 
     private static final Color[] colors = {Color.BLACK,Color.BLUE,Color.CYAN,Color.GOLD};
-    public GoatSpriteComponent(Sprite sprite) {
+    public GoatStaticSpriteComponent(Sprite sprite) {
         super(sprite);
     }
     private float throwTimer = 0;
@@ -52,6 +52,6 @@ public class GoatSpriteComponent extends SpriteRenderComponent {
 
     @Override
     public Component cloneComponent() {
-        return new GoatSpriteComponent(new Sprite(sprite));
+        return new GoatStaticSpriteComponent(new Sprite(sprite));
     }
 }

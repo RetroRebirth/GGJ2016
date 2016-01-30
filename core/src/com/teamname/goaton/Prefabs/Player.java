@@ -2,7 +2,6 @@ package com.teamname.goaton.Prefabs; /**
  * Created by pya on 1/30/16.
  */
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -14,7 +13,7 @@ import com.teamname.goaton.Input.KeyboardInputSource;
 import com.teamname.goaton.components.PlayerMovementComponent;
 import com.teamname.goaton.components.PlayerPhysicsComponent;
 import com.teamname.goaton.components.PlayerPickupComponent;
-import com.teamname.goaton.components.SpriteRenderComponent;
+import com.teamname.goaton.components.StaticSpriteRenderComponent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,7 +30,7 @@ public class Player extends GameObject {
 
     public Player() {
         this.addComponent(new PlayerMovementComponent(new KeyboardInputSource()));
-        this.addComponent(new SpriteRenderComponent(
+        this.addComponent(new StaticSpriteRenderComponent(
                 new Sprite(new Texture(Gdx.files.internal(Assets.player)))));
         this.addComponent(new PlayerPhysicsComponent());
         this.addComponent(new PlayerPickupComponent());
