@@ -23,7 +23,7 @@ public class GoatMovementComponent extends Component {
     private float moveTimer;
     private float maxMoveTime = 3.f;
     private float minMoveTime = 0.5f;
-    private float moveSpeed = 50f;
+    private float moveSpeed = 5f;
     boolean update = true;
     @Override
     protected void create() {

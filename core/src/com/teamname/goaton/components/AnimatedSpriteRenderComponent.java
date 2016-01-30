@@ -21,7 +21,7 @@ public class AnimatedSpriteRenderComponent extends Component {
 
     @Override
     protected void update(float dt) {
-        currentSprite.setPosition(gameObject.getPosition().x - currentSprite.getOriginX(),gameObject.getPosition().y  - currentSprite.getOriginY());
+        currentSprite.setPosition(gameObject.getScreenPosition().x - currentSprite.getOriginX(),gameObject.getScreenPosition().y  - currentSprite.getOriginY());
     }
 
     @Override

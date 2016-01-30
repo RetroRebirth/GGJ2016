@@ -22,7 +22,7 @@ public class PositionComponent extends Component {
     protected void create() {
         boundedWidth = GoatonWorld.Random.nextFloat() * GoatonWorld.worldWidth;
         boundedHeight = GoatonWorld.Random.nextFloat() * GoatonWorld.worldHeight;
-        gameObject.getBody().setTransform(new Vector2(boundedWidth, boundedHeight), 0);
+        gameObject.setPosition(new Vector2(boundedWidth,boundedHeight));
 
     }
 

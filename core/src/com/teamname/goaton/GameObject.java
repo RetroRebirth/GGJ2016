@@ -160,6 +160,7 @@ public class GameObject {
 
     public void addPhysicsBody(Body body) {
         this.body = body;
+        body.setTransform(this.position,0);
         this.body.setUserData(this);
     }
 
