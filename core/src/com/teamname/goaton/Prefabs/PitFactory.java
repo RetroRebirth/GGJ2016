@@ -1,8 +1,14 @@
 package com.teamname.goaton.Prefabs;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
+import com.teamname.goaton.Assets;
 import com.teamname.goaton.GameObject;
 import com.teamname.goaton.GoatonWorld;
+import com.teamname.goaton.components.PitPhysicsComponent;
+import com.teamname.goaton.components.PitPositionComponent;
+import com.teamname.goaton.components.PitSpriteComponent;
 
 import java.util.Random;
 
@@ -12,12 +18,11 @@ import java.util.Random;
 
 public class PitFactory  {
     public static GameObject Create() {
-        Random random = new Random();
         GameObject go = new GameObject();
-        float boundedHeight = random.nextFloat() * GoatonWorld.worldHeight;
-        float boundedWidth = random.nextFloat() * GoatonWorld.worldWidth;
+        go.addComponent(new PitSpriteComponent(new Sprite(new Texture(Assets.pit)))));
+        go.addComponent(new PitPositionComponent());
+        go.addComponent(new PitPhysicsComponent());
 
-        go.setPosition(new Vector2(boundedWidth, boundedHeight));
         return go;
     }
 
