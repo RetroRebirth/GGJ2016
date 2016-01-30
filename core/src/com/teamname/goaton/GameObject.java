@@ -89,7 +89,7 @@ public class GameObject {
         messages.add(msg);
     }
 
-    void update(float dt)
+    public void update(float dt)
     {
 
 
@@ -117,7 +117,7 @@ public class GameObject {
 
     }
 
-    void render(SpriteBatch sb)
+    public void render(SpriteBatch sb)
     {
         for(Map.Entry<String, Component> e : components.entrySet())
         {
@@ -126,7 +126,7 @@ public class GameObject {
 
     }
 
-    void create()
+    public void create()
     {
         for(Map.Entry<String, Component> e : components.entrySet())
         {
@@ -147,7 +147,7 @@ public class GameObject {
     }
 
 
-    void install(MsgHandler handler)
+    public void install(MsgHandler handler)
     {
         handlers.add(handler);
     }
@@ -196,5 +196,10 @@ public class GameObject {
         {
             return new Vector2(position).add(pOffset);
         }
+    }
+
+    public Vector2 getScreenPosition()
+    {
+        return getPosition().scl(GoatonWorld.TILE_SIZE);
     }
 }

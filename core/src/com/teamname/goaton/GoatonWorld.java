@@ -16,6 +16,7 @@ public class GoatonWorld {
     public static World world = new World(new Vector2(0, 0), true); //no gravity
     private static Scene scene;
     public static Random Random = new Random();
+    public static final int TILE_SIZE = 32;
 
     public static <T extends Enum<?>> T RandomEnum(Class<T> clazz){
         int x = GoatonWorld.Random.nextInt(clazz.getEnumConstants().length);
