@@ -1,5 +1,3 @@
-package com.teamname.goaton.desktop;
-
 /**
  * Created by pya on 1/30/16.
  */
