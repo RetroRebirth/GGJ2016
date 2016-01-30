@@ -3,6 +3,7 @@ package com.teamname.goaton;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.Contact;
 
 import java.util.*;
 
@@ -124,6 +125,21 @@ public class GameObject {
     public void addPhysicsBody(Body body) {
         this.body = body;
         this.body.setUserData(this);
+    }
+
+    public void onCollisionEnter(Contact c, GameObject other)
+    {
+        for(Map.Entry<String, Component> e : components.entrySet())
+        {
+            e.getValue().onCollisionEnter(c, other);
+        }
+    }
+    public void onCollisionExit(Contact c, GameObject other)
+    {
+        for(Map.Entry<String, Component> e : components.entrySet())
+        {
+            e.getValue().onCollisionExit(c, other);
+        }
     }
 
     public Body getBody() {

@@ -2,9 +2,7 @@ package com.teamname.goaton.components;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-import com.teamname.goaton.Component;
-import com.teamname.goaton.GoatonWorld;
-import com.teamname.goaton.ObjectTypes;
+import com.teamname.goaton.*;
 
 /**
  * Created by Simon on 1/30/2016.
@@ -29,6 +27,7 @@ public class GoatPhysicsComponent extends Component {
 
         circle.dispose();
     }
+
 
     @Override
     public String getID() {

@@ -2,15 +2,17 @@ package com.teamname.goaton.components;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.teamname.goaton.Goat;
+
 import com.teamname.goaton.GoatonWorld;
 import com.teamname.goaton.Message;
 import com.teamname.goaton.MsgHandler;
+import com.teamname.goaton.Prefabs.Goat;
 
 /**
  * Created by kpidding on 1/30/16.
  */
 public class GoatSpriteComponent extends SpriteRenderComponent {
+
     private static final Color[] colors = {Color.BLACK,Color.BLUE,Color.CYAN,Color.GOLD};
     public GoatSpriteComponent(Sprite sprite) {
         super(sprite);
