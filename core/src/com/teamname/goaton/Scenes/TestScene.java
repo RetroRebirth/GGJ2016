@@ -8,6 +8,7 @@ import com.teamname.goaton.Input.KeyboardInputSource;
 import com.teamname.goaton.Scene;
 import com.teamname.goaton.GoatonWorld;
 import com.teamname.goaton.components.*;
+import com.teamname.goaton.Assets;
 
 /**
  * Created by kpidding on 1/30/16.
@@ -19,7 +20,7 @@ public class TestScene extends Scene {
         GameObject player = new GameObject();
         player.addComponent(new PlayerMovementComponent(new KeyboardInputSource()));
         player.addComponent(new SpriteRenderComponent(
-                new Sprite(new Texture(Gdx.files.internal("art/player.png")))));
+                new Sprite(new Texture(Gdx.files.internal(Assets.player)))));
         player.addComponent(new PlayerPhysicsComponent());
         GameObject testSprite = new GameObject();
 
@@ -43,7 +44,7 @@ public class TestScene extends Scene {
     private void createGoats() {
         GameObject goat = new GameObject();
         goat.addComponent(new GoatMovementComponent());
-        goat.addComponent(new GoatSpriteComponent(new Sprite(new Texture(Gdx.files.internal("art/goat.png")))));
+        goat.addComponent(new GoatSpriteComponent(new Sprite(new Texture(Gdx.files.internal(Assets.goat)))));
         goat.addComponent(new GoatPhysicsComponent());
 
         for(int i = 0; i < 100; i++)
