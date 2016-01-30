@@ -103,4 +103,8 @@ public class GoatMovementComponent extends Component {
     public String getID() {
         return "GoatMovementComponent";
     }
+
+    public Direction getDirection() {
+        return direction;
+    }
 }

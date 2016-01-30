@@ -18,8 +18,8 @@ import java.util.HashMap;
 public class GoatAnimatedSpriteComponent extends AnimatedSpriteRenderComponent {
 
     private static final Color[] colors = {Color.BLACK,Color.BLUE,Color.CYAN,Color.GOLD};
-    private float throwTimer = 0;
     private static final String firstSprite = Assets.goat_D;
+    private float throwTimer = 0;
 
     public GoatAnimatedSpriteComponent(HashMap<String, Sprite> sprites) {
         super(sprites, sprites.get(firstSprite));
@@ -42,6 +42,27 @@ public class GoatAnimatedSpriteComponent extends AnimatedSpriteRenderComponent {
 
     @Override
     protected void update(float dt) {
+        GoatMovementComponent.Direction dir = ((GoatMovementComponent) this.gameObject.getComponent("GoatMovementComponent")).getDirection();
+
+        switch (dir) {
+        case UP:
+            currentSprite = sprites.get(Assets.goat_U);
+            break;
+        case DOWN:
+            currentSprite = sprites.get(Assets.goat_D);
+            break;
+        case LEFT:
+            currentSprite = sprites.get(Assets.goat_L);
+            break;
+        case RIGHT:
+            currentSprite = sprites.get(Assets.goat_R);
+            break;
+        case NONE:
+            break;
+        default:
+            break;
+        }
+
         if(throwTimer > 0)
         {
             throwTimer -= dt;
