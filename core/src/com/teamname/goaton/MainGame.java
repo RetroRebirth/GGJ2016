@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
+import com.badlogic.gdx.physics.box2d.Box2D;
 import com.teamname.goaton.Scenes.TestScene;
 import com.teamname.goaton.Shaders.ShaderLoader;
 import com.badlogic.gdx.utils.viewport.FillViewport;
@@ -35,6 +36,7 @@ public class MainGame extends ApplicationAdapter {
 
 	@Override
 	public void create () {
+        Box2D.init();
         Tween.registerAccessor(Sprite.class, new SpriteAccessor());
         batch = new SpriteBatch();
 
@@ -60,7 +62,7 @@ public class MainGame extends ApplicationAdapter {
         update();
 		batch.begin();
 
-        World.updateRender(1/60.f, batch);
+        World.updateRender(1/60.f, batch,camera);
         batch.end();
 
 
