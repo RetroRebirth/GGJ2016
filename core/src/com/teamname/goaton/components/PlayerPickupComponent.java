@@ -1,6 +1,9 @@
 package com.teamname.goaton.components;
 
 import com.badlogic.gdx.graphics.Cursor;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.teamname.goaton.*;
@@ -14,6 +17,9 @@ import java.util.List;
 public class PlayerPickupComponent extends Component {
 
     List<GameObject> legalGoats = new LinkedList<GameObject>();
+
+
+
     protected void create() {
         PolygonShape arc = new PolygonShape();
         Vector2 verticies[] = new Vector2[8];
@@ -53,6 +59,7 @@ public class PlayerPickupComponent extends Component {
                 }
             }
         });
+
     }
 
 

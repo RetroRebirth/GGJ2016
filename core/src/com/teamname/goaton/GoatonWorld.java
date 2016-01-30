@@ -30,15 +30,17 @@ public class GoatonWorld {
     {
         scene.sendGlobalMessage(msg);
     }
-    public static void updateRender(float dt, SpriteBatch sb, Camera camera)
+    public static void updateRender(float dt, SpriteBatch sb)
     {
-       scene.updateRender(dt, sb, camera);
+       scene.updateRender(dt, sb);
     }
     public static void setScene(Scene newScene)
     {
         GoatonWorld.scene = newScene;
         newScene.create();
         world.setContactListener(new CollisionListener());
+        GoatonWorld.worldHeight = scene.getCamera().viewportHeight;
+        GoatonWorld.worldWidth = scene.getCamera().viewportWidth;
     }
 
 }
