@@ -2,6 +2,7 @@ package com.teamname.goaton.Prefabs; /**
  * Created by pya on 1/30/16.
  */
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -25,7 +26,7 @@ import java.util.HashMap;
 public class Player extends GameObject {
 
     /* All goats held */
-    private ArrayList<Goat> goatStack;
+    private ArrayList<GameObject> goatStack;
     private int goatCapacity = 1;
 
     public Player() {

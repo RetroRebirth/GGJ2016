@@ -7,7 +7,7 @@ import com.teamname.goaton.Component;
 import com.teamname.goaton.GoatonWorld;
 import com.teamname.goaton.Message;
 import com.teamname.goaton.MsgHandler;
-import com.teamname.goaton.Prefabs.Goat;
+import com.teamname.goaton.Prefabs.GoatFactory;
 
 /**
  * Created by kpidding on 1/30/16.
@@ -27,7 +27,7 @@ public class GoatSpriteComponent extends SpriteRenderComponent {
         this.on("throw",new MsgHandler() {
             @Override
             public void handle(Message msg) {
-                throwTimer = Goat.THROWTIME;
+                throwTimer = GoatFactory.THROWTIME;
             }
         });
         super.create();
@@ -39,7 +39,9 @@ public class GoatSpriteComponent extends SpriteRenderComponent {
         if(throwTimer > 0)
         {
             throwTimer -= dt;
-            sprite.setScale(1.0f + 1.5f*(float)Math.abs(Math.sin(  Math.PI*2 * (1 - throwTimer/Goat.THROWTIME)) * throwTimer));
+            float offset = (float)Math.abs(Math.sin(  Math.PI*2 * (1 - throwTimer/ GoatFactory.THROWTIME)) * throwTimer);
+            sprite.setScale(1.0f + 1.5f*offset);
+            sprite.setPosition(gameObject.getPosition().x, gameObject.getPosition().y + 15 * offset );
         }
         else
         {

@@ -2,9 +2,7 @@ package com.teamname.goaton;
 
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 
 import java.util.ArrayList;
@@ -63,7 +61,6 @@ public class Scene {
     }
     public void updateRender(float dt, SpriteBatch sb, Camera camera)
     {
-        debugRenderer.render(GoatonWorld.world, camera.combined);
         /*for (int i = 0; i < NUM_LAYERS; i++)
         {
             while (!addList[i].isEmpty())
@@ -95,8 +92,11 @@ public class Scene {
         for(Body b : bodies)
         {
             GameObject go = (GameObject)b.getUserData();
-            go.position = b.getPosition();
+            go.setPosition(b.getPosition());
         }
+
+        //debugRenderer.render(GoatonWorld.world, camera.combined);
+
 
 
     }

@@ -16,7 +16,7 @@ public class SpriteRenderComponent extends Component {
 
     @Override
     protected void update(float dt) {
-        sprite.setPosition(gameObject.position.x,gameObject.position.y);
+        sprite.setPosition(gameObject.getPosition().x,gameObject.getPosition().y);
     }
 
     @Override

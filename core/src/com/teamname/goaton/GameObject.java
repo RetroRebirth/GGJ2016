@@ -12,7 +12,7 @@ import java.util.*;
  */
 public class GameObject {
     private Body body = null;
-    public Vector2 position = new Vector2();
+    private Vector2 position = new Vector2();
     public float radius = 1f;
 
     public HashMap<String, Component> components;
@@ -129,6 +129,18 @@ public class GameObject {
         }
     }
 
+    public void setPosition(Vector2 pos)
+    {
+        if(body != null)
+        {
+            body.setTransform(pos,body.getAngle());
+        }
+        else
+        {
+            position = pos;
+        }
+    }
+
 
     void install(MsgHandler handler)
     {
@@ -163,5 +175,16 @@ public class GameObject {
 
     public Body getBody() {
         return body;
+    }
+
+    public Vector2 getPosition() {
+        if(body != null)
+        {
+            return body.getPosition();
+        }
+        else
+        {
+            return position;
+        }
     }
 }

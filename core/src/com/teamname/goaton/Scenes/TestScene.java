@@ -1,19 +1,9 @@
 package com.teamname.goaton.Scenes;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.controllers.Controllers;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.teamname.goaton.GameObject;
-import com.teamname.goaton.Input.ControllerInputSorce;
-import com.teamname.goaton.Input.KeyboardInputSource;
-import com.teamname.goaton.Prefabs.Goat;
+import com.teamname.goaton.Prefabs.GoatFactory;
 import com.teamname.goaton.Prefabs.Player;
 import com.teamname.goaton.Scene;
-import com.teamname.goaton.GoatonWorld;
-import com.teamname.goaton.components.*;
-import com.teamname.goaton.Assets;
 
 /**
  * Created by kpidding on 1/30/16.
@@ -41,15 +31,15 @@ public class TestScene extends Scene {
     }
 
     private void createGoats() {
-        GameObject goat = new Goat();
+        GameObject goat = GoatFactory.Create();
 
 
         for(int i = 0; i < 100; i++)
         {
             GameObject newGoat = GameObject.Instantiate(goat);
+
             /*newGoat.position.x = GoatonWorld.Random.nextFloat()* 500;
             newGoat.position.y = GoatonWorld.Random.nextFloat()* 500;*/
-
         }
     }
 }

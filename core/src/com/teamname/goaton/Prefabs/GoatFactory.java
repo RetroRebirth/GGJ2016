@@ -18,15 +18,15 @@ import java.util.Random;
 /**
  * Created by pya on 1/30/16.
  */
-public class Goat extends GameObject {
+public class GoatFactory {
     public static final float THROWTIME = 0.75f;
 
-    public Goat() {
-        super();
-        this.addComponent(new GoatMovementComponent());
-        this.addComponent(new GoatSpriteComponent(new Sprite(new Texture(Gdx.files.internal(Assets.goat)))));
-        this.addComponent(new GoatPhysicsComponent());
-        this.addComponent(new PositionComponent());
-
+    public static GameObject Create() {
+        GameObject go = new GameObject();
+        go.addComponent(new GoatMovementComponent());
+        go.addComponent(new GoatSpriteComponent(new Sprite(new Texture(Gdx.files.internal(Assets.goat)))));
+        go.addComponent(new GoatPhysicsComponent());
+        go.addComponent(new PositionComponent());
+        return go;
     }
 }

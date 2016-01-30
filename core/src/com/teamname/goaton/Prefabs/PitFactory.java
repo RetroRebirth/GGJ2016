@@ -9,16 +9,16 @@ import java.util.Random;
 /**
  * Created by pya on 1/30/16.
  */
-public class Pit {
-    public Pit() {
 
-
-
+public class PitFactory  {
+    public static GameObject Create() {
         Random random = new Random();
+        GameObject go = new GameObject();
         float boundedHeight = random.nextFloat() * GoatonWorld.worldHeight;
         float boundedWidth = random.nextFloat() * GoatonWorld.worldWidth;
 
-        this.position = new Vector2(boundedWidth, boundedHeight);
+        go.setPosition(new Vector2(boundedWidth, boundedHeight));
+        return go;
     }
 
 
