@@ -11,30 +11,23 @@ import java.util.Queue;
  * Created by kpidding on 1/29/16.
  */
 public class World {
-    static List<GameObject> objects = new ArrayList<GameObject>();
-    static Queue<GameObject> addList = new LinkedList<GameObject>();
+    private static Scene scene;
+
     public static void addObject(GameObject object)
     {
-        addList.add(object);
+        scene.addObject(object);
     }
     public static void sendGlobalMessage(Message msg)
     {
-        for(GameObject obj : objects)
-        {
-            obj.send(msg);
-        }
+        scene.sendGlobalMessage(msg);
     }
     public static void updateRender(float dt, SpriteBatch sb)
     {
-        while(!addList.isEmpty())
-        {
-            objects.add(addList.remove());
-        }
-
-        for(GameObject obj : objects)
-        {
-            obj.update(dt);
-            obj.render(sb);
-        }
+       scene.updateRender(dt, sb);
+    }
+    public static void setScene(Scene newScene)
+    {
+        newScene.create();
+        World.scene = newScene;
     }
 }

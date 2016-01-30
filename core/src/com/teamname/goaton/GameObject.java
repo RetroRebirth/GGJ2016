@@ -1,6 +1,7 @@
 package com.teamname.goaton;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import com.sun.corba.se.impl.protocol.giopmsgheaders.MessageHandler;
 import com.teamname.goaton.Component;
 
@@ -11,8 +12,11 @@ import java.util.logging.Handler;
  * Created by pya on 1/30/16.
  */
 public class GameObject {
+    public Vector2 position = new Vector2();
 
     public HashMap<String, Component> components;
+
+
     private Queue<Message> messages = new LinkedList<Message>();
     private List<MsgHandler> handlers = new LinkedList<MsgHandler>();
 
@@ -27,22 +31,18 @@ public class GameObject {
         for(Map.Entry<String, Component> e : other.components.entrySet())
         {
             try {
-                Component newComp = e.getValue().getClass().newInstance();
+                Component newComp = (Component)e.getValue().clone();
                 addComponent(newComp);
             }
-            catch(InstantiationException err)
+            catch (CloneNotSupportedException exc)
             {
-                System.err.println("Oh noes " + err.getMessage());
-            }
-            catch(IllegalAccessException err)
-            {
-                System.err.println("Illegal access: " + err.getMessage());
+                System.err.println("Clone not supported for " + e.getValue().getClass().toString());
             }
         }
     }
 
 
-    public static GameObject instantiate(GameObject targ)
+    public static GameObject Instantiate(GameObject targ)
     {
         GameObject newGameObject = new GameObject(targ);
         World.addObject(newGameObject);
@@ -54,10 +54,10 @@ public class GameObject {
     {
         c.provideGameObject(this);
         components.put(c.getID(),c);
-        c.create();
+
     }
 
-    void send(Message msg)
+    public void send(Message msg)
     {
         messages.add(msg);
     }
@@ -91,6 +91,13 @@ public class GameObject {
 
     }
 
+    void create()
+    {
+        for(Map.Entry<String, Component> e : components.entrySet())
+        {
+            e.getValue().create();
+        }
+    }
 
 
     void install(MsgHandler handler)
@@ -98,6 +105,10 @@ public class GameObject {
         handlers.add(handler);
     }
 
+    public Component getComponent(String componentName)
+    {
+        return components.get(componentName);
+    }
 
 
 

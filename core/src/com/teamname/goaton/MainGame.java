@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
+import com.teamname.goaton.Scenes.TestScene;
 import com.teamname.goaton.Shaders.ShaderLoader;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -39,32 +40,14 @@ public class MainGame extends ApplicationAdapter {
 
         testProgram =  ShaderLoader.LoadShader("shaders/default.vert", "shaders/default.frag");
 
-	    img = new Sprite(new Texture(Gdx.files.internal("badlogic.jpg")));
-        batch.setShader(testProgram);
-        Tween.to(img,SpriteAccessor.TWEEN_XY,1.0f).target(100,100).repeatYoyo(10,0).start(mgr);
-        go1 = new GameObject();
-        go2 = new GameObject();
-        go1.addComponent(new InputComponent());
-        go2.addComponent(new ScoreComponent());
-
-        World.addObject(go1);
-        World.addObject(go2);
-
-
-        img = new Sprite(new Texture(Gdx.files.internal("badlogic.jpg")));
-		img.setSize(100,100);
-		img.setPosition(0,0);
-
-        Tween.to(img,SpriteAccessor.TWEEN_XY,1.0f).target(img.getX() + 1180,img.getY() +
-				620)
-				.repeatYoyo(10,0)
-				.start(mgr);
-
 		camera = new OrthographicCamera();
 		viewport = new StretchViewport(1280,720,camera);
 		viewport.apply();
 
 		camera.position.set(camera.viewportWidth/2,camera.viewportHeight/2,0);
+
+        Scene scene = new TestScene();
+        World.setScene(scene);
 	}
 
 	@Override
@@ -74,10 +57,10 @@ public class MainGame extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		batch.setProjectionMatrix(camera.combined);
-
+        update();
 		batch.begin();
+
         World.updateRender(1/60.f, batch);
-		img.draw(batch);
         batch.end();
 
 
