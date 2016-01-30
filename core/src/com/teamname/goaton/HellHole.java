@@ -1,3 +1,5 @@
+package com.teamname.goaton;
+
 import com.badlogic.gdx.graphics.Color;
 
 import java.lang.Math;
@@ -11,8 +13,8 @@ public class HellHole extends GameObject {
     private int radius;
     public ArrayList<Color> GoatsWanted;
 
-    public HellHole(HashMap<Integer, Component> comps) {
-        super(comps);
+    public HellHole(HashMap<String, Component> comps) {
+        components = new HashMap<String, Component>(comps);
 
         GoatRequests();
     }
@@ -23,6 +25,7 @@ public class HellHole extends GameObject {
 
     private ArrayList<Color> genRandColor(int num) {
         /* Generate random array of colors (goat requests) */
+        return null;
     }
 
 

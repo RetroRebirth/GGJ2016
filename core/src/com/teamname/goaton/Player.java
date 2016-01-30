@@ -1,4 +1,4 @@
-/**
+package com.teamname.goaton; /**
  * Created by pya on 1/30/16.
  */
 
