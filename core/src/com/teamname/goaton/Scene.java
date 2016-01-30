@@ -1,9 +1,12 @@
 package com.teamname.goaton;
 
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -24,6 +27,10 @@ public class Scene {
     List<GameObject>[] layers;
     //Queue<GameObject>[] addList;
     Queue<GameObject> addList = new LinkedList<GameObject>();
+    protected Viewport viewport;
+
+    protected Camera camera;
+    protected float viewportScale = 1.0f;
 
 
 
@@ -32,6 +39,10 @@ public class Scene {
 
     public Scene ()
     {
+        camera = new OrthographicCamera();
+        viewport = new StretchViewport(1280 / 2,720 / 2,camera);
+        viewport.apply();
+
         /*
         layers = new ArrayList[3];
         addList = new LinkedList[3];
@@ -59,7 +70,7 @@ public class Scene {
             obj.send(msg);
         }
     }
-    public void updateRender(float dt, SpriteBatch sb, Camera camera)
+    public void updateRender(float dt, SpriteBatch sb)
     {
         /*for (int i = 0; i < NUM_LAYERS; i++)
         {
@@ -146,4 +157,12 @@ public class Scene {
         //}
     }
 
+    public Camera getCamera() {
+        return camera;
+    }
+
+    public void updateViewport(int width, int height)
+    {
+        viewport.update(width,height);
+    }
 }

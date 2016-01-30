@@ -13,7 +13,7 @@ import com.teamname.goaton.MsgHandler;
  */
 public class PlayerMovementComponent extends Component {
     private GameInputSource src;
-    public float speed = 100.0f;
+    public float speed = 1000.0f;
     public PlayerMovementComponent(GameInputSource src)
     {
         this.src = src;

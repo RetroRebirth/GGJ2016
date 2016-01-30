@@ -2,6 +2,10 @@ package com.teamname.goaton.components;
 
 import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.math.Polygon;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.teamname.goaton.*;
@@ -15,7 +19,9 @@ import java.util.List;
 public class PlayerPickupComponent extends Component {
 
     List<GameObject> legalGoats = new LinkedList<GameObject>();
+
     public static final float PICKUP_RADIUS = 50f;
+
     protected void create() {
         PolygonShape arc = new PolygonShape();
         Vector2 verticies[] = new Vector2[8];
@@ -34,11 +40,15 @@ public class PlayerPickupComponent extends Component {
         Fixture fixture = this.gameObject.getBody().createFixture(fixtureDef);
 
         arc.dispose();
+
         final PlayerPickupComponent thisCmp = this;
+
         on("pickup",new MsgHandler() {
             @Override
             public void handle(Message msg) {
-                float minDist = 10000000f;
+
+                float minDist = 99999999f;
+
                 GameObject closestGoat = null;
                 for (GameObject goat : legalGoats) {
                     if (thisCmp.gameObject.getBody().getPosition().dst2(goat.getBody().getPosition()) < minDist) {
@@ -52,6 +62,7 @@ public class PlayerPickupComponent extends Component {
                 }
             }
         });
+
     }
 
 
