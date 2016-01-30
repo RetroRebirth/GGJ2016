@@ -15,8 +15,10 @@ public class GoatPhysicsComponent extends Component {
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         bodyDef.position.set(this.gameObject.getPosition());
         this.gameObject.addPhysicsBody(GoatonWorld.world.createBody(bodyDef));
+
         CircleShape circle = new CircleShape();
         circle.setRadius(8f);
+
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = circle;
         fixtureDef.filter.categoryBits = ObjectTypes.GOAT;
@@ -39,6 +41,6 @@ public class GoatPhysicsComponent extends Component {
 
     @Override
     public String getID() {
-        return "PlayerPhysicsComponent";
+        return "GoatPhysicsComponent";
     }
 }

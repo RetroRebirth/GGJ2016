@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.teamname.goaton.Assets;
 import com.teamname.goaton.Component;
 import com.teamname.goaton.GameObject;
 import com.teamname.goaton.Input.KeyboardInputSource;
@@ -30,7 +31,7 @@ public class Player extends GameObject {
     public Player() {
         this.addComponent(new PlayerMovementComponent(new KeyboardInputSource()));
         this.addComponent(new SpriteRenderComponent(
-                new Sprite(new Texture(Gdx.files.internal("art/player.png")))));
+                new Sprite(new Texture(Gdx.files.internal(Assets.player)))));
         this.addComponent(new PlayerPhysicsComponent());
         this.addComponent(new PlayerPickupComponent());
     }

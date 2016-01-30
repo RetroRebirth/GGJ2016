@@ -11,6 +11,8 @@ import java.util.Random;
  * Created by kpidding on 1/29/16.
  */
 public class GoatonWorld {
+    public static float worldWidth;
+    public static float worldHeight;
     public static World world = new World(new Vector2(0, 0), true); //no gravity
     private static Scene scene;
     public static Random Random = new Random();

@@ -44,8 +44,11 @@ public class MainGame extends ApplicationAdapter {
 
 		camera.position.set(camera.viewportWidth/2,camera.viewportHeight/2,0);
 
+		GoatonWorld.worldHeight = viewport.getWorldHeight();
+		GoatonWorld.worldWidth = viewport.getWorldWidth();
+
         Scene scene = new TestScene();
-        GoatonWorld.setScene(scene);
+		GoatonWorld.setScene(scene);
 	}
 
 	@Override
