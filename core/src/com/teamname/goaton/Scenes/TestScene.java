@@ -50,8 +50,8 @@ public class TestScene extends Scene {
         for(int i = 0; i < 100; i++)
         {
             GameObject newGoat = GameObject.Instantiate(goat);
-            newGoat.position.x = GoatonWorld.Random.nextFloat()* 500;
-            newGoat.position.y = GoatonWorld.Random.nextFloat()* 500;
+            /*newGoat.position.x = GoatonWorld.Random.nextFloat()* 500;
+            newGoat.position.y = GoatonWorld.Random.nextFloat()* 500;*/
 
         }
     }
