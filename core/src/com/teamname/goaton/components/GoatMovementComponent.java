@@ -1,5 +1,7 @@
 package com.teamname.goaton.components;
 
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.teamname.goaton.Component;
 import com.teamname.goaton.GoatonWorld;
 
@@ -19,11 +21,16 @@ public class GoatMovementComponent extends Component {
     private float moveTimer;
     private float maxMoveTime = 3.f;
     private float minMoveTime = 0.5f;
-    private float moveSpeed = 55f;
+    private float moveSpeed = 50f;
 
     @Override
     protected void create() {
         moveTimer = GoatonWorld.Random.nextFloat() * maxMoveTime;
+    }
+
+    @Override
+    public Component cloneComponent() {
+        return new GoatMovementComponent();
     }
 
     @Override
@@ -43,25 +50,38 @@ public class GoatMovementComponent extends Component {
             }
             moveTimer = GoatonWorld.Random.nextFloat() * (maxMoveTime-minMoveTime) + minMoveTime;
         }
+        Vector2 mov = new Vector2();
         switch (direction)
         {
             case UP:
-                gameObject.position.y += moveSpeed * dt;
+                mov.y += moveSpeed;
                 break;
             case DOWN:
-                gameObject.position.y -= moveSpeed * dt;
+                mov.y -= moveSpeed;
                 break;
             case LEFT:
-                gameObject.position.x -= moveSpeed * dt;
+                mov.x -= moveSpeed;
                 break;
             case RIGHT:
-                gameObject.position.x += moveSpeed*dt;
+                mov.x += moveSpeed;
                 break;
             case NONE:
+
                 break;
             default:
                 break;
         }
+        /*
+        if(mov.len() == 0)
+        {
+            Body goBody = gameObject.getBody();
+            Vector2 vel = new Vector2(goBody.getLinearVelocity()).scl(-0.8f);
+            gameObject.getBody().applyLinearImpulse(vel.x,vel.y,gameObject.position.x,gameObject.position.y,true);
+        }
+        */
+
+        gameObject.getBody().setLinearVelocity(mov.x, mov.y);//;applyLinearImpulse(mov.x,mov.y,gameObject.position.x, gameObject.position.y,true);
+
 
     }
 

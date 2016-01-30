@@ -1,3 +1,4 @@
+/*
 package com.teamname.goaton.components;
 
 import com.badlogic.gdx.math.Vector2;
@@ -5,10 +6,14 @@ import com.teamname.goaton.*;
 
 import java.util.Random;
 
+
+*/
 /**
  * Created by kpidding on 1/30/16.
- */
-public class SpawnComponent extends Component {
+ *//*
+
+
+/public class SpawnComponent extends Component {
     GameObject toClone;
     Random random = new Random();
     public SpawnComponent(GameObject spawn)
@@ -45,9 +50,16 @@ public class SpawnComponent extends Component {
     }
 
     @Override
+    public Component cloneComponent() {
+        return new SpawnComponent();
+    }
+
+    @Override
     public String getID() {
         return "SpawnComponent";
     }
 
 
 }
+
+*/

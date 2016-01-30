@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Array;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -67,7 +68,7 @@ public class Scene {
             }
         }*/
         //doing physics here?
-        GoatonWorld.world.step(dt, 6, 2);
+
         while (!addList.isEmpty())
         {
             GameObject obj = addList.remove();
@@ -81,7 +82,18 @@ public class Scene {
             obj.render(sb);
         }
 
+        GoatonWorld.world.step(dt, 6, 2);
+        Array<Body> bodies = new Array<Body>();
+        GoatonWorld.world.getBodies(bodies);
+        for(Body b : bodies)
+        {
+            GameObject go = (GameObject)b.getUserData();
+            go.position = b.getPosition();
+        }
+
+
     }
+
     public void updatePhysics(float dt) {
         float frameTime = Math.min(dt, 0.5f);
 

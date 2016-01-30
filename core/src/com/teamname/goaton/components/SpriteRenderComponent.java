@@ -32,7 +32,8 @@ public class SpriteRenderComponent extends Component {
     }
 
     @Override
-    public Object clone() throws CloneNotSupportedException {
+    public Component cloneComponent() {
         return new SpriteRenderComponent(new Sprite(sprite));
     }
+
 }

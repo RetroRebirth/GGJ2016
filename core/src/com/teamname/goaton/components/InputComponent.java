@@ -29,4 +29,9 @@ public class InputComponent extends Component {
     public String getID() {
         return "InputComponent";
     }
+
+    @Override
+    public Component cloneComponent() {
+        return new InputComponent(null);
+    }
 }

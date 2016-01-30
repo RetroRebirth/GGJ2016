@@ -1,6 +1,7 @@
 package com.teamname.goaton;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.physics.box2d.Contact;
 
 /**
  * Created by pya on 1/30/16.
@@ -26,15 +27,13 @@ public abstract class Component implements Cloneable {
     {
 
     }
-    protected void onHit(GameObject other)
+
+
+    protected void onCollisionEnter(Contact collision, GameObject other)
     {
 
     }
-    protected void onCollisionEnter(GameObject other)
-    {
-
-    }
-    protected  void onCollisionExit(GameObject other)
+    protected  void onCollisionExit(Contact collision, GameObject other)
     {
 
     }
@@ -46,11 +45,7 @@ public abstract class Component implements Cloneable {
         gameObject.install(handler);
     }
 
-    @Override
-    public Object clone() throws CloneNotSupportedException
-    {
-        return super.clone();
-    }
+    public abstract Component cloneComponent();
 
     public GameObject gameObject;
 

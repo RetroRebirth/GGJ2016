@@ -11,6 +11,7 @@ import com.teamname.goaton.GoatonWorld;
 import com.teamname.goaton.components.GoatMovementComponent;
 import com.teamname.goaton.components.GoatPhysicsComponent;
 import com.teamname.goaton.components.GoatSpriteComponent;
+import com.teamname.goaton.components.PositionComponent;
 
 import java.util.Random;
 
@@ -18,19 +19,14 @@ import java.util.Random;
  * Created by pya on 1/30/16.
  */
 public class Goat extends GameObject {
+    public static final float THROWTIME = 0.75f;
+
     public Goat() {
         super();
         this.addComponent(new GoatMovementComponent());
         this.addComponent(new GoatSpriteComponent(new Sprite(new Texture(Gdx.files.internal(Assets.goat)))));
         this.addComponent(new GoatPhysicsComponent());
+        this.addComponent(new PositionComponent());
 
-        Random random = new Random();
-        float boundedHeight = random.nextFloat() * GoatonWorld.worldHeight;
-        float boundedWidth = random.nextFloat() * GoatonWorld.worldWidth;
-
-        System.out.println(boundedHeight);
-        System.out.println(boundedWidth);
-
-        this.position = new Vector2(boundedWidth, boundedHeight);
     }
 }

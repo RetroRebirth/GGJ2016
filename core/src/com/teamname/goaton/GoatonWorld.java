@@ -38,6 +38,7 @@ public class GoatonWorld {
     {
         GoatonWorld.scene = newScene;
         newScene.create();
+        world.setContactListener(new CollisionListener());
     }
 
 }

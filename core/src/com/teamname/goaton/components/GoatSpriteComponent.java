@@ -2,27 +2,54 @@ package com.teamname.goaton.components;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+
+import com.teamname.goaton.Component;
 import com.teamname.goaton.GoatonWorld;
+import com.teamname.goaton.Message;
+import com.teamname.goaton.MsgHandler;
+import com.teamname.goaton.Prefabs.Goat;
 
 /**
  * Created by kpidding on 1/30/16.
  */
 public class GoatSpriteComponent extends SpriteRenderComponent {
+
     private static final Color[] colors = {Color.BLACK,Color.BLUE,Color.CYAN,Color.GOLD};
     public GoatSpriteComponent(Sprite sprite) {
         super(sprite);
     }
-
+    private float throwTimer = 0;
     @Override
     protected void create() {
 
         sprite.setColor(colors[GoatonWorld.Random.nextInt(colors.length)]);
+
+        this.on("throw",new MsgHandler() {
+            @Override
+            public void handle(Message msg) {
+                throwTimer = Goat.THROWTIME;
+            }
+        });
         super.create();
+
     }
 
     @Override
-    public Object clone() throws CloneNotSupportedException {
-        GoatSpriteComponent gsp = new GoatSpriteComponent(new Sprite(sprite));
-        return gsp;
+    protected void update(float dt) {
+        if(throwTimer > 0)
+        {
+            throwTimer -= dt;
+            sprite.setScale(1.0f + 1.5f*(float)Math.abs(Math.sin(  Math.PI*2 * (1 - throwTimer/Goat.THROWTIME)) * throwTimer));
+        }
+        else
+        {
+            sprite.setScale(1.0f);
+        }
+        super.update(dt);
+    }
+
+    @Override
+    public Component cloneComponent() {
+        return new GoatSpriteComponent(new Sprite(sprite));
     }
 }

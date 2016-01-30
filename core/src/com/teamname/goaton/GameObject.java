@@ -3,6 +3,7 @@ package com.teamname.goaton;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.Contact;
 
 import java.util.*;
 
@@ -10,7 +11,7 @@ import java.util.*;
  * Created by pya on 1/30/16.
  */
 public class GameObject {
-    public Body body = null;
+    private Body body = null;
     public Vector2 position = new Vector2();
     public float radius = 1f;
 
@@ -18,13 +19,20 @@ public class GameObject {
     public List<String> tags;
 
     private Queue<Message> messages = new LinkedList<Message>();
-    private List<MsgHandler> handlers = new LinkedList<MsgHandler>();
+    protected List<MsgHandler> handlers = new LinkedList<MsgHandler>();
+    public List<GameObject> children = new ArrayList<GameObject>();
+    public GameObject parent = null;
 
 
-
-    public GameObject() {
+    public GameObject()
+    {
         this.components = new HashMap<String, Component>();
     }
+
+
+
+
+
     public GameObject(GameObject other)
     {
         this.components = new HashMap<String, Component>(other.components);
@@ -33,14 +41,10 @@ public class GameObject {
         other.tags = this.tags;
         for(Map.Entry<String, Component> e : other.components.entrySet())
         {
-            try {
-                Component newComp = (Component)e.getValue().clone();
-                addComponent(newComp);
-            }
-            catch (CloneNotSupportedException exc)
-            {
-                System.err.println("Clone not supported for " + e.getValue().getClass().toString());
-            }
+            Component newComp = e.getValue().cloneComponent();
+
+            addComponent(newComp);
+
         }
     }
 
@@ -49,9 +53,24 @@ public class GameObject {
         GameObject newGameObject = new GameObject(targ);
 
         GoatonWorld.addObject(newGameObject);
+
         return newGameObject;
     }
 
+    public void addChild(GameObject child) throws Exception
+    {
+        if (child.parent != null) {
+            throw new Exception("Child already is a child of an object");
+        }
+        this.children.add(child);
+        child.parent = this;
+    }
+    public void removeChild(GameObject child) {
+        if (children.contains(child)) {
+            child.parent = null;
+            this.children.remove(child);
+        }
+    }
 
     public void addComponent(Component c)
     {
@@ -68,9 +87,8 @@ public class GameObject {
     void update(float dt)
     {
 
-        if (body != null) {
-            this.position = new Vector2(body.getPosition());
-        }
+
+
         for(Map.Entry<String, Component> e : components.entrySet())
         {
             e.getValue().update(dt);
@@ -78,6 +96,10 @@ public class GameObject {
         while(!messages.isEmpty())
         {
             Message m = messages.remove();
+            for (GameObject child : children)
+            {
+                child.send(m);
+            }
             for (MsgHandler h : handlers)
             {
                 if(h.getMsg().equals(m.getMessage()))
@@ -119,5 +141,27 @@ public class GameObject {
     }
 
 
+    public void addPhysicsBody(Body body) {
+        this.body = body;
+        this.body.setUserData(this);
+    }
 
+    public void onCollisionEnter(Contact c, GameObject other)
+    {
+        for(Map.Entry<String, Component> e : components.entrySet())
+        {
+            e.getValue().onCollisionEnter(c, other);
+        }
+    }
+    public void onCollisionExit(Contact c, GameObject other)
+    {
+        for(Map.Entry<String, Component> e : components.entrySet())
+        {
+            e.getValue().onCollisionExit(c, other);
+        }
+    }
+
+    public Body getBody() {
+        return body;
+    }
 }
