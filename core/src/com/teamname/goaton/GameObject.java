@@ -10,7 +10,7 @@ import java.util.*;
  * Created by pya on 1/30/16.
  */
 public class GameObject {
-    //public Body body = null;
+    public Body body = null;
     public Vector2 position = new Vector2();
     public float radius = 1f;
 
@@ -68,6 +68,9 @@ public class GameObject {
     void update(float dt)
     {
 
+        if (body != null) {
+            this.position = new Vector2(body.getPosition());
+        }
         for(Map.Entry<String, Component> e : components.entrySet())
         {
             e.getValue().update(dt);
