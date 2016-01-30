@@ -2,6 +2,7 @@ package com.teamname.goaton.components;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import com.teamname.goaton.Component;
 
 /**
@@ -12,11 +13,13 @@ public class SpriteRenderComponent extends Component {
     public SpriteRenderComponent(Sprite sprite)
     {
         this.sprite = sprite;
+        sprite.setOrigin(sprite.getWidth()/2,sprite.getHeight()/2);
     }
 
     @Override
     protected void update(float dt) {
-        sprite.setPosition(gameObject.getPosition().x,gameObject.getPosition().y);
+
+        sprite.setPosition(gameObject.getPosition().x - sprite.getOriginX(),gameObject.getPosition().y - sprite.getOriginY());
     }
 
     @Override

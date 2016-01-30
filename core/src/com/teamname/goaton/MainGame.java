@@ -38,7 +38,7 @@ public class MainGame extends ApplicationAdapter {
 
         testProgram =  ShaderLoader.LoadShader("shaders/default.vert", "shaders/default.frag");
 
-		camera = new OrthographicCamera();
+		camera = new OrthographicCamera(1280, 720);
 		viewport = new StretchViewport(1280,720,camera);
 		viewport.apply();
 

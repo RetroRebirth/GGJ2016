@@ -11,6 +11,7 @@ import com.teamname.goaton.*;
 import com.teamname.goaton.Prefabs.GoatFactory;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by kpidding on 1/30/16.
@@ -20,16 +21,29 @@ public class GoatAnimatedSpriteComponent extends AnimatedSpriteRenderComponent {
     private static final Color[] colors = {Color.BLACK,Color.BLUE,Color.CYAN,Color.GOLD};
     private static final String firstSprite = Assets.goat_D;
     private float throwTimer = 0;
+    private boolean onGround;
 
     public GoatAnimatedSpriteComponent(HashMap<String, Sprite> sprites) {
+
         super(sprites, sprites.get(firstSprite));
+        for(Map.Entry<String,Sprite> e : sprites.entrySet())
+        {
+            Sprite s = e.getValue();
+            s.setOrigin(s.getWidth()/2,s.getHeight()/2);
+        }
     }
 
     @Override
     protected void create() {
 
 //        currentSprite.setColor(colors[GoatonWorld.Random.nextInt(colors.length)]);
-
+        this.on("pickup", new MsgHandler() {
+            @Override
+            public void handle(Message msg) {
+                currentSprite.setScale(1.15f);
+                onGround = false;
+            }
+        });
         this.on("throw",new MsgHandler() {
             @Override
             public void handle(Message msg) {
@@ -68,9 +82,16 @@ public class GoatAnimatedSpriteComponent extends AnimatedSpriteRenderComponent {
             throwTimer -= dt;
             float offset = (float)Math.abs(Math.sin(  Math.PI*2 * (1 - throwTimer/ GoatFactory.THROWTIME)) * throwTimer);
             currentSprite.setScale(1.0f + 1.5f*offset);
-            currentSprite.setPosition(gameObject.getPosition().x, gameObject.getPosition().y + 15 * offset );
+            currentSprite.setPosition(
+                    gameObject.getPosition().x - currentSprite.getOriginX(),
+                    gameObject.getPosition().y - currentSprite.getOriginY() + 15 * offset );
+            if(throwTimer <=0)
+            {
+                gameObject.send(new Message("onGround"));
+                onGround = true;
+            }
         }
-        else
+        else if(onGround)
         {
             currentSprite.setScale(1.0f);
         }
@@ -79,6 +100,12 @@ public class GoatAnimatedSpriteComponent extends AnimatedSpriteRenderComponent {
 
     @Override
     public Component cloneComponent() {
-        return new GoatAnimatedSpriteComponent(this.sprites);
+        HashMap<String, Sprite> newSprites = new HashMap<String, Sprite>();
+        for(Map.Entry<String, Sprite> e : this.sprites.entrySet())
+        {
+            newSprites.put(e.getKey(),new Sprite(e.getValue()));
+        }
+        return new GoatAnimatedSpriteComponent(newSprites);
+
     }
 }

@@ -33,11 +33,13 @@ public class PlayerPickupComponent extends Component {
         Fixture fixture = this.gameObject.getBody().createFixture(fixtureDef);
 
         arc.dispose();
+
         final PlayerPickupComponent thisCmp = this;
+
         on("pickup",new MsgHandler() {
             @Override
             public void handle(Message msg) {
-                float minDist = 1000f;
+                float minDist = 99999999f;
                 GameObject closestGoat = null;
                 for (GameObject goat : legalGoats) {
                     if (thisCmp.gameObject.getBody().getPosition().dst2(goat.getBody().getPosition()) < minDist) {
