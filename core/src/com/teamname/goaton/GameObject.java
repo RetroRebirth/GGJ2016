@@ -1,6 +1,7 @@
-package com.teamname.goaton.desktop;
+package com.teamname.goaton;
 
-import java.util.ArrayList;
+import com.teamname.goaton.Component;
+
 import java.util.HashMap;
 
 /**
