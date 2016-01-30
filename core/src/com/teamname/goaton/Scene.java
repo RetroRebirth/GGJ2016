@@ -106,7 +106,7 @@ public class Scene {
             go.setPosition(b.getPosition());
         }
 
-        debugRenderer.render(GoatonWorld.world, camera.combined);
+        //debugRenderer.render(GoatonWorld.world, camera.combined);
 
 
 
