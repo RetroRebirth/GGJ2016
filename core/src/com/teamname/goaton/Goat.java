@@ -13,6 +13,7 @@ import java.util.HashMap;
  * Created by pya on 1/30/16.
  */
 public class Goat extends GameObject {
+    public static final float THROWTIME = 0.75f;
     /* com.teamname.goaton.Goat color */
     public Color color;
 

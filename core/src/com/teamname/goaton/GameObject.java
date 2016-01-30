@@ -10,7 +10,7 @@ import java.util.*;
  * Created by pya on 1/30/16.
  */
 public class GameObject {
-    public Body body = null;
+    private Body body = null;
     public Vector2 position = new Vector2();
     public float radius = 1f;
 
@@ -22,9 +22,11 @@ public class GameObject {
 
 
 
-    public GameObject() {
+    public GameObject()
+    {
         this.components = new HashMap<String, Component>();
     }
+
     public GameObject(GameObject other)
     {
         this.components = new HashMap<String, Component>(other.components);
@@ -49,6 +51,7 @@ public class GameObject {
         GameObject newGameObject = new GameObject(targ);
 
         GoatonWorld.addObject(newGameObject);
+
         return newGameObject;
     }
 
@@ -68,9 +71,8 @@ public class GameObject {
     void update(float dt)
     {
 
-        if (body != null) {
-            this.position = new Vector2(body.getPosition());
-        }
+
+
         for(Map.Entry<String, Component> e : components.entrySet())
         {
             e.getValue().update(dt);
@@ -119,5 +121,12 @@ public class GameObject {
     }
 
 
+    public void addPhysicsBody(Body body) {
+        this.body = body;
+        this.body.setUserData(this);
+    }
 
+    public Body getBody() {
+        return body;
+    }
 }
