@@ -23,7 +23,6 @@ public class PlayerPhysicsComponent extends Component {
         fixtureDef.filter.categoryBits = ObjectTypes.PLAYER;
         fixtureDef.filter.maskBits = ObjectTypes.PLAYER | ObjectTypes.BOUNDARY | ObjectTypes.PIT | ObjectTypes.DEMON;
         fixtureDef.restitution = 0;
-
         Fixture fixture = this.gameObject.body.createFixture(fixtureDef);
 
         circle.dispose();
