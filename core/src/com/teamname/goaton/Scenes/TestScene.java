@@ -1,11 +1,9 @@
 package com.teamname.goaton.Scenes;
 
-import com.badlogic.gdx.math.Vector2;
 import com.teamname.goaton.GameObject;
-import com.teamname.goaton.Prefabs.Goat;
+import com.teamname.goaton.Prefabs.GoatFactory;
 import com.teamname.goaton.Prefabs.Player;
 import com.teamname.goaton.Scene;
-import com.teamname.goaton.GoatonWorld;
 
 /**
  * Created by kpidding on 1/30/16.
@@ -33,7 +31,7 @@ public class TestScene extends Scene {
     }
 
     private void createGoats() {
-        GameObject goat = new Goat();
+        GameObject goat = GoatFactory.Create();
 
 
         for(int i = 0; i < 100; i++)
