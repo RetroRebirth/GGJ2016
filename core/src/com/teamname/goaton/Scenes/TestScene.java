@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.teamname.goaton.GameObject;
 import com.teamname.goaton.Input.ControllerInputSorce;
 import com.teamname.goaton.Input.KeyboardInputSource;

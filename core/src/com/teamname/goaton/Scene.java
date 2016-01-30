@@ -26,6 +26,12 @@ public class Scene {
     List<GameObject>[] layers;
     //Queue<GameObject>[] addList;
     Queue<GameObject> addList = new LinkedList<GameObject>();
+
+
+
+    private Box2DDebugRenderer debugRenderer = new Box2DDebugRenderer();
+
+
     public Scene ()
     {
         /*
@@ -57,6 +63,7 @@ public class Scene {
     }
     public void updateRender(float dt, SpriteBatch sb, Camera camera)
     {
+        debugRenderer.render(GoatonWorld.world, camera.combined);
         /*for (int i = 0; i < NUM_LAYERS; i++)
         {
             while (!addList[i].isEmpty())
