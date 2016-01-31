@@ -22,6 +22,7 @@ public class GoatFactory {
         go.addComponent(new GoatPhysicsComponent());
         go.addComponent(new GoatPositionComponent());
         go.tags.add("goat");
+        go.layer =  Assets.ACTOR_LAYER;
         return go;
     }
 

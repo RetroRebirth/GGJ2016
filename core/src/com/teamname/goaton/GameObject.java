@@ -24,7 +24,7 @@ public class GameObject {
     private Body body = null;
     private Vector2 position = new Vector2();
     public float radius = 1f;
-
+    public int layer = 0;
     public HashMap<String, Component> components;
     public HashSet<String> tags = new HashSet<String>();
 
@@ -49,6 +49,7 @@ public class GameObject {
         this.messages = new LinkedList<Message>();
         this.handlers = new LinkedList<MsgHandler>();
         this.tags = new HashSet<String>(other.tags);
+        other.layer = layer;
         for(Map.Entry<String, Component> e : other.components.entrySet())
         {
             Component newComp = e.getValue().cloneComponent();

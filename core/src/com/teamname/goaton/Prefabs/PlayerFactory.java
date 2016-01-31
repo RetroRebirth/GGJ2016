@@ -43,6 +43,7 @@ public class PlayerFactory extends GameObject {
         go.addComponent(new PlayerPickupComponent());
         go.addComponent(new GoatStackComponent());
         go.tags.add("player");
+        go.layer = Assets.ACTOR_LAYER;
         return go;
     }
 

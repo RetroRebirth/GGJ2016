@@ -1,5 +1,6 @@
 package com.teamname.goaton.Prefabs;
 
+import com.teamname.goaton.Assets;
 import com.teamname.goaton.GameObject;
 import com.teamname.goaton.components.DemonBossAnimatorComponent;
 import com.teamname.goaton.components.DemonPhysicsComponent;
@@ -16,6 +17,7 @@ public class DemonBossFactory {
         demonBoss.addComponent(new DemonBossAnimatorComponent());
         demonBoss.addComponent(new PitPhysicsComponent());
         demonBoss.addComponent(new EnemyComponent(20));
+        demonBoss.layer = Assets.ACTOR_LAYER;
         return demonBoss;
     }
 

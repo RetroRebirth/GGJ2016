@@ -3,6 +3,7 @@ package com.teamname.goaton.Prefabs;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.teamname.goaton.Assets;
 import com.teamname.goaton.GameObject;
 import com.teamname.goaton.components.*;
 
@@ -19,6 +20,7 @@ public class DemonFactory {
         go.addComponent(new EnemyComponent(3));
         go.addComponent(new DemonAuraComponent());
         go.tags.add("demon");
+        go.layer = Assets.ACTOR_LAYER;
         return go;
     }
 
