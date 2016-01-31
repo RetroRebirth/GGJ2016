@@ -46,7 +46,7 @@ public class TestScene extends Scene {
         createGoats();
         //createPits();
         createPitSpawner();
-        addObject(DemonBossFactory.Create());
+
         super.create();
 
     }

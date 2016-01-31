@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
@@ -209,21 +210,24 @@ public abstract class Scene {
             }
             else if(l.getName().equals("Actors"))
             {
-                for(MapObject mo : l.getObjects())
-                {
-                    if(mo.getName().equals("BossSpawn"))
-                    {
-                        GameObject boss = DemonBossFactory.Create();
-                        boss.setPosition(MapObjectToWorld(mo));
-                        addObject(boss);
-                    }
-                    else if(mo.getName().equals("PlayerSpawn"))
-                    {
-                        player = PlayerFactory.Create();
-                        player.setPosition(MapObjectToWorld(mo));
-                        addObject(player);
-                    }
-                }
+
+                MapObjects objects = l.getObjects();
+                Vector2 lArmVec;
+                MapObject lArm = objects.get("leftArm");
+                lArmVec = new Vector2((Float)lArm.getProperties().get("x")+ 25,(Float)lArm.getProperties().get("y") + 200);
+
+                Vector2 rArmVec;
+                MapObject rArm = objects.get("rightArm");
+                rArmVec = new Vector2((Float)rArm.getProperties().get("x") + 25,(Float)rArm.getProperties().get("y") + 200);
+
+                GameObject boss = DemonBossFactory.Create(lArmVec,rArmVec);
+                boss.setPosition(MapObjectToWorld(objects.get("BossSpawn")));
+                addObject(boss);
+
+                player = PlayerFactory.Create();
+                player.setPosition(MapObjectToWorld(objects.get("PlayerSpawn")));
+                addObject(player);
+
             }
             else if (l.getName().equals("SpawnArea"))
             {

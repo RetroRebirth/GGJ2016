@@ -51,4 +51,5 @@ public class Assets {
     public final static String goat_U   = "art/goat_up.png";
     public final static String goat_UL  = "art/goat_up-left.png";
     public final static String goat_UR  = "art/goat_up-right.png";
+    public static String arm            = "art/DemonBossClaw.png";
 }

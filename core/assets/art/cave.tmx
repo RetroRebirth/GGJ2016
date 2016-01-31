@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="32" tileheight="32" backgroundcolor="#000000" nextobjectid="101">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="32" tileheight="32" backgroundcolor="#000000" nextobjectid="112">
  <tileset firstgid="1" name="cave" tilewidth="32" tileheight="32" tilecount="336">
   <image source="cave.png" width="512" height="672"/>
  </tileset>
@@ -11,10 +11,6 @@
    <image width="64" height="64" source="DemonBossClaw.png"/>
   </tile>
  </tileset>
- <objectgroup name="Decals">
-  <object id="97" gid="337" x="847" y="416" width="178" height="159"/>
-  <object id="98" gid="2147483985" x="1126" y="415" width="178" height="159"/>
- </objectgroup>
  <layer name="Tile Layer 1" width="64" height="64">
   <data encoding="base64" compression="zlib">
    eJztWrmS2zAM5Ucl6XIUSbocRc4iR2e7VJXdznLjtHbjzKbSlskX5PiBHB8VaFaYfUIACitRWWnDN/OGJk2LfCAI0BydhBA+Ek8GlFabp8814nXijR5j9O2L+ET8PLC02jx97hLvEe/3GKNvX8RX4reBpdXm6fOE+JT4rMcYffsifhJ/DSyttlifGgfiPoQ188MFx+jbd2zcJN4i3ibeifRbkeYdcEH8B9MbHQ+ID4mPiI8j/Wr9VbP2laHfa8sp4RXxNfEN8W2k3zHpPQK+U/R7bTklfAnnseb7wGd5bTkl/Ajnseb3wGeltOUckdKWGWkw9Zg89vxSxOTnxBcKX05kfjGkiMmU68NS4Woi84shRUymXB/ovLteAuk8vD6eyPxiSBWTV0J/qvPvXHLGWPrngv9dfx0D98AUsW9sWHmrD7fEHfB9gmemyJ8xcN46DWdrVhBLKEulXkD/utyEM71l87mEzwX8lu2i1euyasjtqfJnDAuYI84B56LVef6ohdtliT5RKO2lKPH7Ifo9vr0FDfV91RHwIObVRfYN1Kn1K6C/tBP/jtu8e0jbJ9aZDIlrK229aNp5vjuo455A7ehHUq9mJ82GpXgGz5W/954zL6Jf87VF+HtNcb1QM8YH6d/WftfsgTEH4wDGqFMYJ4V+Hs/Sj2sv94LcMxoPoa21Mn6L/dBmPNd9aPsC1mP6q6Zv2dhOW//C0C/9uArtNfTEJ34O7h3L3mhruf74mf2BNcT0s/ZlM762/nW7jDUyn8sYpdnM0o/xgm2njaflBct3N2CXrvXX7IfrX4Z2LJB7FOs4R6/+vXieNob8TsY/Sfb/TYd+thPGC/QdubflOsk60qvf0ik1S6L+DXwuQIPlhzL+cRyQbRi/PfPEnOjJz9vQ9isZ3+Wz0RZSP/uotIWmv76T8MRm1iNzfUw/7gXpHzJnFPB8TbccG/djzP9T3DNpOU5q1OpeP0Hb7oy6tAPawpNfa/a9Z/LuTYva+VVbQ+4rif2lXay81gfWHTLHCDl39FnNh9nn8Tu5D3AvoLad8vsytG3Efp9Kv3WH7IkRXfGja296fTilX0uMdYeM/5+t8/8U7oHGukPW4oeMlVPQP9YdMv5HwBgxNf1jAddfOyOmjOGXiVj+0M5Mc7sH7oKVP3D90fcxn10F/Vb+YP3s+0w8G10F/Vb+YP+Pnf+vgn4rf8TOz6nPsFME57/Y+d+rf+rvoWjA8591/vfqn+O7gZ7/D94z/BzfDUyJ/G7gPN7zyMjIyMjIyMjIyMjIyLh8/AFFNfiO
@@ -70,17 +66,17 @@
   <object id="85" x="1510" y="803" width="21" height="87"/>
  </objectgroup>
  <objectgroup name="Actors">
-  <object id="62" name="BossSpawn" x="1063" y="306">
+  <object id="105" name="BossSpawn" x="1063" y="306">
    <ellipse/>
   </object>
-  <object id="63" name="PlayerSpawn" x="1047" y="1056">
+  <object id="106" name="PlayerSpawn" x="1047" y="1056">
    <ellipse/>
   </object>
-  <object id="71" name="BossTrigger" x="1024" y="417" width="96" height="86"/>
+  <object id="107" name="BossTrigger" x="1024" y="417" width="96" height="86"/>
+  <object id="108" gid="337" x="847" y="416" width="178" height="159"/>
+  <object id="109" gid="2147483985" x="1126" y="415" width="178" height="159"/>
+  <object id="110" name="leftArm" gid="338" x="905" y="591" width="150" height="178"/>
+  <object id="111" name="rightArm" gid="2147483986" x="1091" y="548" width="150" height="178"/>
  </objectgroup>
  <objectgroup name="Object Layer 5"/>
- <objectgroup name="TopDecals">
-  <object id="99" gid="338" x="905" y="591" width="150" height="178"/>
-  <object id="100" gid="2147483986" x="1091" y="548" width="150" height="178"/>
- </objectgroup>
 </map>
