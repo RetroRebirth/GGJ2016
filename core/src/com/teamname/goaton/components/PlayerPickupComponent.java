@@ -51,7 +51,7 @@ public class PlayerPickupComponent extends Component {
                         minDist = thisCmp.gameObject.getBody().getPosition().dst2(goat.getBody().getPosition());
                     }
                 }
-                System.out.println("Attempt to pickup");
+//                System.out.println("Attempt to pickup");
                 if (closestGoat != null) {
                     gameObject.send(new Message("pickupGoat",closestGoat));
                 }

@@ -20,7 +20,7 @@ public class ScoreComponent extends Component {
         this.on("addScore", new MsgHandler() {
             @Override
             public void handle(Message msg) {
-                System.out.println("Added " + msg.getArg().toString() + "From " + comp.toString());
+//                System.out.println("Added " + msg.getArg().toString() + "From " + comp.toString());
             }
         });
     }

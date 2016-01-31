@@ -13,8 +13,8 @@ public class GoatPositionComponent extends PositionComponent {
 
     @Override
     public Component cloneComponent() {
-        System.out.println(gameObject.getPosition().x);
-        System.out.println(gameObject.getPosition().y);
+//        System.out.println(gameObject.getPosition().x);
+//        System.out.println(gameObject.getPosition().y);
         return new GoatPositionComponent();
     }
 
