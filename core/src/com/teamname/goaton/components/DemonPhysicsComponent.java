@@ -1,5 +1,6 @@
 package com.teamname.goaton.components;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.physics.box2d.*;
 import com.teamname.goaton.*;
 
