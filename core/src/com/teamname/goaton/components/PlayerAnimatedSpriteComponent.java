@@ -70,7 +70,7 @@ public class PlayerAnimatedSpriteComponent extends AnimatedSpriteRenderComponent
                 case UP:
                     switch (walkCycle) {
                         case 0:
-                            currentSprite = sprites.get(Assets.playerC_D);
+                            currentSprite = sprites.get(Assets.playerC_U);
                             break;
                         case 1:
                             currentSprite = sprites.get(Assets.playerC_UL);
