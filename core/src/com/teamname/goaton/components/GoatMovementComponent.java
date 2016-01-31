@@ -2,7 +2,7 @@ package com.teamname.goaton.components;
 
 import aurelienribon.tweenengine.Tween;
 import com.badlogic.gdx.math.Vector2;
-import com.sun.javafx.scene.traversal.Direction;
+//import com.sun.javafx.scene.traversal.Direction;
 import com.teamname.goaton.*;
 
 /**
