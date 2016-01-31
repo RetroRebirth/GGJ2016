@@ -24,7 +24,7 @@ public class PitFactory {
         go.addComponent(new PitPhysicsComponent());
         go.addComponent(new PitPositionComponent());
         //go.addComponent(new PitEnemyComponent(1));
-        go.addComponent(new PitEnemyComponent(1));
+        //go.addComponent(new PitEnemyComponent(1));
         go.layer = Assets.PIT_LAYER;
 
         return go;

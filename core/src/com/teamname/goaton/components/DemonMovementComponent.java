@@ -20,6 +20,12 @@ public class DemonMovementComponent extends Component {
     @Override
     protected void create() {
         super.create();
+        this.on("destroy", new MsgHandler() {
+            @Override
+            public void handle(Message msg) {
+                GoatonWorld.Destroy(gameObject);
+            }
+        });
     }
 
     @Override

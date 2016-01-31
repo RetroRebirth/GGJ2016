@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="32" tileheight="32" backgroundcolor="#000000" nextobjectid="116">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="32" tileheight="32" backgroundcolor="#000000" nextobjectid="121">
  <tileset firstgid="1" name="cave" tilewidth="32" tileheight="32" tilecount="336">
   <image source="cave.png" width="512" height="672"/>
  </tileset>
@@ -64,6 +64,12 @@
   <object id="80" x="1378" y="806" width="11" height="89"/>
   <object id="82" x="1378" y="876" width="156" height="16"/>
   <object id="85" x="1510" y="803" width="21" height="87"/>
+  <object id="116" x="847" y="1656">
+   <ellipse/>
+  </object>
+  <object id="117" x="1000" y="444">
+   <ellipse/>
+  </object>
  </objectgroup>
  <objectgroup name="Actors">
   <object id="105" name="BossSpawn" x="1063" y="306">
@@ -76,7 +82,7 @@
   <object id="109" gid="2147483985" x="1126" y="415" width="178" height="159"/>
   <object id="110" name="leftArm" gid="338" x="905" y="591" width="150" height="178"/>
   <object id="111" name="rightArm" gid="2147483986" x="1091" y="548" width="150" height="178"/>
-  <object id="112" name="BossTrigger" x="1013" y="415" width="96" height="86"/>
+  <object id="112" name="BossTrigger" x="1025" y="414" width="96" height="188"/>
   <object id="113" name="GoatPit" x="1045" y="899">
    <ellipse/>
   </object>

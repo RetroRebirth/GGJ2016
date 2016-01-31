@@ -34,7 +34,7 @@ public class EnemyComponent extends Component {
         if(health <= 0)
         {
             gameObject.send(new Message("destroy"));
-            GoatonWorld.Destroy(this.gameObject);
+
         }
     }
 

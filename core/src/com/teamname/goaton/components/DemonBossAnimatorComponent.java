@@ -26,6 +26,7 @@ public class DemonBossAnimatorComponent extends Component {
     private  float t;
     private float damageTime = 0;
     private float attackAnim = 0;
+    private boolean active = true;
     public DemonBossAnimatorComponent()
     {
         head = new Sprite(new Texture(Gdx.files.internal("art/BossDemon/l1_demonKing_1.png")));
@@ -96,37 +97,139 @@ public class DemonBossAnimatorComponent extends Component {
                 attackAnim = (Float)msg.getArg();
             }
         });
+
+        this.on("destroy", new MsgHandler() {
+            @Override
+            public void handle(Message msg) {
+                TweenCallback shakeCB = new TweenCallback() {
+                    @Override
+                    public void onEvent(int i, BaseTween<?> baseTween) {
+                       GoatonWorld.sendGlobalMessage(new Message("cameraShake",new CamShakeControl(0.2f,45)));
+                    }
+                };
+                active = false;
+                float delay = 1.f;
+                float headFadeOutLen = 3.f;
+                head.setColor(Color.WHITE);
+                jaw.setColor(Color.WHITE);
+                Timeline.createSequence()
+                        .beginParallel()
+                        .push(Tween.to(head, SpriteAccessor.TWEEN_ROT, 1.5f)
+                                .target(50))
+                        .push(Tween.to(head,SpriteAccessor.TWEEN_XY,1.0f)
+                        .target(gameObject.getScreenPosition().x, gameObject.getScreenPosition().y - 120)
+                        .setCallback(shakeCB))
+                        .end()
+                        .beginParallel()
+                        .push(Tween.to(head, SpriteAccessor.TWEEN_XYSCALEXY, headFadeOutLen)
+                                .target(gameObject.getScreenPosition().x, gameObject.getScreenPosition().y, 0.1f * scale)
+                                .ease(TweenEquations.easeInExpo)
+                                .delay(delay))
+                        .push(Tween.to(head, SpriteAccessor.TWEEN_ALPHA, headFadeOutLen)
+                                .target(0f)
+                                .ease(TweenEquations.easeInExpo)
+                                .delay(delay))
+                        .end()
+
+                        .start(GoatonWorld.TweenManager);
+                Timeline.createSequence()
+                        .beginParallel()
+                        .push(Tween.to(jaw, SpriteAccessor.TWEEN_ROT, 1.5f)
+                                .target(50))
+                        .push(Tween.to(jaw,SpriteAccessor.TWEEN_XY,1.0f)
+                                .target(gameObject.getScreenPosition().x, gameObject.getScreenPosition().y - 120))
+
+                        .end()
+                        .beginParallel()
+                        .push(Tween.to(jaw, SpriteAccessor.TWEEN_XYSCALEXY, headFadeOutLen)
+                                .target(gameObject.getScreenPosition().x + 2, gameObject.getScreenPosition().y - 2 , 0.1f * scale)
+                                .ease(TweenEquations.easeInExpo)
+                                .delay(delay))
+                        .push(Tween.to(jaw, SpriteAccessor.TWEEN_ALPHA, headFadeOutLen)
+                                .target(0f)
+                                .ease(TweenEquations.easeInExpo)
+                                .delay(delay))
+                        .end()
+                        .setCallback(new TweenCallback() {
+                            @Override
+                            public void onEvent(int i, BaseTween<?> baseTween) {
+                                GoatonWorld.sendGlobalMessage(new Message("cameraShake",new CamShakeControl(1.f,80.f)));
+                            }
+                        })
+
+                        .start(GoatonWorld.TweenManager);
+
+
+
+
+                Timeline.createSequence()
+
+                        .push(Tween.to(bodyl, SpriteAccessor.TWEEN_XYROT, 1.0f)
+                                .target(gameObject.getScreenPosition().x - 2.5f * bodyl.getWidth(), gameObject.getScreenPosition().y - 110, -10))
+
+
+                        .beginParallel()
+                        .push(Tween.to(bodyl, SpriteAccessor.TWEEN_XYSCALEXY, 3.5f)
+                                .target(gameObject.getScreenPosition().x , gameObject.getScreenPosition().y + 10, 0.2f * scale/2)
+                                .ease(TweenEquations.easeInExpo)
+                                .delay(delay))
+                        .push(Tween.to(bodyl, SpriteAccessor.TWEEN_ALPHA, 3.5f)
+                                .target(0f)
+                                .ease(TweenEquations.easeInExpo)
+                                .delay(delay))
+                        .end()
+
+                        .start(GoatonWorld.TweenManager);
+                Timeline.createSequence()
+                        .push(Tween.to(bodyr,SpriteAccessor.TWEEN_XYROT,1.0f)
+                                .target(gameObject.getScreenPosition().x + 2.5f * bodyr.getWidth(), gameObject.getScreenPosition().y - 110,10))
+
+
+                        .beginParallel()
+                        .push(Tween.to(bodyr, SpriteAccessor.TWEEN_XYSCALEXY, 3.5f)
+                                .target(gameObject.getScreenPosition().x, gameObject.getScreenPosition().y + 10, 0.2f * scale/2)
+                                .ease(TweenEquations.easeInExpo)
+                                .delay(delay))
+                        .push(Tween.to(bodyr, SpriteAccessor.TWEEN_ALPHA, 3.5f)
+                                .target(0f)
+                                .ease(TweenEquations.easeInExpo)
+                                .delay(delay))
+                        .end()
+
+                        .start(GoatonWorld.TweenManager);
+            }
+        });
     }
 
     @Override
     protected void update(float dt) {
-        t += dt;
-        float xOff = 0;
-        if(damageTime > 0)
-        {
-            xOff = 4;
-            damageTime -= dt;
-            if(damageTime <= 0)
-            {
-                head.setColor(Color.WHITE);
-                jaw.setColor((Color.WHITE));
+        if(active) {
+
+
+            t += dt;
+            float xOff = 0;
+            if (damageTime > 0) {
+                xOff = 4;
+                damageTime -= dt;
+                if (damageTime <= 0) {
+                    head.setColor(Color.WHITE);
+                    jaw.setColor((Color.WHITE));
+                }
             }
-        }
-        if(attackAnim <= 0) {
+            if (attackAnim <= 0) {
 
 
-            head.setPosition(gameObject.getScreenPosition().x + xOff * (float) Math.cos(30 * t), gameObject.getScreenPosition().y + (float) Math.sin(t) * headBob);
-            jaw.setPosition(gameObject.getScreenPosition().x + xOff * (float) Math.cos(30 * t + Math.PI), gameObject.getScreenPosition().y + (float) (Math.sin(t) * headBob) + (float) Math.sin(t * 1.05 + 0.5) * jawBob);
-            bodyr.setPosition(gameObject.getScreenPosition().x + xOff * (float) Math.cos(30 * t) + 2.5f * bodyl.getWidth(), gameObject.getScreenPosition().y + (float) Math.sin(t + 0.25) * bodyBob - 45);
-            bodyl.setPosition(gameObject.getScreenPosition().x + xOff * (float) Math.cos(30 * t) - 2.5f * bodyr.getWidth(), gameObject.getScreenPosition().y + (float) Math.sin(t + 0.25) * bodyBob - 45);
-        }
-        else
-        {
-            head.setPosition(gameObject.getScreenPosition().x + xOff * (float) Math.cos(30 * t), gameObject.getScreenPosition().y);
-            jaw.setPosition(gameObject.getScreenPosition().x + xOff * (float) Math.cos(30 * t + Math.PI), gameObject.getScreenPosition().y - 35);
-            bodyr.setPosition(gameObject.getScreenPosition().x + xOff * (float) Math.cos(30 * t) + 2.5f * bodyl.getWidth(), gameObject.getScreenPosition().y + (float) Math.sin(t + 0.25) * bodyBob - 45);
-            bodyl.setPosition(gameObject.getScreenPosition().x + xOff * (float) Math.cos(30 * t) - 2.5f * bodyr.getWidth(), gameObject.getScreenPosition().y + (float) Math.sin(t + 0.25) * bodyBob - 45);
-            attackAnim -= dt;
+                head.setPosition(gameObject.getScreenPosition().x + xOff * (float) Math.cos(30 * t), gameObject.getScreenPosition().y + (float) Math.sin(t) * headBob);
+                jaw.setPosition(gameObject.getScreenPosition().x + xOff * (float) Math.cos(30 * t + Math.PI), gameObject.getScreenPosition().y + (float) (Math.sin(t) * headBob) + (float) Math.sin(t * 1.05 + 0.5) * jawBob);
+                bodyr.setPosition(gameObject.getScreenPosition().x + xOff * (float) Math.cos(30 * t) + 2.5f * bodyl.getWidth(), gameObject.getScreenPosition().y + (float) Math.sin(t + 0.25) * bodyBob - 45);
+                bodyl.setPosition(gameObject.getScreenPosition().x + xOff * (float) Math.cos(30 * t) - 2.5f * bodyr.getWidth(), gameObject.getScreenPosition().y + (float) Math.sin(t + 0.25) * bodyBob - 45);
+            } else {
+                head.setPosition(gameObject.getScreenPosition().x + xOff * (float) Math.cos(30 * t), gameObject.getScreenPosition().y);
+                jaw.setPosition(gameObject.getScreenPosition().x + xOff * (float) Math.cos(30 * t + Math.PI), gameObject.getScreenPosition().y - 35);
+                bodyr.setPosition(gameObject.getScreenPosition().x + xOff * (float) Math.cos(30 * t) + 2.5f * bodyl.getWidth(), gameObject.getScreenPosition().y + (float) Math.sin(t + 0.25) * bodyBob - 45);
+                bodyl.setPosition(gameObject.getScreenPosition().x + xOff * (float) Math.cos(30 * t) - 2.5f * bodyr.getWidth(), gameObject.getScreenPosition().y + (float) Math.sin(t + 0.25) * bodyBob - 45);
+                attackAnim -= dt;
+            }
         }
     }
 

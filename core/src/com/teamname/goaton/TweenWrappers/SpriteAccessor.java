@@ -100,7 +100,10 @@ public class SpriteAccessor implements TweenAccessor<Sprite> {
             case TWEEN_ROT:
                 target.setRotation(newValues[0]);
                 break;
-
+            case TWEEN_XYROT:
+                target.setPosition(newValues[0],newValues[1]);
+                target.setRotation(newValues[2]);
+                break;
             case TWEEN_SCALEX:
                 target.setScale(newValues[0], target.getScaleY());
                 break;

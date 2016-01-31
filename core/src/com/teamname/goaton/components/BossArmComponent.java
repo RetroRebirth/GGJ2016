@@ -59,16 +59,40 @@ public class BossArmComponent extends Component {
                         .setCallback(new TweenCallback() {
                             @Override
                             public void onEvent(int i, BaseTween<?> baseTween) {
-                                GoatonWorld.sendGlobalMessage(new Message("cameraShake",new CamShakeControl(0.05f,15f)));
+                                GoatonWorld.sendGlobalMessage(new Message("cameraShake", new CamShakeControl(0.05f, 15f)));
                             }
                         })
                         .start(GoatonWorld.TweenManager);
             }});
-
-
-
-
-    }
+        this.on("destroy",new MsgHandler() {
+            @Override
+            public void handle(Message msg) {
+                float armDelay = 2.5f;
+                Timeline.createSequence()
+                        .beginParallel()
+                        .push(
+                                Tween.to(armSprite, SpriteAccessor.TWEEN_XY, 1.7f)
+                                        .delay(flipped ? armDelay : armDelay + 0.2f)
+                                        .ease(TweenEquations.easeInExpo)
+                                        .target(targPosition.x  + 64 * (flipped? 1.15f : -1), targPosition.y + 100))
+                        .push(Tween.to(armSprite, SpriteAccessor.TWEEN_RGB, 1.7f)
+                                .ease(TweenEquations.easeInExpo)
+                                .delay(flipped ? armDelay : armDelay + 0.2f)
+                                .target(0, 0, 0))
+                        .push(Tween.to(armSprite, SpriteAccessor.TWEEN_ALPHA, 1.7f)
+                                .ease(TweenEquations.easeInExpo)
+                                .delay(flipped ? armDelay : armDelay + 0.2f)
+                                .target(0.f))
+                        .end()
+                        .setCallback(new TweenCallback() {
+                            @Override
+                            public void onEvent(int i, BaseTween<?> baseTween) {
+                                GoatonWorld.sendGlobalMessage(new Message("cameraShake", new CamShakeControl(0.45f, 15f)));
+                            }
+                        })
+                        .start(GoatonWorld.TweenManager);
+            }});
+        }
 
     @Override
     public String getID() {
