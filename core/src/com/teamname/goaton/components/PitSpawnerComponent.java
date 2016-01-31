@@ -26,10 +26,10 @@ public class PitSpawnerComponent extends Component {
         timeBetweenSpawn = (GoatonWorld.Random.nextFloat() *
                 (maxTime - minTime) + minTime);
 
-        System.out.println("tbs: " + timeBetweenSpawn);
+//        System.out.println("tbs: " + timeBetweenSpawn);
         spawnPerRound = (GoatonWorld.Random.nextInt(maxSpawn - minSpawn) *
                 + minSpawn);
-        System.out.println("spr: " + spawnPerRound);
+//        System.out.println("spr: " + spawnPerRound);
     }
 
     @Override
@@ -46,8 +46,8 @@ public class PitSpawnerComponent extends Component {
             spawnPerRound = (GoatonWorld.Random.nextInt(maxSpawn - minSpawn) *
                      + minSpawn);
 
-            System.out.println("tbs: " + timeBetweenSpawn);
-            System.out.println("spr: " + spawnPerRound);
+//            System.out.println("tbs: " + timeBetweenSpawn);
+//            System.out.println("spr: " + spawnPerRound);
         }
     }
 

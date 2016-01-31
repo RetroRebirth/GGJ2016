@@ -10,8 +10,12 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.teamname.goaton.*;
 import com.teamname.goaton.Prefabs.GoatFactory;
+import com.teamname.goaton.Prefabs.PitDyingGoatFactory;
+
 import java.util.HashMap;
 import java.util.Map;
+
+import static com.teamname.goaton.GoatonWorld.Destroy;
 
 /**
  * Created by kpidding on 1/30/16.
@@ -161,13 +165,19 @@ public class GoatAnimatedSpriteComponent extends AnimatedSpriteRenderComponent {
         if(throwTimer > 0)
         {
             throwTimer -= dt;
-            float offset = (float)Math.abs(Math.sin(  Math.PI*2 * (1 - throwTimer/ GoatFactory.THROWTIME)) * throwTimer);
+            float offset = (float)Math.abs(Math.sin(  Math.PI* (1 - throwTimer/ GoatFactory.THROWTIME)) * throwTimer);
             currentSprite.setScale(1.0f + 1.5f*offset);
             currentSprite.setPosition(
                     gameObject.getScreenPosition().x - currentSprite.getOriginX(),
                     gameObject.getScreenPosition().y - currentSprite.getOriginY() + 15 * offset );
             if(throwTimer <=0)
             {
+                if(!GoatonWorld.TileAt(gameObject.getPosition()))
+                {
+                    GameObject go = GameObject.Instantiate(PitDyingGoatFactory.Create(gameObject));
+                    go.setPosition(gameObject.getPosition());
+                    Destroy(gameObject);
+                }
                 gameObject.send(new Message("onGround"));
                 onGround = true;
             }

@@ -31,7 +31,7 @@ public  class ShaderLoader {
         {
             throw new ShaderException("Could not load shader files");
         }
-        System.out.println("Vertfile reads:" + vertFile);
+//        System.out.println("Vertfile reads:" + vertFile);
         ShaderProgram shader = new ShaderProgram(vertFile, fragFile);
         if (!shader.isCompiled())
         {

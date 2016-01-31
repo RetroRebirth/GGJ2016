@@ -3,6 +3,8 @@ package com.teamname.goaton;
 import aurelienribon.tweenengine.TweenManager;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 
@@ -14,12 +16,13 @@ import java.util.Random;
 public class GoatonWorld {
     public static float worldWidth;
     public static float worldHeight;
+    public static TiledMap cMap;
     public static World world = new World(new Vector2(0, 0), true); //no gravity
     private static Scene scene;
     public static Random Random = new Random();
     public static final int TILE_SIZE = 32;
     public static final Vector2 STAGE_SIZE = new Vector2(3200,3200);
-    
+
     public static TweenManager TweenManager;
     public static <T extends Enum<?>> T RandomEnum(Class<T> clazz){
         int x = GoatonWorld.Random.nextInt(clazz.getEnumConstants().length);
@@ -53,5 +56,11 @@ public class GoatonWorld {
 
     public static void Destroy(GameObject other) {
         scene.removeObject(other);
+    }
+
+    public static boolean TileAt(Vector2 position) {
+        TiledMapTileLayer layer =  (TiledMapTileLayer)cMap.getLayers().get(0);
+        return (layer.getCell((int)Math.floor(position.x),(int)Math.floor(position.y)) != null);
+
     }
 }
