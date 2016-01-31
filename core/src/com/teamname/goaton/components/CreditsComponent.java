@@ -23,7 +23,7 @@ public class CreditsComponent extends Component {
         black = new Sprite(new Texture("art/black.png"));
         black.setScale(200);
         black.setAlpha(0);
-        credits = new Sprite(new Texture("art/Credits.png"));
+        credits = new Sprite(new Texture("art/credits.png"));
         credits.setPosition(-credits.getOriginX(),-credits.getHeight() - 200);
         credits.setAlpha(0);
         on("gameFinish", new MsgHandler() {
