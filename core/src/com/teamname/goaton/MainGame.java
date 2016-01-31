@@ -15,11 +15,13 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2D;
 import com.teamname.goaton.Scenes.TestScene;
 import com.teamname.goaton.Shaders.ShaderLoader;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.teamname.goaton.TweenWrappers.LinearVelocityAccessor;
 import com.teamname.goaton.TweenWrappers.SpriteAccessor;
 import com.teamname.goaton.components.SpriteRenderComponent;
 
@@ -44,6 +46,7 @@ public class MainGame extends ApplicationAdapter {
 	{
         Box2D.init();
         Tween.registerAccessor(Sprite.class, new SpriteAccessor());
+        Tween.registerAccessor(Body.class, new LinearVelocityAccessor());
         batch = new SpriteBatch();
         GoatonWorld.TweenManager = new TweenManager();
 

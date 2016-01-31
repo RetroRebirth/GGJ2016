@@ -26,7 +26,10 @@ public class DemonBossFactory {
                 true)));
         ((EnemyComponent)demonBoss.getComponent("EnemyComponent")).canBeDamaged = false;
 
+        demonBoss.addComponent(new DemonBossAttackComponent());
+        demonBoss.addComponent(new ParticleComponent("art/particleEffects/demonfire.p","demonfire"));
         demonBoss.layer = Assets.ACTOR_LAYER;
+        demonBoss.tags.add("demonboss");
         return demonBoss;
     }
 

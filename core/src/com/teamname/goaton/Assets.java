@@ -11,6 +11,8 @@ public class Assets {
     public final static String player = "art/Player.png";
     public final static String goat = "art/Goat.png";
     public final static String pit = "art/demonhole.png";
+    public final static String heart = "art/heart.png";
+    public final static String player_dead = "art/farmer_dead.png";
 
     // Player sprite assets
     public final static String player_D   = "art/farmer_down.png";

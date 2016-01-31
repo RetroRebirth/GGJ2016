@@ -63,7 +63,6 @@ public class PlayerAnimatedSpriteComponent extends AnimatedSpriteRenderComponent
             }
         }
 
-        // TODO check for carry or normal sprite
         // Render the sprite based on the direction, walk cycle, and if you're carrying a goat
         if (((PlayerMovementComponent) this.gameObject.getComponent("PlayerMovementComponent")).holdingGoat) {
             switch (dir) {
@@ -186,7 +185,10 @@ public class PlayerAnimatedSpriteComponent extends AnimatedSpriteRenderComponent
         }
 
         // Hit stun color shading
-        if (((PlayerMovementComponent) gameObject.getComponent("PlayerMovementComponent")).hit) {
+        if (((PlayerMovementComponent) gameObject.getComponent("PlayerMovementComponent")).dead) {
+//            currentSprite.setColor(Color.WHITE);
+            currentSprite = sprites.get(Assets.player_dead);
+        } else if (((PlayerMovementComponent) gameObject.getComponent("PlayerMovementComponent")).hit) {
             currentSprite.setColor(Color.GRAY);
         } else {
             currentSprite.setColor(Color.WHITE);

@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
-import com.sun.prism.image.ViewPort;
+//import com.sun.prism.image.ViewPort;
 import com.teamname.goaton.GameObject;
 import com.teamname.goaton.Message;
 import com.teamname.goaton.Prefabs.*;
@@ -18,7 +18,7 @@ public class TestScene extends Scene {
 
     private CameraControlComponent camControl;
     private OrthographicCamera guiCamera;
-    ViewPort guiViewport;
+    //ViewPort guiViewport;
     private  GameObject gui;
     private SpriteBatch guiSB;
 
@@ -43,6 +43,7 @@ public class TestScene extends Scene {
 
         gui = new GameObject();
         gui.addComponent(new GUIBossHealthComponent());
+        gui.addComponent(new PlayerHealthComponent());
         gui.create();
         guiSB = new SpriteBatch();
 

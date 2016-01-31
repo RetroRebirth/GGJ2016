@@ -42,4 +42,10 @@ public class KeyboardInputSource implements GameInputSource {
     public boolean isDebugButtonPressed() {
         return Gdx.input.isKeyJustPressed(Input.Keys.Q);
     }
+
+    @Override
+    public boolean isSpinLeftButtonPressed() { return Gdx.input.isKeyJustPressed(Input.Keys.A);}
+
+    @Override
+    public boolean isSpinRightButtonPressed() { return Gdx.input.isKeyJustPressed(Input.Keys.D);}
 }

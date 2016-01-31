@@ -14,6 +14,8 @@ public class SpawnerComponent extends Component {
     protected float minTime = 1f;
     protected float maxTime = 2f;
 
+    protected float initialDelay = 0f;
+
     protected float spawnPerRound;
     protected int minSpawn = 1;
     protected int maxSpawn = 10;
@@ -35,7 +37,12 @@ public class SpawnerComponent extends Component {
 
     @Override
     public void update(float dt) {
-        timeBetweenSpawn -= dt;
+        if (initialDelay > 0.f) {
+            initialDelay -= dt;
+        } else {
+            timeBetweenSpawn -= dt;
+        }
+
         if (timeBetweenSpawn < 0) {
 
             // If this is a demon, make sure there is room for it
