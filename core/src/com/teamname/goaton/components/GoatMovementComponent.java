@@ -24,7 +24,14 @@ public class GoatMovementComponent extends Component {
     private float maxMoveTime = 3.f;
     private float minMoveTime = 0.5f;
     private float moveSpeed = 2.5f;
-    boolean update = true;
+
+    private static final int IDLE = 0;
+    private static final int FLEE = 1;
+    private static final int HELD = 2;
+
+    protected Vector2 fleePoint;
+
+    int state = IDLE;
     @Override
     protected void create() {
 
@@ -32,14 +39,27 @@ public class GoatMovementComponent extends Component {
         this.on("pickup", new MsgHandler() {
             @Override
             public void handle(Message msg) {
-                update = false;
+                state = HELD;
                 gameObject.getBody().setLinearVelocity(0,0);
             }
         });
+
         this.on("onGround", new MsgHandler() {
             @Override
             public void handle(Message msg) {
-                update = true;
+                state = IDLE;
+            }
+        });
+
+        this.on("flee", new MsgHandler() {
+            @Override
+            public void handle(Message msg) {
+                if (state == IDLE) {
+                    state = FLEE;
+                    fleePoint = (Vector2) msg.getArg();
+                    moveTimer = 2.0f;
+                    gameObject.getBody().setLinearVelocity(0, 0);
+                }
             }
         });
     }
@@ -52,37 +72,39 @@ public class GoatMovementComponent extends Component {
     @Override
     protected void update(float dt) {
         super.update(dt);
-        if(update) {
-            moveTimer -= dt;
-            if (moveTimer < 0) {
-                //Higher weight to stop moving.
-                if (direction != Direction.NONE & GoatonWorld.Random.nextFloat() > 0.5) {
-                    direction = Direction.NONE;
-                } else {
-                    direction = GoatonWorld.RandomEnum(Direction.class);
-                }
-                moveTimer = GoatonWorld.Random.nextFloat() * (maxMoveTime - minMoveTime) + minMoveTime;
-            }
-            Vector2 mov = new Vector2();
-            switch (direction) {
-                case UP:
-                    mov.y += moveSpeed;
-                    break;
-                case DOWN:
-                    mov.y -= moveSpeed;
-                    break;
-                case LEFT:
-                    mov.x -= moveSpeed;
-                    break;
-                case RIGHT:
-                    mov.x += moveSpeed;
-                    break;
-                case NONE:
+        switch(state) {
 
-                    break;
-                default:
-                    break;
-            }
+            case IDLE:
+                moveTimer -= dt;
+                if (moveTimer < 0) {
+                    //Higher weight to stop moving.
+                    if (direction != Direction.NONE & GoatonWorld.Random.nextFloat() > 0.5) {
+                        direction = Direction.NONE;
+                    } else {
+                        direction = GoatonWorld.RandomEnum(Direction.class);
+                    }
+                    moveTimer = GoatonWorld.Random.nextFloat() * (maxMoveTime - minMoveTime) + minMoveTime;
+                }
+                Vector2 mov = new Vector2();
+                switch (direction) {
+                    case UP:
+                        mov.y += moveSpeed;
+                        break;
+                    case DOWN:
+                        mov.y -= moveSpeed;
+                        break;
+                    case LEFT:
+                        mov.x -= moveSpeed;
+                        break;
+                    case RIGHT:
+                        mov.x += moveSpeed;
+                        break;
+                    case NONE:
+
+                        break;
+                    default:
+                        break;
+                }
         /*
         if(mov.len() == 0)
         {
@@ -92,7 +114,20 @@ public class GoatMovementComponent extends Component {
         }
         */
 
-            gameObject.getBody().setLinearVelocity(mov.x, mov.y);//;applyLinearImpulse(mov.x,mov.y,gameObject.position.x, gameObject.position.y,true);
+                gameObject.getBody().setLinearVelocity(mov.x, mov.y);//;applyLinearImpulse(mov.x,mov.y,gameObject.position.x, gameObject.position.y,true);
+                break;
+            case FLEE:
+                //move in direction
+                moveTimer -= dt;
+                if (moveTimer < 0f) {
+                    state = IDLE;
+                }
+                Vector2 move = new Vector2(this.gameObject.getPosition().x - this.fleePoint.x, this.gameObject.getPosition().y - this.fleePoint.y);
+                move = move.scl(moveSpeed/move.len());
+                gameObject.getBody().setLinearVelocity(move.x, move.y);
+
+                break;
+
         }
 
     }
