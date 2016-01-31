@@ -80,6 +80,7 @@ public class GoatAnimatedSpriteComponent extends AnimatedSpriteRenderComponent {
 
             }
         });
+
         super.create();
 
     }

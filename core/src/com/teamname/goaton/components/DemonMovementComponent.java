@@ -39,7 +39,7 @@ public class DemonMovementComponent extends Component {
                 // Chill out and look cool by standing still
                 gameObject.direction = GameObject.Direction.NONE;
                 chasingPlayer = false;
-            } else if (rand > 0.4) {
+            } else if (rand > 0.6) {
                 // Take a stroll on memory lane, it's your time to enjoy the scenery
                 gameObject.direction = GoatonWorld.RandomEnum(GameObject.Direction.class);
                 chasingPlayer = false;
@@ -75,7 +75,7 @@ public class DemonMovementComponent extends Component {
             }
             gameObject.getBody().setLinearVelocity(mov.x, mov.y);
         } else {
-            Vector2 dir = Scene.Player.getPosition().sub(this.gameObject.getPosition()).nor().scl(1f);
+            Vector2 dir = Scene.Player.getPosition().sub(this.gameObject.getPosition()).nor().scl(5f);
             this.gameObject.direction = parseDirection(dir);
             this.gameObject.getBody().setLinearVelocity(dir);
         }

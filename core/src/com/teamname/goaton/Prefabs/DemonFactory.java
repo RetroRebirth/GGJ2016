@@ -20,7 +20,7 @@ public class DemonFactory {
         go.addComponent(new DemonMovementComponent());
         go.addComponent(new DemonAnimatedSpriteComponent(LoadSprites()));
         go.addComponent(new DemonPhysicsComponent());
-        go.addComponent(new EnemyComponent(3));
+        go.addComponent(new EnemyComponent(1));
         go.addComponent(new DemonAuraComponent());
         go.addComponent(new DemonPositionComponent(pitPos));
         go.tags.add("demon");
