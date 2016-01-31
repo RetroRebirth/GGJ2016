@@ -20,7 +20,6 @@ public class PositionComponent extends Component {
         boundedWidth =  GoatonWorld.Random.nextFloat() * 100;
         boundedHeight = GoatonWorld.Random.nextFloat() * 100;
 
-
         gameObject.setPosition(new Vector2(boundedWidth, boundedHeight));
     }
 
