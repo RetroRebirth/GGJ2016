@@ -12,6 +12,7 @@ public class ControllerInputSorce implements GameInputSource {
     private int xAx;
     private int yAx;
     private  int aBtn;
+    private int bBtn;
     private boolean btnToggle;
 
     public ControllerInputSorce(Controller ctrl)
@@ -22,6 +23,7 @@ public class ControllerInputSorce implements GameInputSource {
             xAx = Xbox.L_STICK_HORIZONTAL_AXIS;
             yAx = Xbox.L_STICK_VERTICAL_AXIS;
             aBtn = Xbox.A;
+            bBtn = Xbox.B;
         }
     }
     @Override
@@ -58,9 +60,32 @@ public class ControllerInputSorce implements GameInputSource {
             {
                 btnToggle = false;
             }
+
             return false;
         }
         else if(ctrl.getButton(aBtn))
+        {
+            btnToggle = true;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean isGlowButtonPressed() {
+        if(btnToggle)
+        {
+            if(!ctrl.getButton(bBtn))
+            {
+                btnToggle = false;
+            }
+
+            return false;
+        }
+        else if(ctrl.getButton(bBtn))
         {
             btnToggle = true;
             return true;

@@ -42,7 +42,9 @@ public class PlayerFactory extends GameObject {
         go.addComponent(new PlayerPhysicsComponent());
         go.addComponent(new PlayerPickupComponent());
         go.addComponent(new GoatStackComponent());
+        go.addComponent(new ParticleComponent("art/particleEffects/testExplode.p","explode"));
         go.tags.add("player");
+        go.layer = Assets.ACTOR_LAYER;
         return go;
     }
 

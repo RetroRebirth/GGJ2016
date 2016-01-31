@@ -29,7 +29,9 @@ public abstract class Scene {
     public static final int NUM_LAYERS = 3;*/
     protected GameObject player;
     private float timer = 0;
-    protected HashSet<GameObject> objects = new HashSet<GameObject>();
+
+    protected List<GameObject> objects = new LinkedList<GameObject>();
+
     protected List<GameObject>[] layers;
     //Queue<GameObject>[] addList;
     protected Queue<GameObject> addList = new LinkedList<GameObject>();
@@ -104,6 +106,17 @@ public abstract class Scene {
             obj.create();
             objects.add(obj);
         }
+        objects.sort(new Comparator<GameObject>() {
+            @Override
+            public int compare(GameObject o1, GameObject o2) {
+                int cmp = o1.layer - o2.layer;
+                if(cmp != 0)
+                {
+                    return cmp;
+                }
+                return (int)o2.getScreenPosition().y - (int)o1.getScreenPosition().y;
+            }
+        });
 
         for (GameObject obj : objects) {
             obj.update(dt);
@@ -113,7 +126,7 @@ public abstract class Scene {
         //After all is said and done, finish the remove.
         finishRemove();
         OrthographicCamera camera2 = new OrthographicCamera(200,200);
-        debugRenderer.render(GoatonWorld.world, camera2.combined);
+        //debugRenderer.render(GoatonWorld.world, camera2.combined);
     }
 
     public void updatePhysics(float dt) {

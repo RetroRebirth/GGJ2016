@@ -4,6 +4,10 @@ package com.teamname.goaton;
  * Created by pya on 1/30/16.
  */
 public class Assets {
+    public static final int PIT_LAYER = 1;
+    public static final int ACTOR_LAYER = 2;
+    public static final int THROW_LAYER = 3;
+    public static final int UILayer = 4;
     public final static String player = "art/Player.png";
     public final static String goat = "art/Goat.png";
     public final static String pit = "art/demonhole.png";

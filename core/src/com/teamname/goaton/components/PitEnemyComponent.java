@@ -30,6 +30,10 @@ public class PitEnemyComponent extends EnemyComponent {
         if(health <= 0)
         {
             GameObject go = GameObject.Instantiate(PitDyingGoatFactory.Create(other));
+            if(go.components.containsKey("ParticleComponent"))
+            {
+                ((ParticleComponent)(go.getComponent("ParticleComponent"))).setRunEffect(true);
+            }
             go.setPosition(gameObject.getPosition());
         }
     }

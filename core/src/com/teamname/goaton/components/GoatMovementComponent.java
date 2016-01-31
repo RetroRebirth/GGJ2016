@@ -39,6 +39,7 @@ public class GoatMovementComponent extends Component {
 
                 state = HELD;
                 gameObject.getBody().setLinearVelocity(0,0);
+                gameObject.layer = Assets.THROW_LAYER;
             }
         });
 
@@ -46,6 +47,7 @@ public class GoatMovementComponent extends Component {
             @Override
             public void handle(Message msg) {
                 state = IDLE;
+                gameObject.layer = Assets.ACTOR_LAYER;
             }
         });
 
