@@ -94,11 +94,13 @@ public class GoatMovementComponent extends Component {
                 spinCounter = 3;
                 if (prevState == SPIN_CLOCKWISE) {
                     Tween.to(gameObject.getBody(), LinearVelocityAccessor.TWEEN_XY, 0.75f)
-                            .target(curVel.y, curVel.x)
+                            .target(curVel.y, -curVel.x)
+                            //.target(curVel.y)
                             .start(GoatonWorld.TweenManager);
                 } else if (prevState == SPIN_COUNTERWISE) {
                     Tween.to(gameObject.getBody(), LinearVelocityAccessor.TWEEN_XY, 0.75f)
                             .target(-curVel.y, curVel.x)
+                            //.target(-curVel.y)
                             .start(GoatonWorld.TweenManager);
                 }
             }
