@@ -1,13 +1,19 @@
 package com.teamname.goaton.components;
 
+import aurelienribon.tweenengine.Tween;
+import aurelienribon.tweenengine.TweenEquation;
+import aurelienribon.tweenengine.TweenEquations;
+import aurelienribon.tweenengine.TweenManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.teamname.goaton.Component;
+import com.teamname.goaton.GoatonWorld;
 import com.teamname.goaton.Message;
 import com.teamname.goaton.MsgHandler;
+import com.teamname.goaton.TweenWrappers.SpriteAccessor;
 
 /**
  * Created by kpidding on 1/30/16.
@@ -31,11 +37,34 @@ public class DemonBossAnimatorComponent extends Component {
         head.scale(scale);
         jaw.scale(scale);
         body.scale(scale);
+        head.setAlpha(0);
+        jaw.setAlpha(0);
+        body.setAlpha(0);
 
     }
 
     @Override
     protected void create() {
+        this.on("damaged", new MsgHandler() {
+            @Override
+            public void handle(Message msg) {
+                Tween.to(head, SpriteAccessor.TWEEN_ALPHA,3.5f)
+                        .delay(1.0f)
+                        .target(1.0f)
+                        .ease(TweenEquations.easeOutCubic)
+                        .start(GoatonWorld.TweenManager);
+                Tween.to(jaw, SpriteAccessor.TWEEN_ALPHA,3.5f)
+                        .delay(1.0f)
+                        .target(1.0f)
+                        .ease(TweenEquations.easeOutCubic)
+                        .start(GoatonWorld.TweenManager);
+                Tween.to(body, SpriteAccessor.TWEEN_ALPHA,3.5f)
+                        .delay(1.0f)
+                        .target(1.0f)
+                        .ease(TweenEquations.easeOutCubic)
+                        .start(GoatonWorld.TweenManager);
+            }
+        });
         this.on("damaged", new MsgHandler() {
             @Override
             public void handle(Message msg) {
