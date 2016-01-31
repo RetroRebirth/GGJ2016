@@ -23,7 +23,7 @@ public class PlayerPhysicsComponent extends Component {
         bodyDef.position.set(this.gameObject.getPosition());
         this.gameObject.addPhysicsBody(GoatonWorld.world.createBody(bodyDef));
         CircleShape circle = new CircleShape();
-        circle.setRadius(8f);
+        circle.setRadius(0.5f);
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = circle;
         fixtureDef.filter.categoryBits = ObjectTypes.PLAYER;

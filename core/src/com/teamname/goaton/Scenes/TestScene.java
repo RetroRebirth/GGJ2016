@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.utils.Array;
 import com.teamname.goaton.GameObject;
+import com.teamname.goaton.Prefabs.DemonFactory;
 import com.teamname.goaton.Prefabs.GoatFactory;
 import com.teamname.goaton.Prefabs.PitFactory;
 import com.teamname.goaton.Prefabs.PlayerFactory;
@@ -42,28 +43,7 @@ public class TestScene extends Scene {
             //doing physics here?
         camera.position.set(player.getScreenPosition().x, player.getScreenPosition().y, 0);
         camera.update();
-            while (!addList.isEmpty())
-            {
-                GameObject obj = addList.remove();
-                obj.create();
-                objects.add(obj);
-            }
-
-            for(GameObject obj : objects)
-            {
-                obj.update(dt);
-                obj.render(sb);
-            }
-
-            GoatonWorld.world.step(dt, 6, 2);
-            Array<Body> bodies = new Array<Body>();
-            GoatonWorld.world.getBodies(bodies);
-            for(Body b : bodies)
-            {
-                GameObject go = (GameObject)b.getUserData();
-                go.setPosition(b.getPosition());
-            }
-
+        super.updateRender(dt,sb);
             //debugRenderer.render(GoatonWorld.world, camera.combined);
     }
 
@@ -92,7 +72,7 @@ public class TestScene extends Scene {
 
     private void createPits() {
         GameObject pit = PitFactory.Create();
-
+        GameObject.Instantiate(DemonFactory.Create());
         for (int i = 0; i < 50; i++) {
             GameObject newPit = GameObject.Instantiate(pit);
         }

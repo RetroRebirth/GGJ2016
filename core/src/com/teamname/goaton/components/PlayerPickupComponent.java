@@ -20,7 +20,7 @@ public class PlayerPickupComponent extends Component {
 
     List<GameObject> legalGoats = new LinkedList<GameObject>();
 
-    public static final float PICKUP_RADIUS = 50f;
+    public static final float PICKUP_RADIUS = 3f;
 
     protected void create() {
         PolygonShape arc = new PolygonShape();

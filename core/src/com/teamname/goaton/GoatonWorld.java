@@ -38,12 +38,15 @@ public class GoatonWorld {
     public static void setScene(Scene newScene)
     {
         GoatonWorld.scene = newScene;
-        GoatonWorld.worldHeight = scene.getCamera().viewportHeight;
-        GoatonWorld.worldWidth = scene.getCamera().viewportWidth;
+        GoatonWorld.worldHeight = scene.getCamera().viewportHeight/TILE_SIZE;
+        GoatonWorld.worldWidth = scene.getCamera().viewportWidth/TILE_SIZE;
         newScene.create();
         world.setContactListener(new CollisionListener());
 
 
     }
 
+    public static void Destroy(GameObject other) {
+        scene.removeObject(other);
+    }
 }

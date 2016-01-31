@@ -5,7 +5,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.teamname.goaton.Assets;
 import com.teamname.goaton.GameObject;
-import com.teamname.goaton.components.PitCollisionComponent;
+import com.teamname.goaton.components.PitEnemyComponent;
+import com.teamname.goaton.components.EnemyComponent;
 import com.teamname.goaton.components.PitPhysicsComponent;
 import com.teamname.goaton.components.PitPositionComponent;
 import com.teamname.goaton.components.PitStaticSpriteComponent;
@@ -22,7 +23,8 @@ public class PitFactory {
         go.addComponent(new PitStaticSpriteComponent(new Sprite(new Texture(Gdx.files.internal(Assets.player)))));
         go.addComponent(new PitPhysicsComponent());
         go.addComponent(new PitPositionComponent());
-        go.addComponent(new PitCollisionComponent());
+        go.addComponent(new PitEnemyComponent(1));
+        //go.addComponent(new EnemyComponent(1));
         return go;
     }
 

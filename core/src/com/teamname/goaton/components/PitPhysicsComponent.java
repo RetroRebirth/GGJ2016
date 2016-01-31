@@ -22,7 +22,7 @@ public class PitPhysicsComponent extends Component {
         this.gameObject.addPhysicsBody(GoatonWorld.world.createBody(bodyDef));
 
         CircleShape circle = new CircleShape();
-        circle.setRadius(8f);
+        circle.setRadius(0.5f);
 
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = circle;

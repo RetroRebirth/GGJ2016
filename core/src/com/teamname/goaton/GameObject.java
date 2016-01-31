@@ -16,7 +16,7 @@ public class GameObject {
     public float radius = 1f;
 
     public HashMap<String, Component> components;
-    public List<String> tags;
+    public HashSet<String> tags = new HashSet<String>();
 
     private Queue<Message> messages = new LinkedList<Message>();
     protected List<MsgHandler> handlers = new LinkedList<MsgHandler>();
@@ -38,7 +38,7 @@ public class GameObject {
         this.components = new HashMap<String, Component>(other.components);
         this.messages = new LinkedList<Message>();
         this.handlers = new LinkedList<MsgHandler>();
-        other.tags = this.tags;
+        this.tags = new HashSet<String>(other.tags);
         for(Map.Entry<String, Component> e : other.components.entrySet())
         {
             Component newComp = e.getValue().cloneComponent();
@@ -160,6 +160,7 @@ public class GameObject {
 
     public void addPhysicsBody(Body body) {
         this.body = body;
+        body.setTransform(this.position,0);
         this.body.setUserData(this);
     }
 

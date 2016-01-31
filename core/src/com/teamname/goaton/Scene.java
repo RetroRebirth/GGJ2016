@@ -8,10 +8,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * Created by kpidding on 1/30/16.
@@ -23,10 +20,11 @@ public abstract class Scene {
     public static final int NUM_LAYERS = 3;*/
 
     private float timer = 0;
-    protected List<GameObject> objects = new ArrayList<GameObject>();
+    protected HashSet<GameObject> objects = new HashSet<GameObject>();
     protected List<GameObject>[] layers;
     //Queue<GameObject>[] addList;
     protected Queue<GameObject> addList = new LinkedList<GameObject>();
+    protected Queue<GameObject> removeList = new LinkedList<GameObject>();
     protected Viewport viewport;
 
     protected Camera camera;
@@ -58,6 +56,15 @@ public abstract class Scene {
         //addList[ENTITY_LAYER].add(object);
         addList.add(object);
     }
+
+    private void finishRemove()
+    {
+        while(!removeList.isEmpty())
+        {
+            objects.remove(removeList.remove());
+
+        }
+    }
     /*
     public void addObject(GameObject object, int layer)
     {
@@ -72,17 +79,13 @@ public abstract class Scene {
     }
 
     public void updateRender(float dt, SpriteBatch sb) {
-        /*for (int i = 0; i < NUM_LAYERS; i++)
-        {
-            while (!addList[i].isEmpty())
-            {
-                GameObject obj = addList[i].remove();
-                obj.create();
-                objects.add(obj);
-                layers[i].add(obj);
-            }
-        }*/
-        //doing physics here?
+        GoatonWorld.world.step(dt, 6, 2);
+        Array<Body> bodies = new Array<Body>();
+        GoatonWorld.world.getBodies(bodies);
+        for (Body b : bodies) {
+            GameObject go = (GameObject) b.getUserData();
+            go.setPosition(b.getPosition());
+        }
 
         while (!addList.isEmpty()) {
             GameObject obj = addList.remove();
@@ -95,14 +98,8 @@ public abstract class Scene {
             obj.render(sb);
         }
 
-        GoatonWorld.world.step(dt, 6, 2);
-        Array<Body> bodies = new Array<Body>();
-        GoatonWorld.world.getBodies(bodies);
-        for (Body b : bodies) {
-            GameObject go = (GameObject) b.getUserData();
-            go.setPosition(b.getPosition());
-        }
-
+        //After all is said and done, finish the remove.
+        finishRemove();
         //debugRenderer.render(GoatonWorld.world, camera.combined);
     }
 
@@ -158,5 +155,9 @@ public abstract class Scene {
     public void updateViewport(int width, int height)
     {
         viewport.update(width,height);
+    }
+
+    public void removeObject(GameObject other) {
+        removeList.add(other);
     }
 }

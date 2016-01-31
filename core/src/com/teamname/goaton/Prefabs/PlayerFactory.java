@@ -29,6 +29,7 @@ public class PlayerFactory extends GameObject {
         go.addComponent(new PlayerPhysicsComponent());
         go.addComponent(new PlayerPickupComponent());
         go.addComponent(new GoatStackComponent());
+        go.tags.add("player");
         return go;
     }
 
