@@ -37,8 +37,6 @@ public class PlayerFactory extends GameObject {
         }
         go.addComponent(new PlayerMovementComponent(src));
         go.addComponent(new PlayerAnimatedSpriteComponent(LoadSprites()));
-//        go.addComponent(new SpriteRenderComponent(
-//                new Sprite(new Texture(Gdx.files.internal(Assets.player)))));
         go.addComponent(new PlayerPhysicsComponent());
         go.addComponent(new PlayerPickupComponent());
         go.addComponent(new GoatStackComponent());
