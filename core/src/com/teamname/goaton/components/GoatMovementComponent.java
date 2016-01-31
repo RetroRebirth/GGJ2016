@@ -4,6 +4,7 @@ import aurelienribon.tweenengine.Tween;
 import com.badlogic.gdx.math.Vector2;
 //import com.sun.javafx.scene.traversal.Direction;
 import com.teamname.goaton.*;
+import com.teamname.goaton.TweenWrappers.LinearVelocityAccessor;
 
 /**
  * Created by kpidding on 1/30/16.
@@ -75,6 +76,30 @@ public class GoatMovementComponent extends Component {
 
                 } else if (prevState == SPIN_COUNTERWISE) {
 
+                }
+            }
+        });
+
+        this.on("throw", new MsgHandler() {
+            @Override
+            public void handle(Message msg) {
+                prevState = state;
+                Vector2 curVel = gameObject.getBody().getLinearVelocity();
+
+                /*Tween.to(gameObject.getBody(), LinearVelocityAccessor.TWEEN_XY, 0.75f)
+                        .target(-curVel.y, curVel.x)
+                        .start(GoatonWorld.TweenManager);*/
+
+
+                spinCounter = 3;
+                if (prevState == SPIN_CLOCKWISE) {
+                    Tween.to(gameObject.getBody(), LinearVelocityAccessor.TWEEN_XY, 0.75f)
+                            .target(curVel.y, curVel.x)
+                            .start(GoatonWorld.TweenManager);
+                } else if (prevState == SPIN_COUNTERWISE) {
+                    Tween.to(gameObject.getBody(), LinearVelocityAccessor.TWEEN_XY, 0.75f)
+                            .target(-curVel.y, curVel.x)
+                            .start(GoatonWorld.TweenManager);
                 }
             }
         });

@@ -85,6 +85,17 @@ public class PlayerMovementComponent extends Component {
             {
                 this.gameObject.send(new Message("glow"));
             }
+            if (src.isSpinLeftButtonPressed()) {
+                if (holdingGoat) {
+                    this.gameObject.send(new Message("spinCounterwise"));
+                }
+            }
+            if (src.isSpinRightButtonPressed()) {
+                if (holdingGoat) {
+                    this.gameObject.send(new Message("spinClockwise"));
+                }
+            }
+
             movement.scl(speed);
 
             gameObject.getBody().setLinearVelocity(movement.x, movement.y);
