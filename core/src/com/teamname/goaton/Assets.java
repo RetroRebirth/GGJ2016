@@ -66,6 +66,7 @@ public class Assets {
     public final static String demon_U  = "art/demon_up.png";
     public final static String demon_UL = "art/demon_up-left.png";
     public final static String demon_UR = "art/demon_up-right.png";
+    public static String healthBar      = "art/HealthBar.png";
 
     // SFX assets
     public final static String goat_Pickup_SFX      = "sfx/goat_pickup.mp3";
