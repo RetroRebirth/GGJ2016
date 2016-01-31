@@ -52,24 +52,24 @@ public class DemonBossAnimatorComponent extends Component {
             @Override
             public void handle(Message msg) {
                 Tween.to(head, SpriteAccessor.TWEEN_ALPHA,8.5f)
-                        .delay(5.0f)
+                        .delay(3.0f)
                         .target(1.0f)
                         .ease(TweenEquations.easeOutCubic)
                         .start(GoatonWorld.TweenManager);
                 Tween.to(jaw, SpriteAccessor.TWEEN_ALPHA,8.5f)
-                        .delay(5.0f)
+                        .delay(3.0f)
                         .target(1.0f)
                         .ease(TweenEquations.easeOutCubic)
                         .start(GoatonWorld.TweenManager);
-                Tween.to(bodyr, SpriteAccessor.TWEEN_ALPHA,8.5f)
-                        .delay(5.4f)
+                Tween.to(bodyr, SpriteAccessor.TWEEN_ALPHA,5.5f)
+                        .delay(3.4f)
                         .target(1.0f)
-                        .ease(TweenEquations.easeOutCubic)
+                        .ease(TweenEquations.easeInOutQuart)
                         .start(GoatonWorld.TweenManager);
-                Tween.to(bodyl, SpriteAccessor.TWEEN_ALPHA,8.5f)
-                        .delay(5.4f)
-                        .target(1.0f)
-                        .ease(TweenEquations.easeOutCubic)
+                Tween.to(bodyl, SpriteAccessor.TWEEN_ALPHA,5.5f)
+                        .delay(3.4f)
+                        .target(  1.0f)
+                        .ease(TweenEquations.easeInOutQuart)
                         .setCallback(new TweenCallback() {
                             @Override
                             public void onEvent(int i, BaseTween<?> baseTween) {

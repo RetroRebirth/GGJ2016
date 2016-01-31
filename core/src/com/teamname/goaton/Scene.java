@@ -17,6 +17,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.teamname.goaton.Prefabs.BoundBoxFactory;
 import com.teamname.goaton.Prefabs.DemonBossFactory;
 import com.teamname.goaton.Prefabs.PlayerFactory;
+import com.teamname.goaton.Prefabs.PlayerTriggerFactory;
 
 import java.util.*;
 
@@ -227,6 +228,8 @@ public abstract class Scene {
                 player = PlayerFactory.Create();
                 player.setPosition(MapObjectToWorld(objects.get("PlayerSpawn")));
                 addObject(player);
+
+                addObject(PlayerTriggerFactory.Create(objects.get("BossTrigger"),new Message("spawnBoss"),true));
 
             }
             else if (l.getName().equals("SpawnArea"))
