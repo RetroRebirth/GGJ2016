@@ -6,6 +6,7 @@ import com.badlogic.gdx.physics.box2d.Contact;
 /**
  * Created by pya on 1/30/16.
  */
+
 public abstract class Component implements Cloneable {
     public Component()
     {
