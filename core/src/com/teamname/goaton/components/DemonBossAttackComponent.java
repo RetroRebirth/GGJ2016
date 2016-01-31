@@ -33,6 +33,12 @@ public class DemonBossAttackComponent extends Component
                 appeared = true;
             }
         });
+        on("destroy", new MsgHandler() {
+            @Override
+            public void handle(Message msg) {
+                appeared = false;
+            }
+        });
     }
 
     @Override

@@ -158,6 +158,7 @@ public class DemonBossAnimatorComponent extends Component {
                             public void onEvent(int i, BaseTween<?> baseTween) {
                                 GoatonWorld.sendGlobalMessage(new Message("cameraShake",new CamShakeControl(1.f,80.f)));
                                 GoatonWorld.sendGlobalMessage(new Message("bossDestroyed"));
+                                gameObject.setPosition(new Vector2(-999,-999));
                             }
                         })
 
