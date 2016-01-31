@@ -3,10 +3,8 @@ package com.teamname.goaton.Scenes;
 import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
 
 import com.teamname.goaton.GameObject;
 import com.teamname.goaton.Input.ControllerInputSorce;
@@ -99,16 +97,21 @@ public class TestScene extends Scene {
         gui.update(dt);
         gui.render(guiSB);
 
-        if (displayTutorial) {
+        boolean dead = ((PlayerMovementComponent) Scene.Player.getComponent("PlayerMovementComponent")).dead;
+        if (displayTutorial && !dead) {
             if (tutorialDelay > 0f) {
                 tutorialDelay -= dt;
             } else if (tutorialDuration > 0f) {
                 tutorialDuration -= dt;
-                renderTextToScreen();
+                renderTutorialTextToScreen();
             } else {
                 tutorialDelay = TUTORIAL_DELAY;
                 tutorialDuration = TUTORIAL_DUR;
             }
+        }
+
+        if (dead) {
+            renderGameOverTextToScreen();
         }
 
         guiSB.end();
@@ -116,13 +119,12 @@ public class TestScene extends Scene {
             //debugRenderer.render(GoatonWorld.world, camera.combined);
     }
 
-    private void renderTextToScreen() {
-//        font.setColor(0.53f, 0.03f, 0.03f, 1.0f); // Blood-red
-        font.setColor(0.73f, 0.03f, 0.03f, 1.0f); // bright-red
-//        font.setColor(1f, 1f, 1f, 1.0f);
-
-//        font.draw(guiSB, "The Goats of Hell", -60, 160);
+    private void renderTutorialTextToScreen() {
         font.draw(guiSB, "Press [SPACE] to pick up goats!", -100, 48);
+    }
+
+    private void renderGameOverTextToScreen() {
+        font.draw(guiSB, "GAME OVER", -46, 48);
     }
 
     @Override
@@ -135,6 +137,7 @@ public class TestScene extends Scene {
         createPits();
 
         font = new BitmapFont();
+        font.setColor(0.73f, 0.03f, 0.03f, 1.0f); // bright-red
 
         super.create();
 
