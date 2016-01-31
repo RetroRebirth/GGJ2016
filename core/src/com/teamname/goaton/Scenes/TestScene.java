@@ -85,6 +85,7 @@ public class TestScene extends Scene {
 
         createPits();
 
+
         super.create();
 
     }

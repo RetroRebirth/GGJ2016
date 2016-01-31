@@ -69,4 +69,5 @@ public class Assets {
     public final static String demon_UL = "art/demon_up-left.png";
     public final static String demon_UR = "art/demon_up-right.png";
     public static String healthBar      = "art/HealthBar.png";
+    public static String bridge         = "art/bridgeTile.png";
 }
