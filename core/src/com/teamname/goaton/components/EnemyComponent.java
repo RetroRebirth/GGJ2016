@@ -28,6 +28,7 @@ public class EnemyComponent extends Component {
             gameObject.send(new Message("damaged"));
             other.send(new Message("destroy"));
             GoatonWorld.numGoats--;
+            GoatonWorld.Destroy(other);
 
         }
         if(health <= 0)
@@ -36,6 +37,11 @@ public class EnemyComponent extends Component {
                 GoatonWorld.numDemons--;
             }
             gameObject.send(new Message("destroy"));
+            if (gameObject.tags.contains("demon")) {
+                GoatonWorld.Destroy(gameObject);
+            }
+
+
         }
     }
 
