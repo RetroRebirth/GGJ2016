@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import com.teamname.goaton.Component;
 import com.teamname.goaton.GoatonWorld;
 import com.teamname.goaton.Message;
@@ -22,7 +23,8 @@ public class DemonBossAnimatorComponent extends Component {
 
     private Sprite head;
     private Sprite jaw;
-    private Sprite body;
+    private Sprite bodyl;
+    private Sprite bodyr;
     private float scale = 5.5f;
     private float headBob = 20;
     private float jawBob = 10;
@@ -33,19 +35,25 @@ public class DemonBossAnimatorComponent extends Component {
     {
         head = new Sprite(new Texture(Gdx.files.internal("art/BossDemon/l1_demonKing_1.png")));
         jaw = new Sprite(new Texture(Gdx.files.internal("art/BossDemon/l2_demonKing_1.png")));
-        body = new Sprite(new Texture(Gdx.files.internal("art/BossDemon/l0_demonKing_1.png")));
+        bodyl = new Sprite(new Texture(Gdx.files.internal("art/demonboss_body.png")));
+        bodyr = new Sprite(new Texture(Gdx.files.internal("art/demonboss_body.png")));
+        bodyr.setFlip(true,false);
+
         head.scale(scale);
         jaw.scale(scale);
-        body.scale(scale);
+        bodyr.scale(scale/2);
+        bodyl.scale(scale/2);
         head.setAlpha(0);
         jaw.setAlpha(0);
-        body.setAlpha(0);
+        bodyr.setAlpha(0);
+        bodyl.setAlpha(0);
+
 
     }
 
     @Override
     protected void create() {
-        this.on("damaged", new MsgHandler() {
+        this.on("spawnBoss", new MsgHandler() {
             @Override
             public void handle(Message msg) {
                 Tween.to(head, SpriteAccessor.TWEEN_ALPHA,3.5f)
@@ -58,8 +66,13 @@ public class DemonBossAnimatorComponent extends Component {
                         .target(1.0f)
                         .ease(TweenEquations.easeOutCubic)
                         .start(GoatonWorld.TweenManager);
-                Tween.to(body, SpriteAccessor.TWEEN_ALPHA,3.5f)
-                        .delay(1.0f)
+                Tween.to(bodyr, SpriteAccessor.TWEEN_ALPHA,5.5f)
+                        .delay(1.4f)
+                        .target(1.0f)
+                        .ease(TweenEquations.easeOutCubic)
+                        .start(GoatonWorld.TweenManager);
+                Tween.to(bodyl, SpriteAccessor.TWEEN_ALPHA,5.5f)
+                        .delay(1.4f)
                         .target(1.0f)
                         .ease(TweenEquations.easeOutCubic)
                         .start(GoatonWorld.TweenManager);
@@ -92,12 +105,16 @@ public class DemonBossAnimatorComponent extends Component {
         }
         head.setPosition(gameObject.getScreenPosition().x + xOff*(float)Math.cos(30*t), gameObject.getScreenPosition().y + (float)Math.sin(t)*headBob);
         jaw.setPosition(gameObject.getScreenPosition().x+xOff*(float)Math.cos(30*t + Math.PI), gameObject.getScreenPosition().y + (float)(Math.sin(t)*headBob) + (float)Math.sin(t*1.05 + 0.5) * jawBob);
-        body.setPosition(gameObject.getScreenPosition().x+xOff*(float)Math.cos(30*t), gameObject.getScreenPosition().y + (float)Math.sin(t + 0.25) * bodyBob);
+        bodyr.setPosition(gameObject.getScreenPosition().x+xOff*(float)Math.cos(30*t) + 2.5f*bodyl.getWidth(), gameObject.getScreenPosition().y + (float)Math.sin(t + 0.25) * bodyBob - 45);
+        bodyl.setPosition(gameObject.getScreenPosition().x+xOff*(float)Math.cos(30*t) - 2.5f*bodyr.getWidth(), gameObject.getScreenPosition().y + (float)Math.sin(t + 0.25) * bodyBob - 45);
+
     }
 
     @Override
     protected void render(SpriteBatch sb) {
-        body.draw(sb);
+        bodyr.draw(sb);
+        bodyl.draw(sb);
+
         head.draw(sb);
         jaw.draw(sb);
 

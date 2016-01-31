@@ -42,20 +42,23 @@ public class BossArmComponent extends Component {
     protected void create() {
         armSprite.setColor(Color.BLACK);
         super.create();
-        this.on("damaged", new MsgHandler() {
+        this.on("spawnBoss", new MsgHandler() {
             @Override
             public void handle(Message msg) {
                 Timeline.createSequence()
                         .beginParallel()
                         .push(
                                 Tween.to(armSprite, SpriteAccessor.TWEEN_XY, 2.3f)
+                                        .delay(flipped ? 0.5f : 0)
                                         .ease(TweenEquations.easeOutCubic)
                                         .target(targPosition.x, targPosition.y))
                         .push(Tween.to(armSprite, SpriteAccessor.TWEEN_RGB, 2.3f)
                                 .ease(TweenEquations.easeOutCubic)
+                                .delay(flipped ? 0.5f : 0)
                                 .target(1, 1, 1))
                         .push(Tween.to(armSprite, SpriteAccessor.TWEEN_ALPHA, 2.3f)
                                 .ease(TweenEquations.easeOutCubic)
+                                .delay(flipped ? 0.5f : 0)
                                 .target(1.f))
                         .end()
                         .start(GoatonWorld.TweenManager);

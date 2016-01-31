@@ -70,4 +70,13 @@ public class ControllerInputSorce implements GameInputSource {
             return false;
         }
     }
+    public boolean isDebugButtonPressed()
+    {
+        if(ctrl.getButton(Xbox.X))
+        {
+            return true;
+        }
+        return false;
+    }
+
 }
