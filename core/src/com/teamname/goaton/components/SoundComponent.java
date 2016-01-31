@@ -7,6 +7,9 @@ import com.teamname.goaton.Assets;
 import com.teamname.goaton.Message;
 import com.teamname.goaton.MsgHandler;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 /**
  * Created by Cody Kitchener on 1/31/2016.
  */
@@ -22,6 +25,33 @@ public class SoundComponent extends Component {
     Sound titleTheme;
     Sound mainThemeIntro;
     Sound mainThemeLoop;
+    Timer timer;
+
+    private class WaitToExecute extends TimerTask {
+        Sound toDispose;
+
+        public WaitToExecute(Sound toDispose) {
+            this.toDispose = toDispose;
+        }
+
+        public void run() {
+            toDispose.play(0.8f);
+            timer.cancel();
+        }
+    }
+
+    private class WaitToDispose extends TimerTask {
+        Sound toDispose;
+
+        public WaitToDispose(Sound toDispose) {
+            this.toDispose = toDispose;
+        }
+
+        public void run() {
+            toDispose.dispose();
+            timer.cancel();
+        }
+    }
 
     public SoundComponent() {
         // Goat SFX
@@ -41,6 +71,8 @@ public class SoundComponent extends Component {
         this.titleTheme = Gdx.audio.newSound(Gdx.files.internal(Assets.title_Theme));
         this.mainThemeIntro = Gdx.audio.newSound(Gdx.files.internal(Assets.main_Intro));
         this.mainThemeLoop = Gdx.audio.newSound(Gdx.files.internal(Assets.main_Loop));
+        // Set up a timer
+        timer = new Timer();
     }
 
     @Override
@@ -60,10 +92,12 @@ public class SoundComponent extends Component {
             }
         });
         // Handles sound for the boss spawn
-        on("spawnBoss", new MsgHandler() {
+        on("bossSpawnSound", new MsgHandler() {
             @Override
             public void handle(Message msg) {
-
+                bossSpawnSFX.play(1.0f);
+                // Wait 7 seconds to let the file play then dispose of it
+                timer.schedule(new WaitToDispose(bossSpawnSFX), 7 * 1000);
             }
         });
         // Handles sound for a new demon spawning
