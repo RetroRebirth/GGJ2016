@@ -8,6 +8,9 @@ public class Assets {
     public final static String goat = "art/Goat.png";
     public final static String pit = "art/Player.png";
 
+    // Player sprite assets
+    public final static String player_D   = "art/farmer_down.png";
+
     // Goat sprite assets
     public final static String goat_D   = "art/goat_down.png";
     public final static String goat_DL  = "art/goat_down-left.png";

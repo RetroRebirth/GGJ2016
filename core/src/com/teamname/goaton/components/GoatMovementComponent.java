@@ -2,24 +2,14 @@ package com.teamname.goaton.components;
 
 import aurelienribon.tweenengine.Tween;
 import com.badlogic.gdx.math.Vector2;
-import com.teamname.goaton.Component;
-import com.teamname.goaton.GoatonWorld;
-import com.teamname.goaton.Message;
-import com.teamname.goaton.MsgHandler;
+import com.sun.javafx.scene.traversal.Direction;
+import com.teamname.goaton.*;
 
 /**
  * Created by kpidding on 1/30/16.
  */
 public class GoatMovementComponent extends Component {
-    enum Direction
-    {
-        UP,
-        DOWN,
-        LEFT,
-        RIGHT,
-        NONE
-    }
-    private Direction direction = Direction.NONE;
+
     private float moveTimer;
     private float maxMoveTime = 3.f;
     private float minMoveTime = 0.5f;
@@ -92,10 +82,10 @@ public class GoatMovementComponent extends Component {
                 moveTimer -= dt;
                 if (moveTimer < 0) {
                     //Higher weight to stop moving.
-                    if (direction != Direction.NONE & GoatonWorld.Random.nextFloat() > 0.5) {
-                        direction = Direction.NONE;
+                    if (gameObject.direction != GameObject.Direction.NONE & GoatonWorld.Random.nextFloat() > 0.5) {
+                        gameObject.direction = GameObject.Direction.NONE;
                     } else {
-                        direction = GoatonWorld.RandomEnum(Direction.class);
+                        gameObject.direction = GoatonWorld.RandomEnum(GameObject.Direction.class);
                     }
                     moveTimer = GoatonWorld.Random.nextFloat() * (maxMoveTime - minMoveTime) + minMoveTime;
                 }
@@ -129,7 +119,7 @@ public class GoatMovementComponent extends Component {
                     if (spinCounter < 0) {
                         spinCounter = 3;
                     }
-                    direction = Direction.values()[spinCounter];
+                    gameObject.direction = GameObject.Direction.values()[spinCounter];
                     spinCounter--;
                     spinTime = maxSpinTime;
                 }
@@ -140,7 +130,7 @@ public class GoatMovementComponent extends Component {
 
     private void move() {
         Vector2 mov = new Vector2();
-        switch (direction) {
+        switch (gameObject.direction) {
             case UP:
                 mov.y += moveSpeed;
                 break;
@@ -164,9 +154,5 @@ public class GoatMovementComponent extends Component {
     @Override
     public String getID() {
         return "GoatMovementComponent";
-    }
-
-    public Direction getDirection() {
-        return direction;
     }
 }

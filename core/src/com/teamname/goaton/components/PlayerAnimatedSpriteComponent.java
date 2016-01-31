@@ -1,34 +1,26 @@
 package com.teamname.goaton.components;
 
-import com.badlogic.gdx.Gdx;
-
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.teamname.goaton.Assets;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.teamname.goaton.*;
 import com.teamname.goaton.Prefabs.GoatFactory;
+
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Created by kpidding on 1/30/16.
  */
-public class GoatAnimatedSpriteComponent extends AnimatedSpriteRenderComponent {
+public class PlayerAnimatedSpriteComponent extends AnimatedSpriteRenderComponent {
 
-    private static final Color[] colors = {Color.GRAY,Color.CYAN,Color.GOLD,Color.WHITE};
-    private static final String firstSprite = Assets.goat_D;
+    private static final String firstSprite = Assets.player_D;
     public static final float WALKTIME = 0.3f;
-    GameObject.Direction dir = GameObject.Direction.NONE;
-    private float throwTimer = 0;
-    private boolean onGround;
 
+    GoatMovementComponent.Direction dir = GoatMovementComponent.Direction.NONE;
     private int walkCycle = 0;
     private float walkDuration = 0.0f;
     private int walkCycleLoop = 3;
-    private GameObject.Direction prevDir = GameObject.Direction.NONE;
+    private GoatMovementComponent.Direction prevDir = GoatMovementComponent.Direction.NONE;
 
     private Color color;
 
@@ -37,7 +29,7 @@ public class GoatAnimatedSpriteComponent extends AnimatedSpriteRenderComponent {
         return "GoatAnimatedSpriteComponent";
     }
 
-    public GoatAnimatedSpriteComponent(HashMap<String, Sprite> sprites) {
+    public PlayerAnimatedSpriteComponent(HashMap<String, Sprite> sprites) {
 
         super(sprites, sprites.get(firstSprite));
         for(Map.Entry<String,Sprite> e : sprites.entrySet())
@@ -79,9 +71,12 @@ public class GoatAnimatedSpriteComponent extends AnimatedSpriteRenderComponent {
 
 
         // Read which direction the goat is moving
-        dir = this.gameObject.direction;
+        if (this.gameObject.getComponent("GoatMovementComponent") != null)
+        {
+            dir = ((GoatMovementComponent) this.gameObject.getComponent("GoatMovementComponent")).getDirection();
+        }
         // Keep track of which frame of the cycle we should render
-        if (dir == GameObject.Direction.NONE) {
+        if (dir == GoatMovementComponent.Direction.NONE) {
             walkCycle = 0;
             walkDuration = 0.0f;
         } else {
@@ -154,7 +149,7 @@ public class GoatAnimatedSpriteComponent extends AnimatedSpriteRenderComponent {
         }
 
         // Keep track of the previous direction so we can have the goats stand when they stop moving
-        if (dir != GameObject.Direction.NONE) {
+        if (dir != GoatMovementComponent.Direction.NONE) {
             prevDir = dir;
         }
 
@@ -187,7 +182,7 @@ public class GoatAnimatedSpriteComponent extends AnimatedSpriteRenderComponent {
         {
             newSprites.put(e.getKey(),new Sprite(e.getValue()));
         }
-        GoatAnimatedSpriteComponent cmp = new GoatAnimatedSpriteComponent(newSprites);
+        PlayerAnimatedSpriteComponent cmp = new PlayerAnimatedSpriteComponent(newSprites);
         cmp.currentSprite = new Sprite(this.currentSprite);
         cmp.dir = this.dir;
         return cmp;
