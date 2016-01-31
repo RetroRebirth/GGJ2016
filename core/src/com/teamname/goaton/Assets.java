@@ -52,4 +52,18 @@ public class Assets {
     public final static String goat_UL  = "art/goat_up-left.png";
     public final static String goat_UR  = "art/goat_up-right.png";
     public static String arm            = "art/DemonBossClaw.png";
+
+    // Demon sprite assets
+    public final static String demon_D  = "art/demon_down.png";
+    public final static String demon_DL = "art/demon_down-left.png";
+    public final static String demon_DR = "art/demon_down-right.png";
+    public final static String demon_L  = "art/demon_left.png";
+    public final static String demon_LL = "art/demon_left-left.png";
+    public final static String demon_LR = "art/demon_left-right.png";
+    public final static String demon_R  = "art/demon_right.png";
+    public final static String demon_RL = "art/demon_right-left.png";
+    public final static String demon_RR = "art/demon_right-right.png";
+    public final static String demon_U  = "art/demon_up.png";
+    public final static String demon_UL = "art/demon_up-left.png";
+    public final static String demon_UR = "art/demon_up-right.png";
 }

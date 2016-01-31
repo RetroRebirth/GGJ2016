@@ -25,7 +25,7 @@ public class DemonBossAnimatorComponent extends Component {
     private float bodyBob = 3;
     private  float t;
     private float damageTime = 0;
-    private float attackAnim = 10;
+    private float attackAnim = 0;
     public DemonBossAnimatorComponent()
     {
         head = new Sprite(new Texture(Gdx.files.internal("art/BossDemon/l1_demonKing_1.png")));
@@ -51,12 +51,12 @@ public class DemonBossAnimatorComponent extends Component {
         this.on("spawnBoss", new MsgHandler() {
             @Override
             public void handle(Message msg) {
-                Tween.to(head, SpriteAccessor.TWEEN_ALPHA,8.5f)
+                Tween.to(head, SpriteAccessor.TWEEN_ALPHA,5.5f)
                         .delay(3.0f)
                         .target(1.0f)
                         .ease(TweenEquations.easeOutCubic)
                         .start(GoatonWorld.TweenManager);
-                Tween.to(jaw, SpriteAccessor.TWEEN_ALPHA,8.5f)
+                Tween.to(jaw, SpriteAccessor.TWEEN_ALPHA,5.5f)
                         .delay(3.0f)
                         .target(1.0f)
                         .ease(TweenEquations.easeOutCubic)
