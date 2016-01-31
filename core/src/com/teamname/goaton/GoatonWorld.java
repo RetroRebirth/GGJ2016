@@ -18,6 +18,7 @@ import java.util.Random;
 public class GoatonWorld {
     public static float worldWidth;
     public static float worldHeight;
+    public static int numGoats;
     public static TiledMap cMap;
     public static World world = new World(new Vector2(0, 0), true); //no gravity
     private static Scene scene;

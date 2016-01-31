@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.teamname.goaton.Assets;
 import com.teamname.goaton.GameObject;
+import com.teamname.goaton.Message;
 import com.teamname.goaton.components.*;
 
 import java.util.HashMap;
@@ -17,9 +18,9 @@ public class GoatFactory {
 
     public static GameObject Create() {
         GameObject go = new GameObject();
+        go.addComponent(new GoatPhysicsComponent());
         go.addComponent(new GoatMovementComponent());
         go.addComponent(new GoatAnimatedSpriteComponent(LoadSprites()));
-        go.addComponent(new GoatPhysicsComponent());
         go.addComponent(new GoatPositionComponent());
         go.tags.add("goat");
         go.layer =  Assets.ACTOR_LAYER;

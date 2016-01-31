@@ -48,7 +48,7 @@ public class TestScene extends Scene {
     @Override
     public void create() {
 
-        createGoats();
+        //createGoats();
         //createPits();
         createPitSpawner();
 
@@ -86,6 +86,7 @@ public class TestScene extends Scene {
     private void createGoatSpawner() {
         GameObject go = new GameObject();
         go.addComponent(new GoatSpawnerComponent());
+
         GameObject.Instantiate(go);
     }
 }

@@ -73,6 +73,13 @@ public class GoatAnimatedSpriteComponent extends AnimatedSpriteRenderComponent {
                 throwTimer = GoatFactory.THROWTIME;
             }
         });
+        this.on("initialThrow", new MsgHandler() {
+            @Override
+            public void handle(Message msg) {
+                throwTimer = 4.0f/3.0f*GoatFactory.THROWTIME ;
+
+            }
+        });
         super.create();
 
     }
@@ -178,6 +185,7 @@ public class GoatAnimatedSpriteComponent extends AnimatedSpriteRenderComponent {
                 {
                     GameObject go = GameObject.Instantiate(PitDyingGoatFactory.Create(gameObject));
                     go.setPosition(gameObject.getPosition());
+                    GoatonWorld.numGoats--;
                     Destroy(gameObject);
                 }
                 gameObject.send(new Message("onGround"));

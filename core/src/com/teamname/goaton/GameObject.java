@@ -19,7 +19,7 @@ public class GameObject {
         RIGHT,
         NONE
     }
-
+    private boolean created = false;
     public Direction direction = Direction.NONE;
     private Body body = null;
     private Vector2 position = new Vector2();
@@ -153,11 +153,12 @@ public class GameObject {
 
     }
 
-    public void create()
-    {
-        for(Map.Entry<String, Component> e : components.entrySet())
-        {
-            e.getValue().create();
+    public void create() {
+        if (!created) {
+            for (Map.Entry<String, Component> e : components.entrySet()) {
+                e.getValue().create();
+            }
+            created = true;
         }
     }
 

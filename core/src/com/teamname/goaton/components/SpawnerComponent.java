@@ -10,11 +10,11 @@ import com.teamname.goaton.Prefabs.PitFactory;
  * Created by pya on 1/31/16.
  */
 public class SpawnerComponent extends Component {
-    private float timeBetweenSpawn;
+    protected float timeBetweenSpawn;
     protected float minTime = 1f;
     protected float maxTime = 2f;
 
-    private float spawnPerRound;
+    protected float spawnPerRound;
     protected int minSpawn = 1;
     protected int maxSpawn = 10;
 

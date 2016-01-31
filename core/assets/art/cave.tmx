@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="32" tileheight="32" backgroundcolor="#000000" nextobjectid="113">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="32" tileheight="32" backgroundcolor="#000000" nextobjectid="116">
  <tileset firstgid="1" name="cave" tilewidth="32" tileheight="32" tilecount="336">
   <image source="cave.png" width="512" height="672"/>
  </tileset>
@@ -77,6 +77,15 @@
   <object id="110" name="leftArm" gid="338" x="905" y="591" width="150" height="178"/>
   <object id="111" name="rightArm" gid="2147483986" x="1091" y="548" width="150" height="178"/>
   <object id="112" name="BossTrigger" x="1013" y="415" width="96" height="86"/>
+  <object id="113" name="GoatPit" x="1045" y="899">
+   <ellipse/>
+  </object>
+  <object id="114" name="GoatPit2" x="558" y="804">
+   <ellipse/>
+  </object>
+  <object id="115" name="GoatPit3" x="1452" y="849">
+   <ellipse/>
+  </object>
  </objectgroup>
  <objectgroup name="Object Layer 5"/>
 </map>

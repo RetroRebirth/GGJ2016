@@ -28,6 +28,7 @@ public class EnemyComponent extends Component {
             gameObject.send(new Message("damaged"));
             other.send(new Message("destroy"));
             GoatonWorld.Destroy(other);
+            GoatonWorld.numGoats--;
 
         }
         if(health <= 0)

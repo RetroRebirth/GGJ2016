@@ -18,6 +18,8 @@ import com.teamname.goaton.Prefabs.BoundBoxFactory;
 import com.teamname.goaton.Prefabs.DemonBossFactory;
 import com.teamname.goaton.Prefabs.PlayerFactory;
 import com.teamname.goaton.Prefabs.PlayerTriggerFactory;
+import com.teamname.goaton.components.GoatSpawnerComponent;
+import com.teamname.goaton.components.GoatStackComponent;
 
 import java.util.*;
 
@@ -230,6 +232,11 @@ public abstract class Scene {
                 addObject(player);
 
                 addObject(PlayerTriggerFactory.Create(objects.get("BossTrigger"),new Message("spawnBoss"),true));
+
+                GameObject goatSpawner = new GameObject();
+                goatSpawner.addComponent(new GoatSpawnerComponent());
+                goatSpawner.setPosition(MapObjectToWorld(objects.get("GoatPit")));
+                addObject(goatSpawner);
 
             }
             else if (l.getName().equals("SpawnArea"))
