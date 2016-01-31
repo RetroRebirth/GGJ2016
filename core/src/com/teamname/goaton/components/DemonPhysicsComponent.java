@@ -21,7 +21,7 @@ public class DemonPhysicsComponent extends Component {
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = circle;
         fixtureDef.filter.categoryBits = ObjectTypes.DEMON;
-        fixtureDef.filter.maskBits = ObjectTypes.GOAT |
+        fixtureDef.filter.maskBits = ObjectTypes.GOAT_AIR |
                                     ObjectTypes.BOUNDARY |
                                     ObjectTypes.PIT |
                                     ObjectTypes.DEMON |

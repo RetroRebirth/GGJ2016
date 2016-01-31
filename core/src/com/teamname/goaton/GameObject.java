@@ -83,7 +83,24 @@ public class GameObject {
         components.put(c.getID(),c);
 
     }
-
+    public void destory()
+    {
+        while(!messages.isEmpty())
+        {
+            Message m = messages.remove();
+            for (GameObject child : children)
+            {
+                child.send(m);
+            }
+            for (MsgHandler h : handlers)
+            {
+                if(h.getMsg().equals(m.getMessage()))
+                {
+                    h.handle(m);
+                }
+            }
+        }
+    }
     public void send(Message msg)
     {
         messages.add(msg);

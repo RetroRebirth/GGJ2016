@@ -61,8 +61,9 @@ public abstract class Scene {
     {
         while(!removeList.isEmpty())
         {
-            objects.remove(removeList.remove());
-
+            GameObject go = removeList.remove();
+            go.destory();
+            objects.remove(go);
         }
     }
     /*
@@ -158,6 +159,7 @@ public abstract class Scene {
     }
 
     public void removeObject(GameObject other) {
+        other.send(new Message("destroy"));
         removeList.add(other);
     }
 }

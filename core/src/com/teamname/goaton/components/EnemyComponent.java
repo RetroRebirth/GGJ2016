@@ -21,15 +21,12 @@ public class EnemyComponent extends Component {
     protected void onCollisionEnter(Contact collision, GameObject other) {
         if(other.tags.contains("goat"))
         {
-            
             health-=1;
-            other.send(new Message("destroy"));
             GoatonWorld.Destory(other);
         }
         if(health <= 0)
         {
 
-            gameObject.send(new Message("destroy"));
             GoatonWorld.Destory(this.gameObject);
         }
     }
