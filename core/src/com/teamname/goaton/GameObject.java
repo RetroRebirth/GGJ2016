@@ -51,7 +51,6 @@ public class GameObject {
     public static GameObject Instantiate(GameObject targ)
     {
         GameObject newGameObject = new GameObject(targ);
-
         GoatonWorld.addObject(newGameObject);
 
         return newGameObject;

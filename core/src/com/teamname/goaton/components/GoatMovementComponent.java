@@ -1,7 +1,7 @@
 package com.teamname.goaton.components;
 
+import aurelienribon.tweenengine.Tween;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
 import com.teamname.goaton.Component;
 import com.teamname.goaton.GoatonWorld;
 import com.teamname.goaton.Message;
@@ -23,15 +23,22 @@ public class GoatMovementComponent extends Component {
     private float moveTimer;
     private float maxMoveTime = 3.f;
     private float minMoveTime = 0.5f;
+    private float spinTime = 0.05f;
+    private float maxSpinTime = 0.05f;
+    private float minSpinTime = 0.05f;
     private float moveSpeed = 2.5f;
+
 
     private static final int IDLE = 0;
     private static final int FLEE = 1;
     private static final int HELD = 2;
+    private static final int SPIN = 3;
 
     protected Vector2 fleePoint;
 
     int state = IDLE;
+    private int spinCounter = 3;
+
     @Override
     protected void create() {
 
@@ -39,6 +46,7 @@ public class GoatMovementComponent extends Component {
         this.on("pickup", new MsgHandler() {
             @Override
             public void handle(Message msg) {
+
                 state = HELD;
                 gameObject.getBody().setLinearVelocity(0,0);
             }
@@ -62,6 +70,13 @@ public class GoatMovementComponent extends Component {
                 }
             }
         });
+        this.on("suckIntoHole", new MsgHandler() {
+            @Override
+            public void handle(Message msg) {
+            state = SPIN;
+
+            }
+        });
     }
 
     @Override
@@ -73,7 +88,6 @@ public class GoatMovementComponent extends Component {
     protected void update(float dt) {
         super.update(dt);
         switch(state) {
-
             case IDLE:
                 moveTimer -= dt;
                 if (moveTimer < 0) {
@@ -85,26 +99,7 @@ public class GoatMovementComponent extends Component {
                     }
                     moveTimer = GoatonWorld.Random.nextFloat() * (maxMoveTime - minMoveTime) + minMoveTime;
                 }
-                Vector2 mov = new Vector2();
-                switch (direction) {
-                    case UP:
-                        mov.y += moveSpeed;
-                        break;
-                    case DOWN:
-                        mov.y -= moveSpeed;
-                        break;
-                    case LEFT:
-                        mov.x -= moveSpeed;
-                        break;
-                    case RIGHT:
-                        mov.x += moveSpeed;
-                        break;
-                    case NONE:
-
-                        break;
-                    default:
-                        break;
-                }
+                this.move();
         /*
         if(mov.len() == 0)
         {
@@ -113,8 +108,6 @@ public class GoatMovementComponent extends Component {
             gameObject.getBody().applyLinearImpulse(vel.x,vel.y,gameObject.position.x,gameObject.position.y,true);
         }
         */
-
-                gameObject.getBody().setLinearVelocity(mov.x, mov.y);//;applyLinearImpulse(mov.x,mov.y,gameObject.position.x, gameObject.position.y,true);
                 break;
             case FLEE:
                 //move in direction
@@ -128,10 +121,46 @@ public class GoatMovementComponent extends Component {
 
                 break;
 
+
+            //;applyLinearImpulse(mov.x,mov.y,gameObject.position.x, gameObject.position.y,true);
+            case SPIN:
+                spinTime -= dt;
+                if (spinTime < 0) {
+                    if (spinCounter < 0) {
+                        spinCounter = 3;
+                    }
+                    direction = Direction.values()[spinCounter];
+                    spinCounter--;
+                    spinTime = maxSpinTime;
+                }
+                break;
         }
 
     }
 
+    private void move() {
+        Vector2 mov = new Vector2();
+        switch (direction) {
+            case UP:
+                mov.y += moveSpeed;
+                break;
+            case DOWN:
+                mov.y -= moveSpeed;
+                break;
+            case LEFT:
+                mov.x -= moveSpeed;
+                break;
+            case RIGHT:
+                mov.x += moveSpeed;
+                break;
+            case NONE:
+
+                break;
+            default:
+                break;
+        }
+        gameObject.getBody().setLinearVelocity(mov.x, mov.y);
+    }
     @Override
     public String getID() {
         return "GoatMovementComponent";

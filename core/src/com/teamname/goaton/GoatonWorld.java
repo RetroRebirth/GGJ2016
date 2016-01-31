@@ -46,7 +46,7 @@ public class GoatonWorld {
 
     }
 
-    public static void Destory(GameObject other) {
+    public static void Destroy(GameObject other) {
         scene.removeObject(other);
     }
 }

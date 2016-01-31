@@ -25,12 +25,14 @@ public class EnemyComponent extends Component {
         if(other.tags.contains("goat"))
         {
             health-=1;
-            GoatonWorld.Destory(other);
+            other.send(new Message("destroy"));
+            GoatonWorld.Destroy(other);
+
         }
         if(health <= 0)
         {
-
-            GoatonWorld.Destory(this.gameObject);
+            gameObject.send(new Message("destroy"));
+            GoatonWorld.Destroy(this.gameObject);
         }
     }
 

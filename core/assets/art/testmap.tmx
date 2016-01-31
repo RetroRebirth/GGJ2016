@@ -12,9 +12,21 @@
  <tileset firstgid="4" name="GrassLight" tilewidth="32" tileheight="32">
   <image source="Grass_Light.png" width="32" height="32"/>
  </tileset>
+ <tileset firstgid="5" name="Center Grass" tilewidth="32" tileheight="32">
+  <image source="GrassCenter.png" width="32" height="32"/>
+ </tileset>
+ <tileset firstgid="6" name="Grass random 2" tilewidth="32" tileheight="32">
+  <image source="grass_random_2.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="10" name="lighter_random" tilewidth="64" tileheight="64">
+  <image source="lighter_random.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="11" name="medium grass" tilewidth="32" tileheight="32">
+  <image source="medium_random.png" width="64" height="64"/>
+ </tileset>
  <layer name="Tile Layer 1" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJzt0rENwDAMwLAU7v8394OuVgAOuoCac84o1aNEPFrxaMWjFY9WPFrxaMWjFY9WPFrxaMWjFY9WPFrxaMWj1YbHG2zbgQcPHjx48ODBgwcPHjx48OCx78CDBw8ePHjw4MGDBw8ePHjw2HfgwYMHDx48ePDgwYMHDx48eOw78ODBo+khHrfEoxWPVjxa8WjFoxWPVjxa8WjFoxWPVjxa8WjFoxWPVjxa8WjFoxWPVjxa8WjFoxWPVjxa8WjFoxWPVjxa8WjFoxWPVjxa8WjFoxWPVjxajXJtPyFJkiRJkiT99QG8rThI
+   eJzt1sFKQlEYRlEbpJXV+z9uBgkSZqHm2dezBpufBhfkfq1svVqtNrvWX23cofcp8jlmvfsNng+2OPzZve09tkXh92TWe+xv1X6jB928Uz5Gf7YZ46MVH634aMVHKz5a8dGKj1Z8tOKjFR+t+Gh1bR+PE1b2MfrdLH0PPlp7/KePlzttqT5Gv7cl7sFHaw8+Wnvw0dpjhI/R/w/9pZl8jH7X5T34aO0x2sd212vgVvYY7eNt1/sZd3vmcz/dyh588HENH9e+lT344IMPPvjggw8++OCDDz744IOP8Xvwwcd/+dhe8HxlDz748P3BBx988MEHH3zw0fexvfD5yh588OH7gw8++OCDj0v3qDarj2p8tJrJx9K7Nx9Lj49WfLTio9VSfczSUnzMEh+t+GhV9qGWD10WH634aMVHKz5a8dGKj1Z8tOKjFR+t+GjFRys+WvHRio9WfLTioxUfrfhoxUcrPlrx0YqPVny04qMVH634aHXKhzv2fvfhjr3rG27v/n4/d/kACqypYw==
   </data>
  </layer>
 </map>

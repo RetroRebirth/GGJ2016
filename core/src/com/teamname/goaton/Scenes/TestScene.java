@@ -20,6 +20,7 @@ public class TestScene extends Scene {
     private GameObject createPlayer()
     {
         GameObject player = PlayerFactory.Create();
+        player.setPosition(new Vector2(50,50));
         return player;
     }
 
@@ -64,7 +65,6 @@ public class TestScene extends Scene {
         for(int i = 0; i < 100; i++)
         {
             GameObject newGoat = GameObject.Instantiate(goat);
-
             /*newGoat.position.x = GoatonWorld.Random.nextFloat()* 500;
             newGoat.position.y = GoatonWorld.Random.nextFloat()* 500;*/
         }
