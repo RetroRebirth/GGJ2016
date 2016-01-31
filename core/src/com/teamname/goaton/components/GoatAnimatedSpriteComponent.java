@@ -76,7 +76,7 @@ public class GoatAnimatedSpriteComponent extends AnimatedSpriteRenderComponent {
         this.on("initialThrow", new MsgHandler() {
             @Override
             public void handle(Message msg) {
-                throwTimer = 4.0f/3.0f*GoatFactory.THROWTIME ;
+                throwTimer = 2*GoatFactory.THROWTIME ;
 
             }
         });
