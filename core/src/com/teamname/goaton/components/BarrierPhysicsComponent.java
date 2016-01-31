@@ -31,7 +31,7 @@ public class BarrierPhysicsComponent extends Component {
 
         gFix = this.gameObject.getBody().createFixture(fixtureDef);
 
-        circle.dispose();
+        rect.dispose();
     }
 
     @Override

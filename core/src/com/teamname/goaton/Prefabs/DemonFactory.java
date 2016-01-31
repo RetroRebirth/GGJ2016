@@ -15,8 +15,8 @@ public class DemonFactory {
         GameObject go = new GameObject();
         go.addComponent(new GoatMovementComponent());
         go.addComponent(new StaticSpriteRenderComponent(new Sprite(new Texture(Gdx.files.internal("art/demon_down.png")))));
-        go.addComponent(new GoatPhysicsComponent());
-        go.addComponent(new EnemyComponent(1));
+        go.addComponent(new DemonPhysicsComponent());
+        go.addComponent(new EnemyComponent(3));
         go.tags.add("demon");
         return go;
     }

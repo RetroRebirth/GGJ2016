@@ -8,10 +8,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * Created by kpidding on 1/30/16.
@@ -23,7 +20,7 @@ public abstract class Scene {
     public static final int NUM_LAYERS = 3;*/
 
     private float timer = 0;
-    protected List<GameObject> objects = new ArrayList<GameObject>();
+    protected HashSet<GameObject> objects = new HashSet<GameObject>();
     protected List<GameObject>[] layers;
     //Queue<GameObject>[] addList;
     protected Queue<GameObject> addList = new LinkedList<GameObject>();
@@ -65,6 +62,7 @@ public abstract class Scene {
         while(!removeList.isEmpty())
         {
             objects.remove(removeList.remove());
+
         }
     }
     /*
