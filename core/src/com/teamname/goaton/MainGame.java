@@ -54,6 +54,7 @@ public class MainGame extends ApplicationAdapter {
 
         tileMap = new TmxMapLoader().load("art/cave.tmx");
         tileMapRenderer = new OrthogonalTiledMapRenderer(tileMap);
+        GoatonWorld.cMap = tileMap;
         GoatonWorld.worldWidth  =  (Integer)tileMap.getProperties().get("width");
         GoatonWorld.worldHeight = (Integer)tileMap.getProperties().get("height");
 

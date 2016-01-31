@@ -20,7 +20,7 @@ public class PitFactory {
     public static GameObject Create() {
         GameObject go = new GameObject();
 
-        go.addComponent(new PitStaticSpriteComponent(new Sprite(new Texture(Gdx.files.internal(Assets.player)))));
+        go.addComponent(new PitStaticSpriteComponent(new Sprite(new Texture(Gdx.files.internal(Assets.pit)))));
         go.addComponent(new PitPhysicsComponent());
         go.addComponent(new PitPositionComponent());
         //go.addComponent(new PitEnemyComponent(1));
