@@ -72,9 +72,9 @@ public class Assets {
     public static String bridge         = "art/bridgeTile.png";
 
     // SFX assets
-    public final static String goat_Pickup_SFX      = "sfx/goat_pickup.mp3";
+    public final static String goat_Pickup_SFX      = "sfx/goat_pickup_loud.mp3";
     public final static String secret_Pickup_SFX    = "sfx/goat_pickup_alt.mp3";
-    public final static String goat_Toss_SFX        = "sfx/goat_toss.mp3";
+    public final static String goat_Toss_SFX        = "sfx/goat_toss_loud.mp3";
     public final static String secret_Toss_SFX      = "sfx/goat_toss_alt.mp3";
     public final static String boss_Entrance_SFX    = "sfx/boss_spawn.mp3";
     public final static String demon_Spawn_SFX      = "sfx/demon_spawn.mp3";

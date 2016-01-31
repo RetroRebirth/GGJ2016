@@ -70,13 +70,14 @@ public class PlayerMovementComponent extends Component {
                 if(holdingGoat)
                 {
                     this.gameObject.send(new Message("throwGoat"));
+                    GoatonWorld.sendGlobalMessage(new Message("throwGoatSound"));
                     holdingGoat = false;
                 }
                 else
                 {
                     //GoatonWorld.sendGlobalMessage(new Message("throw"));
                     this.gameObject.send(new Message("pickup"));
-
+                    GoatonWorld.sendGlobalMessage(new Message("pickupSound"));
                 }
             }
             if(src.isDebugButtonPressed())

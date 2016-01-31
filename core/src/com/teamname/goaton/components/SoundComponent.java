@@ -7,6 +7,7 @@ import com.teamname.goaton.Assets;
 import com.teamname.goaton.Message;
 import com.teamname.goaton.MsgHandler;
 
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -22,9 +23,6 @@ public class SoundComponent extends Component {
     Sound demonSpawnSFX;
     Sound impactSFX;
     Sound movementSFX;
-    Sound titleTheme;
-    Sound mainThemeIntro;
-    Sound mainThemeLoop;
     Timer timer;
 
     private class WaitToExecute extends TimerTask {
@@ -67,10 +65,6 @@ public class SoundComponent extends Component {
         this.impactSFX = Gdx.audio.newSound(Gdx.files.internal(Assets.impact_SFX));
         // Footsteps SFX
         this.movementSFX = Gdx.audio.newSound(Gdx.files.internal(Assets.movement_SFX));
-        // Title music and Main music
-        this.titleTheme = Gdx.audio.newSound(Gdx.files.internal(Assets.title_Theme));
-        this.mainThemeIntro = Gdx.audio.newSound(Gdx.files.internal(Assets.main_Intro));
-        this.mainThemeLoop = Gdx.audio.newSound(Gdx.files.internal(Assets.main_Loop));
         // Set up a timer
         timer = new Timer();
     }
@@ -81,14 +75,14 @@ public class SoundComponent extends Component {
         on("pickup", new MsgHandler() {
             @Override
             public void handle(Message msg) {
-
+                goatPickupSFX.play(0.5f);
             }
         });
         // Handles sound for tossing goats (secret and default)
-        on("throwGoat", new MsgHandler() {
+        on("throwGoatSound", new MsgHandler() {
             @Override
             public void handle(Message msg) {
-
+                goatTossSFX.play(0.5f);
             }
         });
         // Handles sound for the boss spawn
@@ -96,8 +90,6 @@ public class SoundComponent extends Component {
             @Override
             public void handle(Message msg) {
                 bossSpawnSFX.play(1.0f);
-                // Wait 7 seconds to let the file play then dispose of it
-                timer.schedule(new WaitToDispose(bossSpawnSFX), 7 * 1000);
             }
         });
         // Handles sound for a new demon spawning
