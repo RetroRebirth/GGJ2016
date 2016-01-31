@@ -50,45 +50,47 @@ public class TestScene extends Scene {
 
         //createGoats();
         //createPits();
-        createPitSpawner();
+        //createPitSpawner();
+
+        createPits();
 
         super.create();
 
     }
 
-    private void createGoats() {
-        GameObject goat = GoatFactory.Create();
-
-
-        for(int i = 0; i < 100; i++)
-        {
-            GameObject newGoat = GameObject.Instantiate(goat);
-            /*newGoat.position.x = GoatonWorld.Random.nextFloat()* 500;
-            newGoat.position.y = GoatonWorld.Random.nextFloat()* 500;*/
-        }
-    }
+//    private void createGoats() {
+//        GameObject goat = GoatFactory.Create();
+//
+//
+//        for(int i = 0; i < 100; i++)
+//        {
+//            GameObject newGoat = GameObject.Instantiate(goat);
+//            /*newGoat.position.x = GoatonWorld.Random.nextFloat()* 500;
+//            newGoat.position.y = GoatonWorld.Random.nextFloat()* 500;*/
+//        }
+//    }
 
     private void createPits() {
-        GameObject pit = PitFactory.Create();
+//        GameObject pit = PitFactory.Create();
         //GameObject.Instantiate(DemonFactory.Create());
         //for (int i = 0; i < 50; i++) {
 
-        GameObject.Instantiate(pit);
-        GameObject.Instantiate(pit);
-        GameObject.Instantiate(pit);
+        GameObject.Instantiate(PitFactory.Create());
+        GameObject.Instantiate(PitFactory.Create());
+        GameObject.Instantiate(PitFactory.Create());
 
         //}
 
     }
 
-    private void createPitSpawner() {
-        GameObject.Instantiate(PitSpawnerFactory.Create());
-    }
-
-    private void createGoatSpawner() {
-        GameObject go = new GameObject();
-        go.addComponent(new GoatSpawnerComponent());
-
-        GameObject.Instantiate(go);
-    }
+//    private void createPitSpawner() {
+//        GameObject.Instantiate(PitSpawnerFactory.Create());
+//    }
+//
+//    private void createGoatSpawner() {
+//        GameObject go = new GameObject();
+//        go.addComponent(new GoatSpawnerComponent());
+//
+//        GameObject.Instantiate(go);
+//    }
 }
