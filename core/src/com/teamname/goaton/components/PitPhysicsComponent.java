@@ -27,7 +27,7 @@ public class PitPhysicsComponent extends Component {
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = circle;
         fixtureDef.filter.categoryBits = ObjectTypes.PIT;
-        fixtureDef.filter.maskBits = ObjectTypes.GOAT | ObjectTypes.BOUNDARY | ObjectTypes.DEMON;
+        fixtureDef.filter.maskBits = ObjectTypes.GOAT_AIR | ObjectTypes.BOUNDARY | ObjectTypes.DEMON;
         fixtureDef.restitution = 0;
 
         Fixture fixture = this.gameObject.getBody().createFixture(fixtureDef);

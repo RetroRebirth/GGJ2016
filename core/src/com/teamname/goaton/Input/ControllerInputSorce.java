@@ -28,11 +28,22 @@ public class ControllerInputSorce implements GameInputSource {
     public float getMovementOnAxis(Axis axis) {
         switch(axis)
         {
+
             case X_AXIS:
-                return ctrl.getAxis(xAx);
+                float x = ctrl.getAxis(xAx);
+                if (Math.abs(x) < 0.1)
+                {
+                    x = 0;
+                }
+                return x;
 
             case Y_AXIS:
-                return -ctrl.getAxis(yAx);
+                float y = ctrl.getAxis(yAx);
+                if(Math.abs(y) < 0.1)
+                {
+                    y = 0;
+                }
+                return -y;
             default:
                 throw new IllegalArgumentException();
         }

@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.teamname.goaton.Assets;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -21,7 +22,7 @@ public class GoatAnimatedSpriteComponent extends AnimatedSpriteRenderComponent {
     private static final Color[] colors = {Color.GRAY,Color.CYAN,Color.GOLD,Color.WHITE};
     private static final String firstSprite = Assets.goat_D;
     public static final float WALKTIME = 0.3f;
-
+    GoatMovementComponent.Direction dir = GoatMovementComponent.Direction.NONE;
     private float throwTimer = 0;
     private boolean onGround;
 
@@ -31,7 +32,12 @@ public class GoatAnimatedSpriteComponent extends AnimatedSpriteRenderComponent {
     private GoatMovementComponent.Direction prevDir = GoatMovementComponent.Direction.NONE;
 
     private Color color;
-    
+
+    @Override
+    public String getID() {
+        return "GoatAnimatedSpriteComponent";
+    }
+
     public GoatAnimatedSpriteComponent(HashMap<String, Sprite> sprites) {
 
         super(sprites, sprites.get(firstSprite));
@@ -67,11 +73,17 @@ public class GoatAnimatedSpriteComponent extends AnimatedSpriteRenderComponent {
 
     }
 
+
+
     @Override
     protected void update(float dt) {
-        // Read which direction the goat is moving
-        GoatMovementComponent.Direction dir = ((GoatMovementComponent) this.gameObject.getComponent("GoatMovementComponent")).getDirection();
 
+
+        // Read which direction the goat is moving
+        if (this.gameObject.getComponent("GoatMovementComponent") != null)
+        {
+            dir = ((GoatMovementComponent) this.gameObject.getComponent("GoatMovementComponent")).getDirection();
+        }
         // Keep track of which frame of the cycle we should render
         if (dir == GoatMovementComponent.Direction.NONE) {
             walkCycle = 0;
@@ -179,7 +191,10 @@ public class GoatAnimatedSpriteComponent extends AnimatedSpriteRenderComponent {
         {
             newSprites.put(e.getKey(),new Sprite(e.getValue()));
         }
-        return new GoatAnimatedSpriteComponent(newSprites);
+        GoatAnimatedSpriteComponent cmp = new GoatAnimatedSpriteComponent(newSprites);
+        cmp.currentSprite = new Sprite(this.currentSprite);
+        cmp.dir = this.dir;
+        return cmp;
 
     }
 }

@@ -64,7 +64,9 @@ public abstract class Scene {
             GameObject go = removeList.remove();
             go.destory();
             objects.remove(go);
+            GoatonWorld.world.destroyBody(go.getBody());
         }
+
     }
     /*
     public void addObject(GameObject object, int layer)

@@ -5,10 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.utils.Array;
 import com.teamname.goaton.GameObject;
-import com.teamname.goaton.Prefabs.DemonFactory;
-import com.teamname.goaton.Prefabs.GoatFactory;
-import com.teamname.goaton.Prefabs.PitFactory;
-import com.teamname.goaton.Prefabs.PlayerFactory;
+import com.teamname.goaton.Prefabs.*;
 import com.teamname.goaton.Scene;
 import com.teamname.goaton.GoatonWorld;
 
@@ -54,6 +51,7 @@ public class TestScene extends Scene {
         addObject(this.player);
         createGoats();
         createPits();
+        addObject(DemonBossFactory.Create());
         super.create();
 
     }
