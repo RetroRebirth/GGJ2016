@@ -54,6 +54,7 @@ public class MainGame extends ApplicationAdapter {
         tileMap = new TmxMapLoader().load("art/testmap.tmx");
         tileMapRenderer = new OrthogonalTiledMapRenderer(tileMap);
 
+
 		GoatonWorld.setScene(scene);
 	}
 
@@ -61,13 +62,13 @@ public class MainGame extends ApplicationAdapter {
 	public void render ()
 	{
 
-		Gdx.gl.glClearColor(1, 0, 0, 1);
+		Gdx.gl.glClearColor(0.35f,0.89f,0.89f,1.0f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		batch.setProjectionMatrix(scene.getCamera().combined);
         update();
 
-        tileMapRenderer.setView((OrthographicCamera)scene.getCamera());
+        tileMapRenderer.setView((OrthographicCamera) scene.getCamera());
         tileMapRenderer.render();
         batch.begin();
         GoatonWorld.updateRender(1 / 60.f, batch);
