@@ -31,7 +31,6 @@ public class MainGame extends ApplicationAdapter {
     private OrthogonalTiledMapRenderer tileMapRenderer;
 
 	Sprite img;
-    static TweenManager mgr = new TweenManager();
     ShaderProgram testProgram;
 
     //Message test
@@ -45,6 +44,7 @@ public class MainGame extends ApplicationAdapter {
         Box2D.init();
         Tween.registerAccessor(Sprite.class, new SpriteAccessor());
         batch = new SpriteBatch();
+        GoatonWorld.TweenManager = new TweenManager();
 
         testProgram =  ShaderLoader.LoadShader("shaders/default.vert", "shaders/default.frag");
 
@@ -80,7 +80,7 @@ public class MainGame extends ApplicationAdapter {
     }
     public void update()
     {
-        mgr.update(1/60.0f);
+
 	}
 
 	@Override

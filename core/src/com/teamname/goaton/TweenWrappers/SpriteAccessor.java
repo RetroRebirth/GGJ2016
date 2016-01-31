@@ -16,11 +16,11 @@ public class SpriteAccessor implements TweenAccessor<Sprite> {
     public static final int TWEEN_SCALEX = 5;
     public static final int TWEEN_SCALEY = 6;
     public static final int TWEEN_SCALEXY = 7;
-    public static final int TWEEN_SCALEXYROT = 8;
-    public static final int TWEEN_XYSCALEXYROT = 9;
-    public static final int TWEEN_RGB = 10;
-    public static final int TWEEN_ALPHA = 11;
-
+    public static final int TWEEN_XYSCALEXY = 8;
+    public static final int TWEEN_SCALEXYROT = 9;
+    public static final int TWEEN_XYSCALEXYROT = 10;
+    public static final int TWEEN_RGB = 11;
+    public static final int TWEEN_ALPHA = 12;
 
     @Override
     public int getValues(Sprite target, int tweenType, float[] returnValues) {
@@ -53,6 +53,11 @@ public class SpriteAccessor implements TweenAccessor<Sprite> {
                 returnValues[0] = target.getScaleX();
                 returnValues[1] = target.getScaleY();
                 return 2;
+            case TWEEN_XYSCALEXY:
+                returnValues[0] = target.getX();
+                returnValues[1] = target.getY();
+                returnValues[2] = target.getScaleX();
+                return 3;
             case TWEEN_SCALEXYROT:
                 returnValues[0] = target.getScaleX();
                 returnValues[1] = target.getScaleY();
@@ -105,7 +110,10 @@ public class SpriteAccessor implements TweenAccessor<Sprite> {
             case TWEEN_SCALEXY:
                 target.setScale(newValues[0], newValues[1]);
                 break;
-
+            case TWEEN_XYSCALEXY:
+                target.setScale(newValues[2]);
+                target.setPosition(newValues[0],newValues[1]);
+                break;
             case TWEEN_SCALEXYROT:
                 target.setScale(newValues[0], newValues[1]);
                 target.setRotation(newValues[2]);

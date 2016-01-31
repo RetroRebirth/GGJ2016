@@ -1,11 +1,5 @@
 package com.teamname.goaton.components;
 
-import com.badlogic.gdx.graphics.Cursor;
-import com.badlogic.gdx.math.Polygon;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.teamname.goaton.*;
@@ -34,7 +28,7 @@ public class PlayerPickupComponent extends Component {
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = arc;
         fixtureDef.isSensor = true;
-        fixtureDef.filter.categoryBits = ObjectTypes.PICKUP_DETECTOR;
+        fixtureDef.filter.categoryBits = ObjectTypes.GOAT_DETECTOR;
         fixtureDef.filter.maskBits = ObjectTypes.GOAT;
 
         Fixture fixture = this.gameObject.getBody().createFixture(fixtureDef);
@@ -68,7 +62,6 @@ public class PlayerPickupComponent extends Component {
 
     @Override
     protected void onCollisionEnter(Contact collision, GameObject other) {
-        System.out.println("Got a goat");
         Fixture f1 = collision.getFixtureA();
         Fixture f2 = collision.getFixtureB();
         if (f1.isSensor() || f2.isSensor()) {
@@ -76,8 +69,8 @@ public class PlayerPickupComponent extends Component {
             legalGoats.add(other);
         }
     }
+    @Override
     protected void onCollisionExit(Contact collision, GameObject other) {
-        System.out.println("Lost a goat");
         Fixture f1 = collision.getFixtureA();
         Fixture f2 = collision.getFixtureB();
         if (f1.isSensor() || f2.isSensor()) {

@@ -19,6 +19,9 @@ public class EnemyComponent extends Component {
     }
     @Override
     protected void onCollisionEnter(Contact collision, GameObject other) {
+        if (collision.getFixtureA().isSensor() || collision.getFixtureB().isSensor()) {
+            return;
+        }
         if(other.tags.contains("goat"))
         {
             health-=1;

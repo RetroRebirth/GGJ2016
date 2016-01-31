@@ -27,10 +27,17 @@ public class GoatMovementComponent extends Component {
     private float maxSpinTime = 0.05f;
     private float minSpinTime = 0.05f;
     private float moveSpeed = 2.5f;
-    private int spinCounter = 3;
-    boolean wander = true;
-    boolean spin = false;
 
+
+    private static final int IDLE = 0;
+    private static final int FLEE = 1;
+    private static final int HELD = 2;
+    private static final int SPIN = 3;
+
+    protected Vector2 fleePoint;
+
+    int state = IDLE;
+    private int spinCounter = 3;
 
     @Override
     protected void create() {
@@ -39,21 +46,34 @@ public class GoatMovementComponent extends Component {
         this.on("pickup", new MsgHandler() {
             @Override
             public void handle(Message msg) {
-                wander = false;
+
+                state = HELD;
                 gameObject.getBody().setLinearVelocity(0,0);
             }
         });
+
         this.on("onGround", new MsgHandler() {
             @Override
             public void handle(Message msg) {
-                wander = true;
+                state = IDLE;
+            }
+        });
+
+        this.on("flee", new MsgHandler() {
+            @Override
+            public void handle(Message msg) {
+                if (state == IDLE) {
+                    state = FLEE;
+                    fleePoint = (Vector2) msg.getArg();
+                    moveTimer = 2.0f;
+                    gameObject.getBody().setLinearVelocity(0, 0);
+                }
             }
         });
         this.on("suckIntoHole", new MsgHandler() {
             @Override
             public void handle(Message msg) {
-            wander = false;
-            spin = true;
+            state = SPIN;
 
             }
         });
@@ -67,20 +87,19 @@ public class GoatMovementComponent extends Component {
     @Override
     protected void update(float dt) {
         super.update(dt);
-        if(wander) {
-            moveTimer -= dt;
-            if (moveTimer < 0) {
-                //Higher weight to stop moving.
-                if (direction != Direction.NONE & GoatonWorld.Random.nextFloat() > 0.5) {
-                    direction = Direction.NONE;
-                } else {
-                    direction = GoatonWorld.RandomEnum(Direction.class);
+        switch(state) {
+            case IDLE:
+                moveTimer -= dt;
+                if (moveTimer < 0) {
+                    //Higher weight to stop moving.
+                    if (direction != Direction.NONE & GoatonWorld.Random.nextFloat() > 0.5) {
+                        direction = Direction.NONE;
+                    } else {
+                        direction = GoatonWorld.RandomEnum(Direction.class);
+                    }
+                    moveTimer = GoatonWorld.Random.nextFloat() * (maxMoveTime - minMoveTime) + minMoveTime;
                 }
-                moveTimer = GoatonWorld.Random.nextFloat() * (maxMoveTime - minMoveTime) + minMoveTime;
-            }
-
-            this.move();
-
+                this.move();
         /*
         if(mov.len() == 0)
         {
@@ -89,18 +108,32 @@ public class GoatMovementComponent extends Component {
             gameObject.getBody().applyLinearImpulse(vel.x,vel.y,gameObject.position.x,gameObject.position.y,true);
         }
         */
+                break;
+            case FLEE:
+                //move in direction
+                moveTimer -= dt;
+                if (moveTimer < 0f) {
+                    state = IDLE;
+                }
+                Vector2 move = new Vector2(this.gameObject.getPosition().x - this.fleePoint.x, this.gameObject.getPosition().y - this.fleePoint.y);
+                move = move.scl(moveSpeed/move.len());
+                gameObject.getBody().setLinearVelocity(move.x, move.y);
+
+                break;
+
 
             //;applyLinearImpulse(mov.x,mov.y,gameObject.position.x, gameObject.position.y,true);
-        } else if (spin){
-            spinTime -= dt;
-            if (spinTime < 0) {
-                if (spinCounter < 0) {
-                    spinCounter = 3;
+            case SPIN:
+                spinTime -= dt;
+                if (spinTime < 0) {
+                    if (spinCounter < 0) {
+                        spinCounter = 3;
+                    }
+                    direction = Direction.values()[spinCounter];
+                    spinCounter--;
+                    spinTime = maxSpinTime;
                 }
-                direction = Direction.values()[spinCounter];
-                spinCounter--;
-                spinTime = maxSpinTime;
-            }
+                break;
         }
 
     }

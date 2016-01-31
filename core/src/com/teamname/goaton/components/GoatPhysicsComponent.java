@@ -1,6 +1,5 @@
 package com.teamname.goaton.components;
 
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.teamname.goaton.*;
 
@@ -26,7 +25,7 @@ public class GoatPhysicsComponent extends Component {
                                     ObjectTypes.BOUNDARY |
                                     ObjectTypes.PIT |
                                     ObjectTypes.DEMON |
-                                    ObjectTypes.PICKUP_DETECTOR;
+                                    ObjectTypes.GOAT_DETECTOR;
         fixtureDef.restitution = 0;
 
         gFix = this.gameObject.getBody().createFixture(fixtureDef);
@@ -59,7 +58,7 @@ public class GoatPhysicsComponent extends Component {
                         ObjectTypes.BOUNDARY |
                         ObjectTypes.PIT |
                         ObjectTypes.DEMON |
-                        ObjectTypes.PICKUP_DETECTOR;
+                        ObjectTypes.GOAT_DETECTOR;
                 groundFilter.categoryBits = ObjectTypes.GOAT;
                 gFix.setFilterData(groundFilter);
             }

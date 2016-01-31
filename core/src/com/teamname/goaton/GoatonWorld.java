@@ -1,5 +1,6 @@
 package com.teamname.goaton;
 
+import aurelienribon.tweenengine.TweenManager;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -18,6 +19,7 @@ public class GoatonWorld {
     public static Random Random = new Random();
     public static final int TILE_SIZE = 32;
     public static final Vector2 STAGE_SIZE = new Vector2(3200,3200);
+    public static TweenManager TweenManager;
     public static <T extends Enum<?>> T RandomEnum(Class<T> clazz){
         int x = GoatonWorld.Random.nextInt(clazz.getEnumConstants().length);
         return clazz.getEnumConstants()[x];
@@ -33,7 +35,9 @@ public class GoatonWorld {
     }
     public static void updateRender(float dt, SpriteBatch sb)
     {
+       TweenManager.update(dt);
        scene.updateRender(dt, sb);
+
     }
     public static void setScene(Scene newScene)
     {

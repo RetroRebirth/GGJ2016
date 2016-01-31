@@ -17,6 +17,7 @@ public class DemonFactory {
         go.addComponent(new StaticSpriteRenderComponent(new Sprite(new Texture(Gdx.files.internal("art/demon_down.png")))));
         go.addComponent(new DemonPhysicsComponent());
         go.addComponent(new EnemyComponent(3));
+        go.addComponent(new DemonAuraComponent());
         go.tags.add("demon");
         return go;
     }
