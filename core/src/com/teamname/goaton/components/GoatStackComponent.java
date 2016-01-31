@@ -31,7 +31,7 @@ public class GoatStackComponent extends Component {
                 {
                     cGoat.setPosition(gameObject.getPosition().add(new Vector2(0,1)));
                     gameObject.removeChild(cGoat);
-                    cGoat.getBody().setLinearVelocity(gameObject.getBody().getLinearVelocity().scl(1.15f));
+                    cGoat.getBody().setLinearVelocity(calcGoatThrowVelocity());
                     cGoat.send(new Message("throw"));
                     cGoat = null;
                 }
@@ -39,6 +39,31 @@ public class GoatStackComponent extends Component {
             }
         });
 
+    }
+
+    protected Vector2 calcGoatThrowVelocity() {
+        // Get the player's speed magnitude
+        float mag = ((PlayerMovementComponent) this.gameObject.getComponent("PlayerMovementComponent")).speed;
+        Vector2 vec = new Vector2(0.0f, 0.0f);
+
+        switch (this.gameObject.direction) {
+            case UP:
+                vec.y = mag;
+                break;
+            case DOWN:
+                vec.y = -mag;
+                break;
+            case LEFT:
+                vec.x = -mag;
+                break;
+            case RIGHT:
+                vec.x = mag;
+                break;
+        }
+        // Scale how far the goat flies
+        vec = vec.scl(1.15f);
+
+        return vec;
     }
 
     @Override

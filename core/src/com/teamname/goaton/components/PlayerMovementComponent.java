@@ -56,13 +56,15 @@ public class PlayerMovementComponent extends Component {
             }
         }
         movement.scl(speed);
+
         gameObject.getBody().setLinearVelocity(movement.x, movement.y);
 
         gameObject.direction = parseDirection(movement);
     }
 
+    // Player's direction is which way they are facing. Therefore, player can't have a NONE direction after moving
     protected GameObject.Direction parseDirection(Vector2 movement) {
-        GameObject.Direction direction = GameObject.Direction.NONE;
+        GameObject.Direction direction;
 
         // Check if horizontal/vertical then positive or negative
         if (Math.abs(movement.x) > Math.abs(movement.y)) {
@@ -77,7 +79,7 @@ public class PlayerMovementComponent extends Component {
             } else {
                 direction = GameObject.Direction.DOWN;
             }
-        } else if (movement.len() > 0.0) {
+        } else {
             direction = this.gameObject.direction;
         }
 

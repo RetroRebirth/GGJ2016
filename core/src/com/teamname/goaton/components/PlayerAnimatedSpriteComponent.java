@@ -14,13 +14,11 @@ import java.util.Map;
 public class PlayerAnimatedSpriteComponent extends AnimatedSpriteRenderComponent {
 
     private static final String firstSprite = Assets.player_D;
-    public static final float WALKTIME = 0.3f;
+    public static final float WALKTIME = 0.1f;
 
-    GameObject.Direction dir = GameObject.Direction.NONE;
     private int walkCycle = 0;
     private float walkDuration = 0.0f;
     private int walkCycleLoop = 3;
-    private GameObject.Direction prevDir = GameObject.Direction.NONE;
 
     @Override
     public String getID() {
@@ -48,12 +46,12 @@ public class PlayerAnimatedSpriteComponent extends AnimatedSpriteRenderComponent
 
     @Override
     protected void update(float dt) {
-
-
         // Read which direction the player is moving
-        dir = this.gameObject.direction;
-        // Keep track of which frame of the cycle we should render
-        if (dir == GameObject.Direction.NONE) {
+        GameObject.Direction dir = this.gameObject.direction;
+
+        // Keep track of which frame of the walking cycle we should render
+        if (this.gameObject.getBody().getLinearVelocity().len() <= 0.0f) {
+            // Player isn't moving, reset to standing sprite
             walkCycle = 0;
             walkDuration = 0.0f;
         } else {
@@ -67,7 +65,7 @@ public class PlayerAnimatedSpriteComponent extends AnimatedSpriteRenderComponent
 
         // TODO check for carry or normal sprite
         // Render the sprite based on the direction and walk cycle
-        switch (prevDir) {
+        switch (dir) {
             case UP:
                 switch (walkCycle) {
                     case 0:
@@ -126,11 +124,6 @@ public class PlayerAnimatedSpriteComponent extends AnimatedSpriteRenderComponent
                 break;
         }
 
-        // Keep track of the previous direction so we can have the player stand when they stop moving
-        if (dir != GameObject.Direction.NONE) {
-            prevDir = dir;
-        }
-
         super.update(dt);
     }
 
@@ -143,7 +136,6 @@ public class PlayerAnimatedSpriteComponent extends AnimatedSpriteRenderComponent
         }
         PlayerAnimatedSpriteComponent cmp = new PlayerAnimatedSpriteComponent(newSprites);
         cmp.currentSprite = new Sprite(this.currentSprite);
-        cmp.dir = this.dir;
         return cmp;
 
     }
