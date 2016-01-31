@@ -12,7 +12,7 @@ import com.teamname.goaton.*;
 public class DemonMovementComponent extends Component {
 
     private float moveTimer;
-    private float maxMoveTime = 3.f;
+    private float maxMoveTime = 3.0f;
     private float minMoveTime = 0.5f;
     private float moveSpeed = 2.5f;
     private boolean chasingPlayer = false;
@@ -20,6 +20,12 @@ public class DemonMovementComponent extends Component {
     @Override
     protected void create() {
         super.create();
+        this.on("destroy", new MsgHandler() {
+            @Override
+            public void handle(Message msg) {
+                GoatonWorld.Destroy(gameObject);
+            }
+        });
     }
 
     @Override
@@ -48,6 +54,7 @@ public class DemonMovementComponent extends Component {
                 chasingPlayer = true;
             }
             moveTimer = GoatonWorld.Random.nextFloat() * (maxMoveTime - minMoveTime) + minMoveTime;
+            //System.out.println(moveTimer);
         }
         this.move();
     }
