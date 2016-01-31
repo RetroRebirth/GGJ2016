@@ -6,6 +6,7 @@ import com.teamname.goaton.GameObject;
 import com.teamname.goaton.Prefabs.*;
 import com.teamname.goaton.Scene;
 import com.teamname.goaton.components.BoundsPhysicsComponent;
+import com.teamname.goaton.components.GoatSpawnerComponent;
 
 /**
  * Created by kpidding on 1/30/16.
@@ -64,14 +65,22 @@ public class TestScene extends Scene {
 
     private void createPits() {
         GameObject pit = PitFactory.Create();
-        GameObject.Instantiate(DemonFactory.Create());
-        for (int i = 0; i < 50; i++) {
-            GameObject newPit = GameObject.Instantiate(pit);
-        }
+        //GameObject.Instantiate(DemonFactory.Create());
+        //for (int i = 0; i < 50; i++) {
+        GameObject.Instantiate(pit);
+        GameObject.Instantiate(pit);
+        GameObject.Instantiate(pit);
+        //}
 
     }
 
     private void createPitSpawner() {
         GameObject.Instantiate(PitSpawnerFactory.Create());
+    }
+
+    private void createGoatSpawner() {
+        GameObject go = new GameObject();
+        go.addComponent(new GoatSpawnerComponent());
+        GameObject.Instantiate(go);
     }
 }

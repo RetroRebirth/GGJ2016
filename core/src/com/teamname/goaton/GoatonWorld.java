@@ -27,7 +27,8 @@ public class GoatonWorld {
 
     public static TweenManager TweenManager;
 
-    public static ArrayList<Rectangle> SpawnAreas;
+    public static ArrayList<Rectangle> GoatSpawnAreas;
+    public static ArrayList<Rectangle> PitSpawnAreas;
     public static <T extends Enum<?>> T RandomEnum(Class<T> clazz){
         int x = GoatonWorld.Random.nextInt(clazz.getEnumConstants().length);
         return clazz.getEnumConstants()[x];

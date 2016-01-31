@@ -2,6 +2,7 @@ package com.teamname.goaton.Prefabs;
 
 import com.teamname.goaton.GameObject;
 import com.teamname.goaton.components.PitSpawnerComponent;
+import com.teamname.goaton.components.SpawnerComponent;
 
 /**
  * Created by pya on 1/31/16.

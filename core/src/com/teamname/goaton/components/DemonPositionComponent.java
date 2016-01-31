@@ -1,16 +1,22 @@
 package com.teamname.goaton.components;
 
+import com.badlogic.gdx.math.Vector2;
 import com.teamname.goaton.Component;
 import com.teamname.goaton.GoatonWorld;
 
 /**
- * Created by pya on 1/30/16.
+ * Created by pya on 1/31/16.
  */
-public class GoatPositionComponent extends PositionComponent {
+public class DemonPositionComponent extends PositionComponent {
+    Vector2 pitPos;
 
-    public GoatPositionComponent() {
-        super();
-        spawnAreas = GoatonWorld.GoatSpawnAreas;
+    public DemonPositionComponent(Vector2 pitPos) {
+        this.pitPos = pitPos;
+    }
+
+    @Override
+    protected void create() {
+        gameObject.setPosition(pitPos);
     }
 
     @Override

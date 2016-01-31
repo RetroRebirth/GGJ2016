@@ -22,11 +22,12 @@ public class GoatMovementComponent extends Component {
     private static final int IDLE = 0;
     private static final int FLEE = 1;
     private static final int HELD = 2;
-    private static final int SPIN = 3;
+    private static final int SPIN_CLOCKWISE = 3;
+    private static final int SPIN_COUNTERWISE = 4;
 
     protected Vector2 fleePoint;
 
-    int state = IDLE;
+    int state = SPIN_COUNTERWISE;
     private int spinCounter = 3;
 
     @Override
@@ -62,11 +63,18 @@ public class GoatMovementComponent extends Component {
                 }
             }
         });
-        this.on("suckIntoHole", new MsgHandler() {
+        this.on("spinClockwise", new MsgHandler() {
             @Override
             public void handle(Message msg) {
-            state = SPIN;
-
+                spinCounter = 3;
+                state = SPIN_CLOCKWISE;
+            }
+        });
+        this.on("spinCounterwise", new MsgHandler() {
+            @Override
+            public void handle(Message msg) {
+                spinCounter = 0;
+                state = SPIN_COUNTERWISE;
             }
         });
     }
@@ -115,7 +123,7 @@ public class GoatMovementComponent extends Component {
 
 
             //;applyLinearImpulse(mov.x,mov.y,gameObject.position.x, gameObject.position.y,true);
-            case SPIN:
+            case SPIN_CLOCKWISE:
                 spinTime -= dt;
                 if (spinTime < 0) {
                     if (spinCounter < 0) {
@@ -126,6 +134,17 @@ public class GoatMovementComponent extends Component {
                     spinTime = maxSpinTime;
                 }
                 break;
+            case SPIN_COUNTERWISE:
+                spinTime -= dt;
+                if (spinTime < 0) {
+                    if (spinCounter > 3) {
+                        spinCounter = 0;
+                    }
+                    gameObject.direction = GameObject.Direction.values()[spinCounter];
+                    spinCounter++;
+                    spinTime = maxSpinTime;
+                }
+
         }
 
     }
@@ -152,6 +171,8 @@ public class GoatMovementComponent extends Component {
                 break;
         }
         gameObject.getBody().setLinearVelocity(mov.x, mov.y);
+        /*gameObject.getBody().applyForceToCenter(new Vector2(mov.x * 10, mov.y * 10), true);
+        gameObject.getBody().applyForceToCenter(new Vector2(-mov.y * 10, mov.x * 10), true);*/
     }
     @Override
     public String getID() {

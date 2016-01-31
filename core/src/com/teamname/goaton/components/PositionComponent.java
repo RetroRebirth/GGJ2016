@@ -14,21 +14,21 @@ import java.util.ArrayList;
 public class PositionComponent extends Component {
     protected float boundedWidth;
     protected float boundedHeight;
+    protected ArrayList<Rectangle> spawnAreas;
 
     public PositionComponent() {}
 
-
     @Override
     protected void create() {
-        int numSpawns = GoatonWorld.SpawnAreas.size();
-        Rectangle chosen = GoatonWorld.SpawnAreas.get(GoatonWorld.Random.nextInt(numSpawns));
+        int numSpawns = spawnAreas.size();
+        Rectangle chosen = spawnAreas.get(GoatonWorld.Random.nextInt(numSpawns));
 
         float upBoundX = chosen.getX() + chosen.getWidth();
         float upBoundY = chosen.getY() + chosen.getHeight();
         float lowBoundX = chosen.getX();
         float lowBoundY = chosen.getY();
 
-        boundedWidth =  GoatonWorld.Random.nextFloat() * (upBoundX - lowBoundX) + lowBoundX;
+        boundedWidth = GoatonWorld.Random.nextFloat() * (upBoundX - lowBoundX) + lowBoundX;
         boundedHeight = GoatonWorld.Random.nextFloat() * (upBoundY - lowBoundY) + lowBoundY;
 
         gameObject.setPosition(new Vector2(boundedWidth, boundedHeight));
