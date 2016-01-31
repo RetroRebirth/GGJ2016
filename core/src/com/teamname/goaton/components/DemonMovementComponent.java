@@ -65,35 +65,44 @@ public class DemonMovementComponent extends Component {
                     // Chill out and look cool by standing still
                     gameObject.direction = GameObject.Direction.NONE;
                     state = IDLE;
-                } else {
+                } else if (rand > 0.3f){
                     // Take a stroll on memory lane, it's your time to enjoy the scenery
                     gameObject.direction = GoatonWorld.RandomEnum(GameObject.Direction.class);
                     state = ROAM;
+                }
+                else {
+                    state = CHASE;
                 }
             }
             Vector2 toPlayerVector = new Vector2(this.gameObject.getPosition().x - Scene.Player.getPosition().x,
                     this.gameObject.getPosition().y-Scene.Player.getPosition().y);
             distToPlayer = toPlayerVector.len();
             if (distToPlayer < 10f) {
-                if (GoatonWorld.Random.nextFloat() < 0.6f) {
+                if (GoatonWorld.Random.nextFloat() < 0.6f && state == IDLE || state == ROAM) {
                     state = CHASE;
                 }
                 else if (state == CHASE || state == IDLE || state == ROAM){
                     state = WINDUP;
                     playerTarget = new Vector2(Scene.Player.getPosition().sub(this.gameObject.getPosition()).nor());
                     gameObject.direction = parseDirection(playerTarget);
-                    chargeTimer = 0.4f;
+                    chargeTimer = 0.5f;
                     this.gameObject.send(new Message("windup"));
                 }
             }
-            if (state == WINDUP && chargeTimer <= 0f) {
-                this.gameObject.send(new Message("charge"));
-                state = CHARGE;
+            else if (state == CHASE) {
+                if (distToPlayer > 15f) {
+                    state = ROAM;
+                }
             }
+
             moveTimer = GoatonWorld.Random.nextFloat() * (maxMoveTime - minMoveTime) + minMoveTime;
             //System.out.println(moveTimer);
         }
 
+        if (state == WINDUP && chargeTimer <= 0f) {
+            this.gameObject.send(new Message("charge"));
+            state = CHARGE;
+        }
         chargeTimer -= dt;
         this.move();
     }
@@ -136,7 +145,7 @@ public class DemonMovementComponent extends Component {
                         .add(Scene.Player.getPosition().sub(this.gameObject.getPosition()).nor().scl(2 * moveSpeed)));
                 break;
             case WINDUP:
-                this.gameObject.getBody().setLinearVelocity(this.gameObject.getBody().getLinearVelocity().scl(0.8f));
+                this.gameObject.getBody().setLinearVelocity(this.gameObject.getBody().getLinearVelocity().scl(0f));
                 break;
         }
     }
