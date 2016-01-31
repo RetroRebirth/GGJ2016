@@ -16,12 +16,13 @@ public class DemonPositionComponent extends PositionComponent {
 
     @Override
     protected void create() {
+        System.out.println("pitPos: " + pitPos);
         gameObject.setPosition(pitPos);
     }
 
     @Override
     public Component cloneComponent() {
-        return new GoatPositionComponent();
+        return new DemonPositionComponent(pitPos);
     }
 
     @Override

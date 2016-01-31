@@ -28,6 +28,7 @@ public class GoatMovementComponent extends Component {
     protected Vector2 fleePoint;
 
     int state = SPIN_COUNTERWISE;
+    int prevState = SPIN_COUNTERWISE;
     private int spinCounter = 3;
 
     @Override
@@ -37,7 +38,7 @@ public class GoatMovementComponent extends Component {
         this.on("pickup", new MsgHandler() {
             @Override
             public void handle(Message msg) {
-
+                prevState = state;
                 state = HELD;
                 gameObject.getBody().setLinearVelocity(0,0);
                 gameObject.layer = Assets.THROW_LAYER;
@@ -47,6 +48,7 @@ public class GoatMovementComponent extends Component {
         this.on("onGround", new MsgHandler() {
             @Override
             public void handle(Message msg) {
+                prevState = state;
                 state = IDLE;
                 gameObject.layer = Assets.ACTOR_LAYER;
             }
@@ -56,6 +58,7 @@ public class GoatMovementComponent extends Component {
             @Override
             public void handle(Message msg) {
                 if (state == IDLE) {
+                    prevState = state;
                     state = FLEE;
                     fleePoint = (Vector2) msg.getArg();
                     moveTimer = 2.0f;
@@ -63,6 +66,19 @@ public class GoatMovementComponent extends Component {
                 }
             }
         });
+        this.on("throwGoat", new MsgHandler() {
+            @Override
+            public void handle(Message msg) {
+                prevState = state;
+                spinCounter = 3;
+                if (prevState == SPIN_CLOCKWISE) {
+
+                } else if (prevState == SPIN_COUNTERWISE) {
+
+                }
+            }
+        });
+
         this.on("spinClockwise", new MsgHandler() {
             @Override
             public void handle(Message msg) {
