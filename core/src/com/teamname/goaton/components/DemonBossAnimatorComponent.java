@@ -96,7 +96,7 @@ public class DemonBossAnimatorComponent extends Component {
         this.on("attackAnim", new MsgHandler() {
             @Override
             public void handle(Message msg) {
-                attackAnim = (Float)msg.getArg();
+                 attackAnim = (Float)msg.getArg();
             }
         });
 

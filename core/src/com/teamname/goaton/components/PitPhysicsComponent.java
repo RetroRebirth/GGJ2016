@@ -17,17 +17,17 @@ public class PitPhysicsComponent extends Component {
     protected void create() {
 
         BodyDef bodyDef = new BodyDef();
-        bodyDef.type = BodyDef.BodyType.StaticBody;
+        bodyDef.type = BodyDef.BodyType.KinematicBody;
         bodyDef.position.set(this.gameObject.getPosition());
         this.gameObject.addPhysicsBody(GoatonWorld.world.createBody(bodyDef));
 
         CircleShape circle = new CircleShape();
-        circle.setRadius(0.5f);
+        circle.setRadius(0.75f);
 
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = circle;
-        fixtureDef.filter.categoryBits = ObjectTypes.PIT;
-        fixtureDef.filter.maskBits = ObjectTypes.GOAT_AIR | ObjectTypes.BOUNDARY | ObjectTypes.DEMON;
+        fixtureDef.filter.categoryBits = ObjectTypes.DEMON | ObjectTypes.PIT;
+        fixtureDef.filter.maskBits = ObjectTypes.PLAYER | ObjectTypes.GOAT_AIR  | ObjectTypes.DEMON;
         fixtureDef.restitution = 0;
 
         Fixture fixture = this.gameObject.getBody().createFixture(fixtureDef);
