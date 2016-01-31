@@ -47,7 +47,7 @@ public class PlayerMovementComponent extends Component {
     @Override
     protected void update(float dt) {
         if (dead) {
-
+            // Do nothing because you died
         } else if (hit) {
             // TODO Knockback animation
             hitStun -= dt;
@@ -55,7 +55,9 @@ public class PlayerMovementComponent extends Component {
                 hit = false;
                 hitStun = HIT_STUN;
             }
-        } else {
+        }
+
+        if (!dead && (!hit || hitStun < 2.f*HIT_STUN / 3.f)) {
             Vector2 movement = new Vector2();
             movement.x += src.getMovementOnAxis(GameInputSource.Axis.X_AXIS);
             movement.y += src.getMovementOnAxis(GameInputSource.Axis.Y_AXIS);

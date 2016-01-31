@@ -22,7 +22,7 @@ import static com.teamname.goaton.GoatonWorld.Destroy;
  */
 public class GoatAnimatedSpriteComponent extends AnimatedSpriteRenderComponent {
 
-    private static final Color[] colors = {Color.GRAY,Color.CYAN,Color.GOLD,Color.WHITE};
+    private static final Color[] colors = {Color.GRAY,Color.WHITE,Color.LIGHT_GRAY,Color.DARK_GRAY};
     private static final String firstSprite = Assets.goat_D;
     public static final float WALKTIME = 0.3f;
     public static final float STRUGGLETIME = 0.1f;

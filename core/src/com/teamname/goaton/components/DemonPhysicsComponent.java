@@ -1,6 +1,7 @@
 package com.teamname.goaton.components;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.teamname.goaton.*;
 
@@ -9,6 +10,19 @@ import com.teamname.goaton.*;
  */
 public class DemonPhysicsComponent extends Component {
     Fixture gFix;
+    FixtureDef fixtureDef;
+
+    public void setMaskBits(short maskBits)
+    {
+        CircleShape circle = new CircleShape();
+        circle.setRadius(0.0f);
+        fixtureDef.shape = circle;
+        fixtureDef.filter.maskBits = maskBits;
+        gameObject.getBody().destroyFixture(gFix);
+       gFix = gameObject.getBody().createFixture(fixtureDef);
+
+        circle.dispose();
+    }
     @Override
     protected void create() {
         BodyDef bodyDef = new BodyDef();
@@ -19,7 +33,7 @@ public class DemonPhysicsComponent extends Component {
         CircleShape circle = new CircleShape();
         circle.setRadius(0.7f);
 
-        FixtureDef fixtureDef = new FixtureDef();
+        fixtureDef = new FixtureDef();
         fixtureDef.shape = circle;
         fixtureDef.filter.categoryBits = ObjectTypes.DEMON;
         fixtureDef.filter.maskBits = ObjectTypes.GOAT_AIR |

@@ -13,6 +13,8 @@ public class AnimatedSpriteRenderComponent extends Component {
     protected HashMap<String, Sprite> sprites;
     protected Sprite currentSprite;
 
+    private boolean visible = true;
+
     public AnimatedSpriteRenderComponent(HashMap<String, Sprite> sprites, Sprite currentSprite)
     {
         this.sprites = sprites;
@@ -32,9 +34,13 @@ public class AnimatedSpriteRenderComponent extends Component {
 
     @Override
     protected void render(SpriteBatch sb) {
+        if(visible)
         currentSprite.draw(sb);
     }
 
+    public void setVisible(boolean visible) {
+        this.visible = visible;
+    }
     @Override
     public Component cloneComponent() {
         return new AnimatedSpriteRenderComponent(this.sprites, this.currentSprite);

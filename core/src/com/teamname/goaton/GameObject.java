@@ -27,7 +27,7 @@ public class GameObject {
     public int layer = 0;
     public HashMap<String, Component> components;
     public HashSet<String> tags = new HashSet<String>();
-
+    private List<Component> renderOrderedComponents = new LinkedList<Component>();
     private Queue<Message> messages = new LinkedList<Message>();
     protected List<MsgHandler> handlers = new LinkedList<MsgHandler>();
     public List<GameObject> children = new ArrayList<GameObject>();
@@ -91,6 +91,7 @@ public class GameObject {
     {
         c.provideGameObject(this);
         components.put(c.getID(),c);
+        renderOrderedComponents.add(c);
 
     }
     public void destroy()
@@ -146,9 +147,9 @@ public class GameObject {
 
     public void render(SpriteBatch sb)
     {
-        for(Map.Entry<String, Component> e : components.entrySet())
+        for(Component e : renderOrderedComponents)
         {
-            e.getValue().render(sb);
+            e.render(sb);
         }
 
     }
