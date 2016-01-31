@@ -89,6 +89,7 @@ public class DemonBossAnimatorComponent extends Component {
                 head.setColor(Color.BLUE);
                 jaw.setColor(Color.BLUE);
                 GoatonWorld.sendGlobalMessage(new Message("cameraShake", new CamShakeControl(0.1f,25f)));
+                GoatonWorld.sendGlobalMessage(new Message("bossDamaged"));
 
             }
         });

@@ -1,14 +1,15 @@
 package com.teamname.goaton.Scenes;
 
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.sun.prism.image.ViewPort;
 import com.teamname.goaton.GameObject;
+import com.teamname.goaton.Message;
 import com.teamname.goaton.Prefabs.*;
 import com.teamname.goaton.Scene;
-import com.teamname.goaton.components.BoundsPhysicsComponent;
-import com.teamname.goaton.components.DemonSpawnerComponent;
-import com.teamname.goaton.components.GoatSpawnerComponent;
-import com.teamname.goaton.components.CameraControlComponent;
+import com.teamname.goaton.components.*;
 
 /**
  * Created by kpidding on 1/30/16.
@@ -16,8 +17,16 @@ import com.teamname.goaton.components.CameraControlComponent;
 public class TestScene extends Scene {
 
     private CameraControlComponent camControl;
+    private OrthographicCamera guiCamera;
+    ViewPort guiViewport;
+    private  GameObject gui;
+    private SpriteBatch guiSB;
 
-
+    @Override
+    public void sendGlobalMessage(Message msg) {
+        gui.send(msg);
+        super.sendGlobalMessage(msg);
+    }
 
     public TestScene()
     {
@@ -25,6 +34,18 @@ public class TestScene extends Scene {
         GameObject camObj = new GameObject();
         camObj.addComponent(camControl);
         addObject(camObj);
+        guiCamera = new OrthographicCamera(1280/2,720/2);
+        //guiCamera.position.set(-1280/4,720/4,0);
+        guiCamera.zoom = 1.f;
+        guiCamera.update();
+        //viewport = new StretchViewport(1280/2,720/2,guiCamera);
+        //guiCamera.position.set(1280 / 4.0f, 720 / 4.0f, 0);
+
+        gui = new GameObject();
+        gui.addComponent(new GUIBossHealthComponent());
+        gui.create();
+        guiSB = new SpriteBatch();
+
     }
 
     @Override
@@ -41,7 +62,16 @@ public class TestScene extends Scene {
         }*/
             //doing physics here?
         camControl.setCameraPosition(new Vector2(Scene.Player.getScreenPosition().x, Scene.Player.getScreenPosition().y));
-        super.updateRender(dt,sb);
+        super.updateRender(dt, sb);
+        sb.end();
+
+        //viewport.apply();
+        guiSB.setProjectionMatrix(guiCamera.combined);
+        guiSB.begin();
+        gui.update(dt);
+        gui.render(guiSB);
+        guiSB.end();
+
             //debugRenderer.render(GoatonWorld.world, camera.combined);
     }
 

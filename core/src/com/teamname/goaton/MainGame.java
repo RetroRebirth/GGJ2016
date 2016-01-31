@@ -82,7 +82,7 @@ public class MainGame extends ApplicationAdapter {
         tileMapRenderer.render();
         batch.begin();
         GoatonWorld.updateRender(1 / 60.f, batch);
-        batch.end();
+        //batch.end();
         //scene.getCamera().translate(1,1,0);
         scene.getCamera().update();
 
