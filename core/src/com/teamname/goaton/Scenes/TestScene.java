@@ -13,13 +13,7 @@ import com.teamname.goaton.GoatonWorld;
  * Created by kpidding on 1/30/16.
  */
 public class TestScene extends Scene {
-    private GameObject player;
-    private GameObject createPlayer()
-    {
-        GameObject player = PlayerFactory.Create();
-        player.setPosition(new Vector2(50,50));
-        return player;
-    }
+
 
     public TestScene()
     {
@@ -47,8 +41,7 @@ public class TestScene extends Scene {
 
     @Override
     public void create() {
-        this.player = createPlayer();
-        addObject(this.player);
+
         createGoats();
         createPits();
         addObject(DemonBossFactory.Create());
