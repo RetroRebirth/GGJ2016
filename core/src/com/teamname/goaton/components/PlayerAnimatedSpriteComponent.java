@@ -64,64 +64,125 @@ public class PlayerAnimatedSpriteComponent extends AnimatedSpriteRenderComponent
         }
 
         // TODO check for carry or normal sprite
-        // Render the sprite based on the direction and walk cycle
-        switch (dir) {
-            case UP:
-                switch (walkCycle) {
-                    case 0:
-                        currentSprite = sprites.get(Assets.player_U);
-                        break;
-                    case 1:
-                        currentSprite = sprites.get(Assets.player_UL);
-                        break;
-                    case 2:
-                        currentSprite = sprites.get(Assets.player_UR);
-                        break;
-                }
-                break;
-            case DOWN:
-                switch (walkCycle) {
-                    case 0:
-                        currentSprite = sprites.get(Assets.player_D);
-                        break;
-                    case 1:
-                        currentSprite = sprites.get(Assets.player_DL);
-                        break;
-                    case 2:
-                        currentSprite = sprites.get(Assets.player_DR);
-                        break;
-                }
-                break;
-            case LEFT:
-                switch (walkCycle) {
-                    case 0:
-                        currentSprite = sprites.get(Assets.player_L);
-                        break;
-                    case 1:
-                        currentSprite = sprites.get(Assets.player_LL);
-                        break;
-                    case 2:
-                        currentSprite = sprites.get(Assets.player_LR);
-                        break;
-                }
-                break;
-            case RIGHT:
-                switch (walkCycle) {
-                    case 0:
-                        currentSprite = sprites.get(Assets.player_R);
-                        break;
-                    case 1:
-                        currentSprite = sprites.get(Assets.player_RL);
-                        break;
-                    case 2:
-                        currentSprite = sprites.get(Assets.player_RR);
-                        break;
-                }
-                break;
-            case NONE:
-                break;
-            default:
-                break;
+        // Render the sprite based on the direction, walk cycle, and if you're carrying a goat
+        if (((PlayerMovementComponent) this.gameObject.getComponent("PlayerMovementComponent")).holdingGoat) {
+            switch (dir) {
+                case UP:
+                    switch (walkCycle) {
+                        case 0:
+                            currentSprite = sprites.get(Assets.playerC_D);
+                            break;
+                        case 1:
+                            currentSprite = sprites.get(Assets.playerC_UL);
+                            break;
+                        case 2:
+                            currentSprite = sprites.get(Assets.playerC_UR);
+                            break;
+                    }
+                    break;
+                case DOWN:
+                    switch (walkCycle) {
+                        case 0:
+                            currentSprite = sprites.get(Assets.playerC_D);
+                            break;
+                        case 1:
+                            currentSprite = sprites.get(Assets.playerC_DL);
+                            break;
+                        case 2:
+                            currentSprite = sprites.get(Assets.playerC_DR);
+                            break;
+                    }
+                    break;
+                case LEFT:
+                    switch (walkCycle) {
+                        case 0:
+                            currentSprite = sprites.get(Assets.playerC_L);
+                            break;
+                        case 1:
+                            currentSprite = sprites.get(Assets.playerC_LL);
+                            break;
+                        case 2:
+                            currentSprite = sprites.get(Assets.playerC_LR);
+                            break;
+                    }
+                    break;
+                case RIGHT:
+                    switch (walkCycle) {
+                        case 0:
+                            currentSprite = sprites.get(Assets.playerC_R);
+                            break;
+                        case 1:
+                            currentSprite = sprites.get(Assets.playerC_RL);
+                            break;
+                        case 2:
+                            currentSprite = sprites.get(Assets.playerC_RR);
+                            break;
+                    }
+                    break;
+                case NONE:
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (dir) {
+                case UP:
+                    switch (walkCycle) {
+                        case 0:
+                            currentSprite = sprites.get(Assets.player_U);
+                            break;
+                        case 1:
+                            currentSprite = sprites.get(Assets.player_UL);
+                            break;
+                        case 2:
+                            currentSprite = sprites.get(Assets.player_UR);
+                            break;
+                    }
+                    break;
+                case DOWN:
+                    switch (walkCycle) {
+                        case 0:
+                            currentSprite = sprites.get(Assets.player_D);
+                            break;
+                        case 1:
+                            currentSprite = sprites.get(Assets.player_DL);
+                            break;
+                        case 2:
+                            currentSprite = sprites.get(Assets.player_DR);
+                            break;
+                    }
+                    break;
+                case LEFT:
+                    switch (walkCycle) {
+                        case 0:
+                            currentSprite = sprites.get(Assets.player_L);
+                            break;
+                        case 1:
+                            currentSprite = sprites.get(Assets.player_LL);
+                            break;
+                        case 2:
+                            currentSprite = sprites.get(Assets.player_LR);
+                            break;
+                    }
+                    break;
+                case RIGHT:
+                    switch (walkCycle) {
+                        case 0:
+                            currentSprite = sprites.get(Assets.player_R);
+                            break;
+                        case 1:
+                            currentSprite = sprites.get(Assets.player_RL);
+                            break;
+                        case 2:
+                            currentSprite = sprites.get(Assets.player_RR);
+                            break;
+                    }
+                    break;
+                case NONE:
+                    break;
+                default:
+                    break;
+            }
         }
 
         super.update(dt);
