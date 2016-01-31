@@ -39,6 +39,7 @@ public class GoatStackComponent extends Component {
             }
         });
 
+
     }
 
     protected Vector2 calcGoatThrowVelocity() {

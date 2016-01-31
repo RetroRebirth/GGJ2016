@@ -59,6 +59,10 @@ public class PlayerMovementComponent extends Component {
         {
             GoatonWorld.sendGlobalMessage(new Message("spawnBoss"));
         }
+        if(src.isGlowButtonPressed())
+        {
+            this.gameObject.send(new Message("glow"));
+        }
         movement.scl(speed);
 
         gameObject.getBody().setLinearVelocity(movement.x, movement.y);

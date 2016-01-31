@@ -11,6 +11,7 @@ public interface GameInputSource {
     }
     float getMovementOnAxis(Axis axis);
     boolean  isThrowButtonPressed();
+    boolean isGlowButtonPressed();
     boolean isDebugButtonPressed();
 
 
