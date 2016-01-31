@@ -1,10 +1,8 @@
 package com.teamname.goaton.components;
 
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Contact;
-import com.teamname.goaton.Component;
-import com.teamname.goaton.GameObject;
-import com.teamname.goaton.GoatonWorld;
-import com.teamname.goaton.Message;
+import com.teamname.goaton.*;
 
 /**
  * Created by kpidding on 1/30/16.
@@ -27,9 +25,16 @@ public class EnemyComponent extends Component {
             health-=1;
             gameObject.send(new Message("damaged"));
             other.send(new Message("destroy"));
-            GoatonWorld.Destroy(other);
             GoatonWorld.numGoats--;
+            GoatonWorld.Destroy(other);
 
+        }
+        if (other.tags.contains("player")) {
+            // TODO damage player
+//            other.getBody().applyForce(100f, 100f, 0f, 0f, false);
+            ((PlayerMovementComponent) other.getComponent("PlayerMovementComponent")).hit = true;
+            Vector2 dir = other.getPosition().sub(this.gameObject.getPosition()).nor().scl(10f);
+            other.getBody().setLinearVelocity(dir);
         }
         if(health <= 0)
         {
@@ -40,6 +45,8 @@ public class EnemyComponent extends Component {
             if (gameObject.tags.contains("demon")) {
                 GoatonWorld.Destroy(gameObject);
             }
+
+
         }
     }
 

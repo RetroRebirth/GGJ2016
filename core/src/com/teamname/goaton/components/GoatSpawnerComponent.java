@@ -51,7 +51,19 @@ public class GoatSpawnerComponent extends SpawnerComponent {
         GameObject go = GameObject.Instantiate(GoatFactory.Create());
         go.create();
         go.setPosition(gameObject.getPosition());
-        go.getBody().setLinearVelocity((GoatonWorld.Random.nextFloat()-0.5f)*20,(GoatonWorld.Random.nextFloat()-0.5f)*20) ;
+
+        float rand = GoatonWorld.Random.nextFloat();
+        if (rand > 0.75f) {
+            go.getBody().setLinearVelocity(-10f, 0f);
+        } else if (rand > 0.5f) {
+            go.getBody().setLinearVelocity(10f, 0f);
+        } else if (rand > 0.25f) {
+            go.getBody().setLinearVelocity(0f, 8f);
+        } else {
+            go.getBody().setLinearVelocity(0f, -8f);
+        }
+
+//        go.getBody().setLinearVelocity((GoatonWorld.Random.nextFloat()-0.5f)*20,(GoatonWorld.Random.nextFloat()-0.5f)*20) ;
  //       go.send(new Message("pickup"));
         go.send(new Message("throw"));
     }

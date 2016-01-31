@@ -17,7 +17,7 @@ public class DemonPhysicsComponent extends Component {
         this.gameObject.addPhysicsBody(GoatonWorld.world.createBody(bodyDef));
 
         CircleShape circle = new CircleShape();
-        circle.setRadius(0.8f);
+        circle.setRadius(0.7f);
 
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = circle;
@@ -26,7 +26,8 @@ public class DemonPhysicsComponent extends Component {
                                     ObjectTypes.BOUNDARY |
                                     ObjectTypes.DEMON |
                                     ObjectTypes.PLAYER;
-        fixtureDef.restitution = 0f;
+
+        fixtureDef.restitution = 0.5f;
 
         gFix = this.gameObject.getBody().createFixture(fixtureDef);
 

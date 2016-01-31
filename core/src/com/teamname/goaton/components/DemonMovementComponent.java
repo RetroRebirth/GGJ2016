@@ -12,7 +12,7 @@ import com.teamname.goaton.*;
 public class DemonMovementComponent extends Component {
 
     private float moveTimer;
-    private float maxMoveTime = 3.f;
+    private float maxMoveTime = 3.0f;
     private float minMoveTime = 0.5f;
     private float moveSpeed = 5f;
 
@@ -91,6 +91,7 @@ public class DemonMovementComponent extends Component {
                 state = CHARGE;
             }
             moveTimer = GoatonWorld.Random.nextFloat() * (maxMoveTime - minMoveTime) + minMoveTime;
+            //System.out.println(moveTimer);
         }
 
         chargeTimer -= dt;

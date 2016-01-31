@@ -138,7 +138,7 @@ public class GoatMovementComponent extends Component {
                 break;
 
 
-            //;applyLinearImpulse(mov.x,mov.y,gameObject.position.x, gameObject.position.y,true);
+
             case SPIN_CLOCKWISE:
                 spinTime -= dt;
                 if (spinTime < 0) {

@@ -16,6 +16,10 @@ public class PlayerMovementComponent extends Component {
         this.src = src;
     }
     public boolean holdingGoat = false;
+    public boolean hit = false;
+    private final float HIT_STUN = 1.0f;
+    private float hitStun = HIT_STUN;
+
     @Override
     protected void create() {
         this.on("pickupGoat",new MsgHandler() {
@@ -34,40 +38,50 @@ public class PlayerMovementComponent extends Component {
 
     @Override
     protected void update(float dt) {
-        Vector2 movement = new Vector2();
-        movement.x += src.getMovementOnAxis(GameInputSource.Axis.X_AXIS);
-        movement.y += src.getMovementOnAxis(GameInputSource.Axis.Y_AXIS);
-        if(movement.len() > 1.0)
-        {
-            movement = movement.nor();
-        }
-        if(src.isThrowButtonPressed())
-        {
-            if(holdingGoat)
+        if (!hit) {
+
+            Vector2 movement = new Vector2();
+            movement.x += src.getMovementOnAxis(GameInputSource.Axis.X_AXIS);
+            movement.y += src.getMovementOnAxis(GameInputSource.Axis.Y_AXIS);
+            if(movement.len() > 1.0)
             {
-                this.gameObject.send(new Message("throwGoat"));
-                holdingGoat = false;
+                movement = movement.nor();
             }
-            else
+            if(src.isThrowButtonPressed())
             {
-                //GoatonWorld.sendGlobalMessage(new Message("throw"));
-                this.gameObject.send(new Message("pickup"));
+                if(holdingGoat)
+                {
+                    this.gameObject.send(new Message("throwGoat"));
+                    holdingGoat = false;
+                }
+                else
+                {
+                    //GoatonWorld.sendGlobalMessage(new Message("throw"));
+                    this.gameObject.send(new Message("pickup"));
 
+                }
+            }
+            if(src.isDebugButtonPressed())
+            {
+                GoatonWorld.sendGlobalMessage(new Message("spawnBoss"));
+            }
+            if(src.isGlowButtonPressed())
+            {
+                this.gameObject.send(new Message("glow"));
+            }
+            movement.scl(speed);
+
+            gameObject.getBody().setLinearVelocity(movement.x, movement.y);
+
+            gameObject.direction = parseDirection(movement);
+        } else {
+            // TODO Knockback animation
+            hitStun -= dt;
+            if (hitStun < 0.0f) {
+                hit = false;
+                hitStun = HIT_STUN;
             }
         }
-        if(src.isDebugButtonPressed())
-        {
-            GoatonWorld.sendGlobalMessage(new Message("spawnBoss"));
-        }
-        if(src.isGlowButtonPressed())
-        {
-            this.gameObject.send(new Message("glow"));
-        }
-        movement.scl(speed);
-
-        gameObject.getBody().setLinearVelocity(movement.x, movement.y);
-
-        gameObject.direction = parseDirection(movement);
     }
 
     // Player's direction is which way they are facing. Therefore, player can't have a NONE direction after moving
