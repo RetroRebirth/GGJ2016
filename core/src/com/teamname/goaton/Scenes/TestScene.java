@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.utils.Array;
 import com.teamname.goaton.GameObject;
+import com.teamname.goaton.Prefabs.DemonFactory;
 import com.teamname.goaton.Prefabs.GoatFactory;
 import com.teamname.goaton.Prefabs.PitFactory;
 import com.teamname.goaton.Prefabs.PlayerFactory;
@@ -92,7 +93,7 @@ public class TestScene extends Scene {
 
     private void createPits() {
         GameObject pit = PitFactory.Create();
-
+        GameObject.Instantiate(DemonFactory.Create());
         for (int i = 0; i < 50; i++) {
             GameObject newPit = GameObject.Instantiate(pit);
         }

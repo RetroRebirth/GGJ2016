@@ -16,7 +16,9 @@ public class StaticSpriteRenderComponent extends Component {
 
     @Override
     protected void update(float dt) {
-        sprite.setPosition(gameObject.getPosition().x,gameObject.getPosition().y);
+        sprite.setPosition(
+                gameObject.getScreenPosition().x - sprite.getOriginX(),
+                gameObject.getScreenPosition().y - sprite.getOriginY());
     }
 
     @Override

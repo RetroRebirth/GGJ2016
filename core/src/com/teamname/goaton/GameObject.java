@@ -16,7 +16,7 @@ public class GameObject {
     public float radius = 1f;
 
     public HashMap<String, Component> components;
-    public List<String> tags;
+    public List<String> tags = new LinkedList<String>();
 
     private Queue<Message> messages = new LinkedList<Message>();
     protected List<MsgHandler> handlers = new LinkedList<MsgHandler>();
