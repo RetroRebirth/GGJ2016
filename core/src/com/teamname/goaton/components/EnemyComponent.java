@@ -10,6 +10,7 @@ import com.teamname.goaton.*;
 public class EnemyComponent extends Component {
     public int health;
     public int initialHealth;
+    public boolean canBeDamaged = true;
     public  EnemyComponent(int health)
     {
         this.health = health;
@@ -20,7 +21,7 @@ public class EnemyComponent extends Component {
         if (collision.getFixtureA().isSensor() || collision.getFixtureB().isSensor()) {
             return;
         }
-        if(other.tags.contains("goat"))
+        if(other.tags.contains("goat") && canBeDamaged)
         {
             health-=1;
             gameObject.send(new Message("damaged"));
@@ -36,8 +37,9 @@ public class EnemyComponent extends Component {
             Vector2 dir = other.getPosition().sub(this.gameObject.getPosition()).nor().scl(10f);
             other.getBody().setLinearVelocity(dir);
         }
-        if(health <= 0)
+        if(canBeDamaged && health <= 0)
         {
+            canBeDamaged = false;
             if (gameObject.tags.contains("demon")) {
                 GoatonWorld.numDemons--;
             }
