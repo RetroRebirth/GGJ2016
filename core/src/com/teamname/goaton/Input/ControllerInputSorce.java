@@ -13,6 +13,9 @@ public class ControllerInputSorce implements GameInputSource {
     private int yAx;
     private  int aBtn;
     private int bBtn;
+    private int startBtn;
+    private int spinLeftBtn;
+    private int spinRightBtn;
     private boolean btnToggle;
 
     public ControllerInputSorce(Controller ctrl)
@@ -24,6 +27,9 @@ public class ControllerInputSorce implements GameInputSource {
             yAx = Xbox.L_STICK_VERTICAL_AXIS;
             aBtn = Xbox.A;
             bBtn = Xbox.B;
+            startBtn = Xbox.START;
+            spinLeftBtn = Xbox.L_BUMPER;
+            spinRightBtn = Xbox.R_BUMPER;
         }
     }
     @Override
@@ -95,6 +101,72 @@ public class ControllerInputSorce implements GameInputSource {
             return false;
         }
         else if(ctrl.getButton(bBtn))
+        {
+            btnToggle = true;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean isSpinLeftButtonPressed() {
+        if(btnToggle)
+        {
+            if(!ctrl.getButton(spinLeftBtn))
+            {
+                btnToggle = false;
+            }
+
+            return false;
+        }
+        else if(ctrl.getButton(spinLeftBtn))
+        {
+            btnToggle = true;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean isSpinRightButtonPressed() {
+        if(btnToggle)
+        {
+            if(!ctrl.getButton(spinRightBtn))
+            {
+                btnToggle = false;
+            }
+
+            return false;
+        }
+        else if(ctrl.getButton(spinRightBtn))
+        {
+            btnToggle = true;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean isRestartButtonPressed() {
+        if(btnToggle)
+        {
+            if(!ctrl.getButton(startBtn))
+            {
+                btnToggle = false;
+            }
+
+            return false;
+        }
+        else if(ctrl.getButton(startBtn))
         {
             btnToggle = true;
             return true;

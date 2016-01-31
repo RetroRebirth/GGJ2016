@@ -13,6 +13,9 @@ public interface GameInputSource {
     boolean  isThrowButtonPressed();
     boolean isGlowButtonPressed();
     boolean isDebugButtonPressed();
+    boolean isSpinLeftButtonPressed();
+    boolean isSpinRightButtonPressed();
+    boolean isRestartButtonPressed();
 
 
 }

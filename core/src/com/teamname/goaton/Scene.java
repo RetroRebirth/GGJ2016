@@ -1,5 +1,7 @@
 package com.teamname.goaton;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -14,10 +16,7 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.teamname.goaton.Prefabs.BoundBoxFactory;
-import com.teamname.goaton.Prefabs.DemonBossFactory;
-import com.teamname.goaton.Prefabs.PlayerFactory;
-import com.teamname.goaton.Prefabs.PlayerTriggerFactory;
+import com.teamname.goaton.Prefabs.*;
 import com.teamname.goaton.components.GoatSpawnerComponent;
 
 import java.util.*;
@@ -39,12 +38,17 @@ public abstract class Scene {
     //Queue<GameObject>[] addList;
     protected Queue<GameObject> addList = new LinkedList<GameObject>();
     protected Queue<GameObject> removeList = new LinkedList<GameObject>();
+    //I'm so sorry
+    GameObject removableBarrier;
+    Vector2 bridgePos;
     protected Viewport viewport;
 
     protected Camera camera;
     protected float viewportScale = 1.0f;
 
-
+    protected Music titleTheme;
+    protected Music mainThemeIntro;
+    protected Music mainThemeLoop;
 
     protected Box2DDebugRenderer debugRenderer = new Box2DDebugRenderer();
 
@@ -89,6 +93,12 @@ public abstract class Scene {
     }*/
     public void sendGlobalMessage(Message msg)
     {
+        //*I'm so, so sorry*/
+        if(msg.getMessage().equals("bossDestroyed"))
+        {
+            GoatonWorld.Destroy(removableBarrier);
+            BridgeTileFactory.Create(this,bridgePos,3);
+        }
         for(GameObject obj : objects)
         {
             obj.send(msg);
@@ -126,6 +136,11 @@ public abstract class Scene {
             obj.render(sb);
         }
 
+        if (!mainThemeIntro.isPlaying()) {
+
+            mainThemeIntro.dispose();
+            mainThemeLoop.play();
+        }
         //After all is said and done, finish the remove.
         finishRemove();
         //OrthographicCamera camera2 = new OrthographicCamera(200,200);
@@ -174,6 +189,16 @@ public abstract class Scene {
             {
                 obj.create();
             }
+
+            // Set up and initialize intro music
+            mainThemeIntro = Gdx.audio.newMusic(Gdx.files.internal(Assets.main_Intro));
+            mainThemeIntro.setVolume(0.75f);
+            mainThemeIntro.play();
+
+            // Initialize the main loop; set the volume and set looping to true
+            mainThemeLoop = Gdx.audio.newMusic(Gdx.files.internal(Assets.main_Loop));
+            mainThemeLoop.setVolume(0.75f);
+            mainThemeLoop.isLooping();
         //}
     }
 
@@ -207,7 +232,13 @@ public abstract class Scene {
                 for(MapObject mo : l.getObjects())
                 {
                     mo.setVisible(false);
-                    addObject(BoundBoxFactory.Create(mo,false));
+
+                    GameObject go = BoundBoxFactory.Create(mo,false);
+                    addObject(go);
+                    if(mo.getName() != null && mo.getName().equals("RemovableBoundary"))
+                    {
+                        removableBarrier = go;
+                    }
                 }
             }
             else if(l.getName().equals("Actors"))
@@ -236,6 +267,8 @@ public abstract class Scene {
                 goatSpawner.addComponent(new GoatSpawnerComponent());
                 goatSpawner.setPosition(MapObjectToWorld(objects.get("GoatPit")));
                 addObject(goatSpawner);
+
+                bridgePos = MapObjectToWorld(objects.get("BridgeSpawn"));
 
             }
             else if (l.getName().equals("SpawnArea"))

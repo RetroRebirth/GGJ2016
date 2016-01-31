@@ -23,7 +23,10 @@ public class EnemyComponent extends Component {
     protected void update(float dt) {
        if(health <= 0)
        {
-           ((DemonPhysicsComponent)(gameObject.getComponent("DemonPhysicsComponent"))).setMaskBits((short)0);
+           if((gameObject.getComponent("DemonPhysicsComponent")) != null){
+               ((DemonPhysicsComponent)(gameObject.getComponent("DemonPhysicsComponent"))).setMaskBits((short)0);
+
+           }
        }
     }
 
