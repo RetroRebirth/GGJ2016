@@ -2,13 +2,10 @@ package com.teamname.goaton.Scenes;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.utils.Array;
 import com.teamname.goaton.GameObject;
 import com.teamname.goaton.Prefabs.*;
 import com.teamname.goaton.Scene;
-import com.teamname.goaton.GoatonWorld;
-import com.teamname.goaton.components.BarrierPhysicsComponent;
+import com.teamname.goaton.components.BoundsPhysicsComponent;
 
 /**
  * Created by kpidding on 1/30/16.
@@ -50,10 +47,6 @@ public class TestScene extends Scene {
 
     @Override
     public void create() {
-        stageBounds = new GameObject();
-        stageBounds.addComponent(new BarrierPhysicsComponent(100,100));
-        addObject(stageBounds);
-
         this.player = createPlayer();
         addObject(this.player);
         createGoats();
