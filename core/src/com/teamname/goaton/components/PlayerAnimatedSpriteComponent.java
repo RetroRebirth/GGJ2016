@@ -9,24 +9,22 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by kpidding on 1/30/16.
+ * Created by Chris Williams on 1/30/16.
  */
 public class PlayerAnimatedSpriteComponent extends AnimatedSpriteRenderComponent {
 
     private static final String firstSprite = Assets.player_D;
-    public static final float WALKTIME = 0.3f;
+    public static final float WALKTIME = 0.1f;
 
-    GoatMovementComponent.Direction dir = GoatMovementComponent.Direction.NONE;
+    GameObject.Direction dir = GameObject.Direction.NONE;
     private int walkCycle = 0;
     private float walkDuration = 0.0f;
     private int walkCycleLoop = 3;
-    private GoatMovementComponent.Direction prevDir = GoatMovementComponent.Direction.NONE;
-
-    private Color color;
+    private GameObject.Direction prevDir = GameObject.Direction.NONE;
 
     @Override
     public String getID() {
-        return "GoatAnimatedSpriteComponent";
+        return "PlayerAnimatedSpriteComponent";
     }
 
     public PlayerAnimatedSpriteComponent(HashMap<String, Sprite> sprites) {
@@ -41,25 +39,7 @@ public class PlayerAnimatedSpriteComponent extends AnimatedSpriteRenderComponent
 
     @Override
     protected void create() {
-        // Pick a color and color all the goat sprites
-        color = colors[GoatonWorld.Random.nextInt(colors.length)];
-        for (Map.Entry<String, Sprite> entry : sprites.entrySet()) {
-            entry.getValue().setColor(color);
-        }
 
-        this.on("pickup", new MsgHandler() {
-            @Override
-            public void handle(Message msg) {
-                currentSprite.setScale(1.15f);
-                onGround = false;
-            }
-        });
-        this.on("throw",new MsgHandler() {
-            @Override
-            public void handle(Message msg) {
-                throwTimer = GoatFactory.THROWTIME;
-            }
-        });
         super.create();
 
     }
@@ -70,13 +50,10 @@ public class PlayerAnimatedSpriteComponent extends AnimatedSpriteRenderComponent
     protected void update(float dt) {
 
 
-        // Read which direction the goat is moving
-        if (this.gameObject.getComponent("GoatMovementComponent") != null)
-        {
-            dir = ((GoatMovementComponent) this.gameObject.getComponent("GoatMovementComponent")).getDirection();
-        }
+        // Read which direction the player is moving
+        dir = this.gameObject.direction;
         // Keep track of which frame of the cycle we should render
-        if (dir == GoatMovementComponent.Direction.NONE) {
+        if (dir == GameObject.Direction.NONE) {
             walkCycle = 0;
             walkDuration = 0.0f;
         } else {
@@ -88,57 +65,58 @@ public class PlayerAnimatedSpriteComponent extends AnimatedSpriteRenderComponent
             }
         }
 
+        // TODO check for carry or normal sprite
         // Render the sprite based on the direction and walk cycle
         switch (prevDir) {
             case UP:
                 switch (walkCycle) {
                     case 0:
-                        currentSprite = sprites.get(Assets.goat_U);
+                        currentSprite = sprites.get(Assets.player_U);
                         break;
                     case 1:
-                        currentSprite = sprites.get(Assets.goat_UL);
+                        currentSprite = sprites.get(Assets.player_UL);
                         break;
                     case 2:
-                        currentSprite = sprites.get(Assets.goat_UR);
+                        currentSprite = sprites.get(Assets.player_UR);
                         break;
                 }
                 break;
             case DOWN:
                 switch (walkCycle) {
                     case 0:
-                        currentSprite = sprites.get(Assets.goat_D);
+                        currentSprite = sprites.get(Assets.player_D);
                         break;
                     case 1:
-                        currentSprite = sprites.get(Assets.goat_DL);
+                        currentSprite = sprites.get(Assets.player_DL);
                         break;
                     case 2:
-                        currentSprite = sprites.get(Assets.goat_DR);
+                        currentSprite = sprites.get(Assets.player_DR);
                         break;
                 }
                 break;
             case LEFT:
                 switch (walkCycle) {
                     case 0:
-                        currentSprite = sprites.get(Assets.goat_L);
+                        currentSprite = sprites.get(Assets.player_L);
                         break;
                     case 1:
-                        currentSprite = sprites.get(Assets.goat_LI);
+                        currentSprite = sprites.get(Assets.player_LL);
                         break;
                     case 2:
-                        currentSprite = sprites.get(Assets.goat_LO);
+                        currentSprite = sprites.get(Assets.player_LR);
                         break;
                 }
                 break;
             case RIGHT:
                 switch (walkCycle) {
                     case 0:
-                        currentSprite = sprites.get(Assets.goat_R);
+                        currentSprite = sprites.get(Assets.player_R);
                         break;
                     case 1:
-                        currentSprite = sprites.get(Assets.goat_RI);
+                        currentSprite = sprites.get(Assets.player_RL);
                         break;
                     case 2:
-                        currentSprite = sprites.get(Assets.goat_RO);
+                        currentSprite = sprites.get(Assets.player_RR);
                         break;
                 }
                 break;
@@ -148,28 +126,9 @@ public class PlayerAnimatedSpriteComponent extends AnimatedSpriteRenderComponent
                 break;
         }
 
-        // Keep track of the previous direction so we can have the goats stand when they stop moving
-        if (dir != GoatMovementComponent.Direction.NONE) {
+        // Keep track of the previous direction so we can have the player stand when they stop moving
+        if (dir != GameObject.Direction.NONE) {
             prevDir = dir;
-        }
-
-        if(throwTimer > 0)
-        {
-            throwTimer -= dt;
-            float offset = (float)Math.abs(Math.sin(  Math.PI*2 * (1 - throwTimer/ GoatFactory.THROWTIME)) * throwTimer);
-            currentSprite.setScale(1.0f + 1.5f*offset);
-            currentSprite.setPosition(
-                    gameObject.getScreenPosition().x - currentSprite.getOriginX(),
-                    gameObject.getScreenPosition().y - currentSprite.getOriginY() + 15 * offset );
-            if(throwTimer <=0)
-            {
-                gameObject.send(new Message("onGround"));
-                onGround = true;
-            }
-        }
-        else if(onGround)
-        {
-            currentSprite.setScale(1.0f);
         }
 
         super.update(dt);
