@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
 import com.teamname.goaton.GameObject;
+import com.teamname.goaton.GoatonWorld;
 import com.teamname.goaton.Input.ControllerInputSorce;
 import com.teamname.goaton.Input.GameInputSource;
 import com.teamname.goaton.Input.KeyboardInputSource;
@@ -127,7 +128,7 @@ public class TestScene extends Scene {
 
         guiSB.end();
 
-            //debugRenderer.render(GoatonWorld.world, camera.combined);
+        debugRenderer.render(GoatonWorld.world, camera.combined);
     }
 
     private void renderTutorialTextToScreen() {

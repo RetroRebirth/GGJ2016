@@ -80,8 +80,8 @@ timeline0: 0.0
 - Scale - 
 lowMin: 0.0
 lowMax: 0.0
-highMin: 30.0
-highMax: 30.0
+highMin: 50.0
+highMax: 50.0
 relative: false
 scalingCount: 1
 scaling0: 1.0
@@ -91,8 +91,8 @@ timeline0: 0.0
 active: true
 lowMin: -75.0
 lowMax: -75.0
-highMin: -500.0
-highMax: -600.0
+highMin: -750.0
+highMax: -1000.0
 relative: false
 scalingCount: 3
 scaling0: 1.0
@@ -158,4 +158,4 @@ additive: true
 behind: false
 premultipliedAlpha: false
 - Image Path -
-/home/lejonmcgowan/GGJ2016/particle.png
+particle.png

@@ -58,9 +58,16 @@ public class EnemyComponent extends Component {
                 GoatonWorld.sendGlobalMessage(new Message("player_hit"));
             }
             ((PlayerMovementComponent) other.getComponent("PlayerMovementComponent")).hit = true;
-            float pushback = gameObject.tags.contains("demonboss") ? 2.0f : 10.0f;
-            Vector2 dir = other.getPosition().sub(this.gameObject.getPosition()).nor().scl(pushback);
-            other.getBody().setLinearVelocity(dir);
+            if(gameObject.tags.contains("demonboss"))
+            {
+                other.getBody().setLinearVelocity(new Vector2(0,-300.0f));
+                other.getBody().applyLinearImpulse(new Vector2(0, -20), new Vector2(0,-400.0f), false);
+            }
+            else
+            {
+                Vector2 dir = other.getPosition().sub(this.gameObject.getPosition()).nor().scl(10.0f);
+                other.getBody().setLinearVelocity(dir);
+            }
         }
         if(health <= 0 && canBeDamaged)
         {

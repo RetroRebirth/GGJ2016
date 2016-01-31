@@ -2,6 +2,7 @@ package com.teamname.goaton.components;
 
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.teamname.goaton.*;
@@ -21,21 +22,25 @@ public class DemonBossPhysicsComponent extends Component {
     short normalBits = ObjectTypes.PLAYER | ObjectTypes.GOAT_AIR  | ObjectTypes.DEMON | ObjectTypes.GOAT;
     FixtureDef fixtureDef;
 
-    private final float fireRadius = 10.0f;
+    private final float fireRadiusY = 13.0f;
+    private final float fireRadiusFan = 5.0f;
+
     private final float normalRadius = 0.75f;
 
     public void setMaskBits(boolean hitbox)
     {
         hitboxOn = hitbox;
-
+        PolygonShape polygonShape = new PolygonShape();
+        polygonShape.set(new float[]{-4.0f,0.0f,-fireRadiusFan,-fireRadiusY,fireRadiusFan,-fireRadiusY,4.0f,0.0f});
         CircleShape circle = new CircleShape();
-        circle.setRadius(hitbox ? fireRadius : normalRadius);
+        circle.setRadius(hitbox ? fireRadiusY : normalRadius);
         fixtureDef.shape = circle;
         fixtureDef.filter.maskBits = hitbox ? normalBits : nobits;
         gameObject.getBody().destroyFixture(fixture);
         fixture = gameObject.getBody().createFixture(fixtureDef);
         fixtureDef.restitution = 1.0f;
         circle.dispose();
+        polygonShape.dispose();
     }
 
     @Override
