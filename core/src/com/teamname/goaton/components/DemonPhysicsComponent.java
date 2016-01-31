@@ -24,15 +24,24 @@ public class DemonPhysicsComponent extends Component {
         fixtureDef.filter.categoryBits = ObjectTypes.DEMON;
         fixtureDef.filter.maskBits = ObjectTypes.GOAT_AIR |
                                     ObjectTypes.BOUNDARY |
-                                    ObjectTypes.PIT |
                                     ObjectTypes.DEMON |
                                     ObjectTypes.PLAYER;
+
         fixtureDef.restitution = 0.5f;
 
         gFix = this.gameObject.getBody().createFixture(fixtureDef);
 
         circle.dispose();
     }
+
+    @Override
+    protected void onCollisionEnter(Contact collision, GameObject other) {
+        if (other.getBody().getFixtureList().get(0).getFilterData().categoryBits == ObjectTypes.BOUNDARY ||
+                other.getBody().getFixtureList().get(0).getFilterData().categoryBits == ObjectTypes.PLAYER) {//refactor me?
+            this.gameObject.send(new Message("hit"));
+        }
+    }
+
 
     @Override
     public Component cloneComponent() {

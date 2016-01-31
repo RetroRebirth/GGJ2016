@@ -2,6 +2,7 @@ package com.teamname.goaton.components;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.teamname.goaton.Assets;
 import com.teamname.goaton.Component;
 import com.teamname.goaton.GameObject;
 import com.teamname.goaton.GoatonWorld;
@@ -33,6 +34,7 @@ public class PitPositionComponent extends PositionComponent {
             // Attach a demon spawn to this pit position
             GameObject go = new GameObject();
             go.addComponent(new DemonSpawnerComponent(pos));
+            go.layer = Assets.ACTOR_LAYER;
             GameObject.Instantiate(go);
         }
     }
