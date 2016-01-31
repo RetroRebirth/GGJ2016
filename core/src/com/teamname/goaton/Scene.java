@@ -214,7 +214,8 @@ public abstract class Scene {
             }
             else if (l.getName().equals("SpawnArea"))
             {
-                GoatonWorld.SpawnAreas = new ArrayList<Rectangle>();
+                GoatonWorld.GoatSpawnAreas = new ArrayList<Rectangle>();
+                GoatonWorld.PitSpawnAreas = new ArrayList<Rectangle>();
 
                 for(MapObject mo : l.getObjects())
                 {
@@ -223,7 +224,8 @@ public abstract class Scene {
                     float wd = (Float)props.get("width")/GoatonWorld.TILE_SIZE;
                     float ht = (Float)props.get("height")/GoatonWorld.TILE_SIZE;
 
-                    GoatonWorld.SpawnAreas.add(boundingBox(newVec, wd, ht));
+                    GoatonWorld.GoatSpawnAreas.add(boundingBox(newVec, wd, ht));
+                    GoatonWorld.PitSpawnAreas.add(boundingBox(newVec, wd, ht));
                 }
             }
         }
