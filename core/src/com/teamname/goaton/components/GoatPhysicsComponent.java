@@ -17,7 +17,7 @@ public class GoatPhysicsComponent extends Component {
         this.gameObject.addPhysicsBody(GoatonWorld.world.createBody(bodyDef));
 
         CircleShape circle = new CircleShape();
-        circle.setRadius(8f);
+        circle.setRadius(0.5f);
 
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = circle;
@@ -41,16 +41,26 @@ public class GoatPhysicsComponent extends Component {
                 gFix.setFilterData(heldFilter);
             }
         });
+        this.on("throw", new MsgHandler() {
+            @Override
+            public void handle(Message msg) {
+                Filter airFilter = gFix.getFilterData();
+                airFilter.categoryBits = ObjectTypes.GOAT_AIR;
+                gFix.setFilterData(airFilter);
+            }
+        });
         this.on("onGround", new MsgHandler() {
             @Override
             public void handle(Message msg) {
                 Filter groundFilter = gFix.getFilterData();
+
                 groundFilter.maskBits =
                         ObjectTypes.GOAT |
                         ObjectTypes.BOUNDARY |
                         ObjectTypes.PIT |
                         ObjectTypes.DEMON |
                         ObjectTypes.PICKUP_DETECTOR;
+                groundFilter.categoryBits = ObjectTypes.GOAT;
                 gFix.setFilterData(groundFilter);
             }
         });

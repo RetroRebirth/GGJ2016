@@ -156,8 +156,8 @@ public class GoatAnimatedSpriteComponent extends AnimatedSpriteRenderComponent {
             float offset = (float)Math.abs(Math.sin(  Math.PI*2 * (1 - throwTimer/ GoatFactory.THROWTIME)) * throwTimer);
             currentSprite.setScale(1.0f + 1.5f*offset);
             currentSprite.setPosition(
-                    gameObject.getPosition().x - currentSprite.getOriginX(),
-                    gameObject.getPosition().y - currentSprite.getOriginY() + 15 * offset );
+                    gameObject.getScreenPosition().x - currentSprite.getOriginX(),
+                    gameObject.getScreenPosition().y - currentSprite.getOriginY() + 15 * offset );
             if(throwTimer <=0)
             {
                 gameObject.send(new Message("onGround"));

@@ -20,7 +20,7 @@ public class GoatStackComponent extends Component {
                 cGoat = (GameObject)msg.getArg();
                 cGoat.send(new Message("pickup"));
                 gameObject.addChild(cGoat);
-                cGoat.setPosition(new Vector2(0,35));
+                cGoat.setPosition(new Vector2(0,1f));
             }
         });
 
@@ -29,9 +29,9 @@ public class GoatStackComponent extends Component {
             public void handle(Message msg) {
                 if(cGoat != null)
                 {
-                    cGoat.setPosition(gameObject.getPosition().add(new Vector2(0,35)));
+                    cGoat.setPosition(gameObject.getPosition().add(new Vector2(0,1)));
                     gameObject.removeChild(cGoat);
-                    cGoat.getBody().setLinearVelocity(gameObject.getBody().getLinearVelocity().scl(1.5f));
+                    cGoat.getBody().setLinearVelocity(gameObject.getBody().getLinearVelocity().scl(1.15f));
                     cGoat.send(new Message("throw"));
                     cGoat = null;
                 }

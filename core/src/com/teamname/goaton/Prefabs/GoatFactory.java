@@ -21,6 +21,7 @@ public class GoatFactory {
         go.addComponent(new GoatAnimatedSpriteComponent(LoadSprites()));
         go.addComponent(new GoatPhysicsComponent());
         go.addComponent(new GoatPositionComponent());
+        go.tags.add("goat");
         return go;
     }
 
