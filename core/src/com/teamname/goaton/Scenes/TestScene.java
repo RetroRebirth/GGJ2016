@@ -74,6 +74,8 @@ public class TestScene extends Scene {
         //for (int i = 0; i < 50; i++) {
 
         GameObject.Instantiate(pit);
+        GameObject.Instantiate(pit);
+        GameObject.Instantiate(pit);
 
         //}
 
