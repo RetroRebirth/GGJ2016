@@ -71,9 +71,9 @@ public class TestScene extends Scene {
         GameObject pit = PitFactory.Create();
         //GameObject.Instantiate(DemonFactory.Create());
         //for (int i = 0; i < 50; i++) {
+
         GameObject.Instantiate(pit);
-        GameObject.Instantiate(pit);
-        GameObject.Instantiate(pit);
+
         //}
 
     }

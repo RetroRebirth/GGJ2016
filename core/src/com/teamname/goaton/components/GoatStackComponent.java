@@ -5,12 +5,16 @@ import com.teamname.goaton.Component;
 import com.teamname.goaton.GameObject;
 import com.teamname.goaton.Message;
 import com.teamname.goaton.MsgHandler;
+import com.teamname.goaton.Prefabs.GoatFactory;
 
 /**
  * Created by kpidding on 1/30/16.
  */
 public class GoatStackComponent extends Component {
     private GameObject cGoat;
+    private Vector2 straight;
+    private Vector2 curve;
+    //private float throwTime = 0;
 
     @Override
     protected void create() {
@@ -31,9 +35,12 @@ public class GoatStackComponent extends Component {
                 {
                     cGoat.setPosition(gameObject.getPosition().add(new Vector2(0,1)));
                     gameObject.removeChild(cGoat);
-                    //cGoat.getBody().setLinearVelocity(calcGoatThrowVelocity());
-                    Vector2 mov = calcGoatThrowVelocity();
-                    cGoat.getBody().applyForceToCenter(new Vector2(mov.x * 50, mov.y * 50), true);
+                    cGoat.getBody().setLinearVelocity(calcGoatThrowVelocity());
+                    /*Vector2 mov = calcGoatThrowVelocity();
+                    straight = (new Vector2(mov.x * 50, mov.y * 50));
+                    curve = (new Vector2(-mov.y * 20, mov.x * 20));
+                    throwTime = GoatFactory.THROWTIME;*/
+                    //cGoat.getBody().applyForceToCenter(new Vector2(mov.x * 50, mov.y * 50), true);
                     //cGoat.getBody().applyForceToCenter(new Vector2(-mov.y * 20, mov.x * 20), true);
                     //cGoat.getBody())
                     cGoat.send(new Message("throw"));
@@ -45,6 +52,17 @@ public class GoatStackComponent extends Component {
 
 
     }
+
+/*    @Override
+    protected void update(float dt) {
+        if (throwTime > 0 && cGoat != null) {
+            cGoat.getBody().applyForceToCenter(straight, true);
+            cGoat.getBody().applyForceToCenter(curve, true);
+            throwTime--;
+        } else {
+            cGoat = null;
+        }
+    }*/
 
     protected Vector2 calcGoatThrowVelocity() {
         // Get the player's speed magnitude

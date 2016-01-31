@@ -14,10 +14,10 @@ public class DemonSpawnerComponent extends SpawnerComponent {
     public DemonSpawnerComponent(Vector2 pitPos) {
         this.pitPos = pitPos;
         go = DemonFactory.Create(pitPos);
-        minTime = 5f;
-        maxTime = 10f;
+        minTime = 1f;
+        maxTime = 2f;
 
-        maxSpawn = 2;
+        maxSpawn = 3;
     }
 
     @Override
