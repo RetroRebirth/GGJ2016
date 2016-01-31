@@ -29,6 +29,7 @@ public class GoatAnimatedSpriteComponent extends AnimatedSpriteRenderComponent {
     GameObject.Direction dir = GameObject.Direction.DOWN;
     private float throwTimer = 0;
     private boolean onGround = true;
+    private boolean justLanded = false;
 
     private int walkCycle = 0;
     private float walkDuration = 0.0f;
@@ -90,7 +91,14 @@ public class GoatAnimatedSpriteComponent extends AnimatedSpriteRenderComponent {
     @Override
     protected void update(float dt) {
 
-
+        if(!GoatonWorld.TileAt(gameObject.getPosition()) && justLanded && onGround)
+        {
+            GameObject go = GameObject.Instantiate(PitDyingGoatFactory.Create(gameObject));
+            go.setPosition(gameObject.getPosition());
+            GoatonWorld.numGoats--;
+            Destroy(gameObject);
+            justLanded = false;
+        }
         // Read which direction the goat is moving
         dir = this.gameObject.direction;
         // Keep track of which frame of the cycle we should render
@@ -191,11 +199,13 @@ public class GoatAnimatedSpriteComponent extends AnimatedSpriteRenderComponent {
                 }
                 gameObject.send(new Message("onGround"));
                 onGround = true;
+                justLanded = true;
             }
         }
         else if(onGround)
         {
             // Goat just landed
+
             currentSprite.setScale(1.0f);
         }
 

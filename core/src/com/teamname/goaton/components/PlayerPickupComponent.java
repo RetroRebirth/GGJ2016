@@ -65,7 +65,7 @@ public class PlayerPickupComponent extends Component {
     protected void onCollisionEnter(Contact collision, GameObject other) {
         Fixture f1 = collision.getFixtureA();
         Fixture f2 = collision.getFixtureB();
-        if (f1.isSensor() || f2.isSensor()) {
+        if ((f1.isSensor() || f2.isSensor()) && other.tags.contains("goat")) {
             //other.send(new Message("pickup"));
             legalGoats.add(other);
         }
