@@ -33,6 +33,9 @@ public class EnemyComponent extends Component {
         }
         if(health <= 0)
         {
+            if (gameObject.tags.contains("demon")) {
+                GoatonWorld.numDemons--;
+            }
             gameObject.send(new Message("destroy"));
             GoatonWorld.Destroy(this.gameObject);
         }

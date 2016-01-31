@@ -38,8 +38,14 @@ public class SpawnerComponent extends Component {
         timeBetweenSpawn -= dt;
         if (timeBetweenSpawn < 0) {
 
-            for (int numPits = 0; numPits < spawnPerRound; numPits++) {
-                GameObject.Instantiate(go);
+            // If this is a demon, make sure there is room for it
+            if (!go.tags.contains("demon") || GoatonWorld.numDemons < 3) {
+                for (int numPits = 0; numPits < spawnPerRound; numPits++) {
+                    if (go.tags.contains("demon")) {
+                        GoatonWorld.numDemons++;
+                    }
+                    GameObject.Instantiate(go);
+                }
             }
 
             timeBetweenSpawn = (GoatonWorld.Random.nextFloat() *
