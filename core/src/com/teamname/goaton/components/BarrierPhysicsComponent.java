@@ -1,5 +1,6 @@
 package com.teamname.goaton.components;
 
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.teamname.goaton.Component;
 import com.teamname.goaton.GoatonWorld;
@@ -10,6 +11,13 @@ import com.teamname.goaton.ObjectTypes;
  */
 public class BarrierPhysicsComponent extends Component {
     Fixture gFix;
+    Vector2 size;
+
+    public BarrierPhysicsComponent(int tileWidth, int tileHeight)
+    {
+        size = new Vector2(tileWidth,tileHeight);
+    }
+
     @Override
     protected void create() {
         BodyDef bodyDef = new BodyDef();
@@ -18,7 +26,7 @@ public class BarrierPhysicsComponent extends Component {
         this.gameObject.addPhysicsBody(GoatonWorld.world.createBody(bodyDef));
 
         PolygonShape rect = new PolygonShape();
-        rect.setAsBox(8f, 8f);
+        rect.setAsBox(size.x,size.y);
 
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = rect;
@@ -36,7 +44,7 @@ public class BarrierPhysicsComponent extends Component {
 
     @Override
     public Component cloneComponent() {
-        return new BarrierPhysicsComponent();
+        return new BarrierPhysicsComponent((int)size.x,(int)size.y);
     }
 
     @Override

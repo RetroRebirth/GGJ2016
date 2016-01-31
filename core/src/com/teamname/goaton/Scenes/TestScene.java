@@ -11,12 +11,15 @@ import com.teamname.goaton.Prefabs.PitFactory;
 import com.teamname.goaton.Prefabs.PlayerFactory;
 import com.teamname.goaton.Scene;
 import com.teamname.goaton.GoatonWorld;
+import com.teamname.goaton.components.BarrierPhysicsComponent;
 
 /**
  * Created by kpidding on 1/30/16.
  */
 public class TestScene extends Scene {
     private GameObject player;
+    private GameObject stageBounds;
+
     private GameObject createPlayer()
     {
         GameObject player = PlayerFactory.Create();
@@ -50,6 +53,10 @@ public class TestScene extends Scene {
 
     @Override
     public void create() {
+        stageBounds = new GameObject();
+        stageBounds.addComponent(new BarrierPhysicsComponent(100,100));
+        addObject(stageBounds);
+
         this.player = createPlayer();
         addObject(this.player);
         createGoats();
