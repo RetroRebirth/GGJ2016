@@ -14,7 +14,7 @@ import java.util.Map;
 public class PlayerAnimatedSpriteComponent extends AnimatedSpriteRenderComponent {
 
     private static final String firstSprite = Assets.player_D;
-    public static final float WALKTIME = 0.1f;
+    public static final float WALKTIME = 0.3f;
 
     GameObject.Direction dir = GameObject.Direction.NONE;
     private int walkCycle = 0;
