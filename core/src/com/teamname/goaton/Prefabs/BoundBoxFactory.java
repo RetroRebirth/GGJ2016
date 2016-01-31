@@ -18,7 +18,7 @@ public class BoundBoxFactory {
         float y = (Float)prop.get("y");
         float wd = (Float) prop.get("width");
         float ht = (Float)prop.get("height");
-        go.addComponent(new BoundBoxComponent(x,y,wd,ht,blockThrows));
+        go.addComponent(new BoundBoxComponent(x,y,wd/2,ht/2,blockThrows));
         return go;
     }
 }

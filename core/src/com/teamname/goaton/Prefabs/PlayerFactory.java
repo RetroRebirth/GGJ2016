@@ -36,13 +36,33 @@ public class PlayerFactory extends GameObject {
             src = new KeyboardInputSource();
         }
         go.addComponent(new PlayerMovementComponent(src));
-        go.addComponent(new SpriteRenderComponent(
-                new Sprite(new Texture(Gdx.files.internal(Assets.player)))));
+        go.addComponent(new PlayerAnimatedSpriteComponent(LoadSprites()));
+//        go.addComponent(new SpriteRenderComponent(
+//                new Sprite(new Texture(Gdx.files.internal(Assets.player)))));
         go.addComponent(new PlayerPhysicsComponent());
         go.addComponent(new PlayerPickupComponent());
         go.addComponent(new GoatStackComponent());
         go.tags.add("player");
         return go;
+    }
+
+    protected static HashMap<String, Sprite> LoadSprites() {
+        HashMap<String, Sprite> sprites = new HashMap<String, Sprite>();
+
+        sprites.put(Assets.player_D, new Sprite(new Texture(Gdx.files.internal(Assets.player_D))));
+        sprites.put(Assets.player_DL, new Sprite(new Texture(Gdx.files.internal(Assets.player_DL))));
+        sprites.put(Assets.player_DR, new Sprite(new Texture(Gdx.files.internal(Assets.player_DR))));
+        sprites.put(Assets.player_L, new Sprite(new Texture(Gdx.files.internal(Assets.player_L))));
+        sprites.put(Assets.player_LL, new Sprite(new Texture(Gdx.files.internal(Assets.player_LL))));
+        sprites.put(Assets.player_LR, new Sprite(new Texture(Gdx.files.internal(Assets.player_LR))));
+        sprites.put(Assets.player_R, new Sprite(new Texture(Gdx.files.internal(Assets.player_R))));
+        sprites.put(Assets.player_RL, new Sprite(new Texture(Gdx.files.internal(Assets.player_RL))));
+        sprites.put(Assets.player_RR, new Sprite(new Texture(Gdx.files.internal(Assets.player_RR))));
+        sprites.put(Assets.player_U, new Sprite(new Texture(Gdx.files.internal(Assets.player_U))));
+        sprites.put(Assets.player_UL, new Sprite(new Texture(Gdx.files.internal(Assets.player_UL))));
+        sprites.put(Assets.player_UR, new Sprite(new Texture(Gdx.files.internal(Assets.player_UR))));
+
+        return sprites;
     }
 
 }

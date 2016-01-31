@@ -46,8 +46,8 @@ public class BoundBoxComponent extends Component {
                     ObjectTypes.GOAT |
                     ObjectTypes.GOAT_AIR|
                             ObjectTypes.PIT |
-                            ObjectTypes.DEMON ;//|
-//                            ObjectTypes.PLAYER;
+                            ObjectTypes.DEMON |
+                           ObjectTypes.PLAYER;
 
         }
         else
@@ -57,12 +57,12 @@ public class BoundBoxComponent extends Component {
         fixtureDef.filter.maskBits =
                 ObjectTypes.GOAT |
                 ObjectTypes.PIT |
-                ObjectTypes.DEMON ;//|
-//                ObjectTypes.PLAYER;
+                ObjectTypes.DEMON |
+                ObjectTypes.PLAYER;
         }
             fixtureDef.restitution = 0;
         this.gameObject.getBody().createFixture(fixtureDef);
-        gameObject.setPosition(new Vector2(this.rect.x + this.rect.width/2, this.rect.y + this.rect.height/2));
+        gameObject.setPosition(new Vector2(this.rect.x + this.rect.width , this.rect.y + this.rect.height));
         rect.dispose();
 
     }

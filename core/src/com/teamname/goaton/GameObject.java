@@ -11,6 +11,16 @@ import java.util.*;
  * Created by pya on 1/30/16.
  */
 public class GameObject {
+    public enum Direction
+    {
+        UP,
+        DOWN,
+        LEFT,
+        RIGHT,
+        NONE
+    }
+
+    public Direction direction = Direction.NONE;
     private Body body = null;
     private Vector2 position = new Vector2();
     public float radius = 1f;

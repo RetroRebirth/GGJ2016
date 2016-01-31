@@ -21,7 +21,9 @@ public class PlayerPhysicsComponent extends Component {
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         bodyDef.position.set(this.gameObject.getPosition());
+        bodyDef.fixedRotation = true;
         this.gameObject.addPhysicsBody(GoatonWorld.world.createBody(bodyDef));
+
         CircleShape circle = new CircleShape();
         circle.setRadius(0.5f);
         FixtureDef fixtureDef = new FixtureDef();

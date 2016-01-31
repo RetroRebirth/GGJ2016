@@ -1,33 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="32" tileheight="32" backgroundcolor="#000000" nextobjectid="72">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="32" tileheight="32" backgroundcolor="#000000" nextobjectid="86">
  <tileset firstgid="1" name="cave" tilewidth="32" tileheight="32" tilecount="336">
   <image source="cave.png" width="512" height="672"/>
  </tileset>
  <layer name="Tile Layer 1" width="64" height="64">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
- <layer name="PillarLayer" width="64" height="64">
-  <data encoding="base64" compression="zlib">
-   eJzt1bkNACAMBEE3zNN/xLVAZJBmpM2tS1wFAAAAAADcGmmmlXbzLb+zJQC8xW8GAAAAAAAAgD4H+ugFLw==
-  </data>
- </layer>
- <objectgroup name="WallLayer">
-  <object id="7" x="1373" y="716" width="136" height="87"/>
-  <object id="9" x="772" y="710" width="120" height="58"/>
-  <object id="10" x="574" y="996" width="130" height="65"/>
- </objectgroup>
+ <objectgroup name="WallLayer"/>
  <objectgroup name="SpawnArea">
   <object id="14" x="1678.79" y="727.273" width="303.03" height="293.939"/>
   <object id="15" x="921.212" y="1145.45" width="269.697" height="363.636"/>
   <object id="56" x="130" y="730" width="283" height="262"/>
  </objectgroup>
- <layer name="PillarLayerOverlay" width="64" height="64">
-  <data encoding="base64" compression="zlib">
-   eJzt1ckJwDAMRUE3lqWBLA1k6b+K/BpigzHMwLsKoYtKAQAAAAD4Z0pzWtLad5UutrSnI52Vs0a85ZXu9KS3clbLW46o5S0BaGPE39yS3+w3AwAAAAAAAAB9fJU5Cws=
-  </data>
- </layer>
  <objectgroup name="BoundaryBarrier">
   <object id="25" x="896" y="807" width="29" height="181"/>
   <object id="26" x="899" y="805" width="309" height="27"/>
@@ -57,6 +43,14 @@
   <object id="55" x="107" y="708" width="20" height="310"/>
   <object id="64" x="992" y="95" width="27" height="104"/>
   <object id="66" x="1129" y="96" width="26" height="106"/>
+  <object id="72" x="486" y="714" width="14" height="175"/>
+  <object id="74" x="487" y="872" width="143" height="19"/>
+  <object id="75" x="614" y="716" width="19" height="173"/>
+  <object id="76" x="487" y="710" width="144" height="24"/>
+  <object id="78" x="1378" y="802" width="154" height="14"/>
+  <object id="80" x="1378" y="806" width="11" height="89"/>
+  <object id="82" x="1378" y="876" width="156" height="16"/>
+  <object id="85" x="1510" y="803" width="21" height="87"/>
  </objectgroup>
  <objectgroup name="Actors">
   <object id="62" name="BossSpawn" x="1063" y="306">
@@ -67,4 +61,5 @@
   </object>
   <object id="71" name="BossTrigger" x="1024" y="417" width="96" height="86"/>
  </objectgroup>
+ <objectgroup name="Object Layer 5"/>
 </map>

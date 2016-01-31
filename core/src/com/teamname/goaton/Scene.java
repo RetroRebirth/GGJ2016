@@ -111,7 +111,8 @@ public abstract class Scene {
 
         //After all is said and done, finish the remove.
         finishRemove();
-        debugRenderer.render(GoatonWorld.world, camera.combined);
+        OrthographicCamera camera2 = new OrthographicCamera(200,200);
+        debugRenderer.render(GoatonWorld.world, camera2.combined);
     }
 
     public void updatePhysics(float dt) {
