@@ -27,8 +27,8 @@ public class GoatMovementComponent extends Component {
 
     protected Vector2 fleePoint;
 
-    int state = IDLE;
-    int prevState = IDLE;
+    int state = SPIN_COUNTERWISE;
+    int prevState = SPIN_COUNTERWISE;
     private int spinCounter = 3;
 
     @Override
