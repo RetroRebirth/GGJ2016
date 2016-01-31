@@ -1,17 +1,12 @@
 package com.teamname.goaton.components;
 
-import aurelienribon.tweenengine.Timeline;
-import aurelienribon.tweenengine.Tween;
-import aurelienribon.tweenengine.TweenEquation;
-import aurelienribon.tweenengine.TweenEquations;
+import aurelienribon.tweenengine.*;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.teamname.goaton.Component;
-import com.teamname.goaton.GoatonWorld;
-import com.teamname.goaton.Message;
-import com.teamname.goaton.MsgHandler;
+import com.badlogic.gdx.physics.box2d.World;
+import com.teamname.goaton.*;
 import com.teamname.goaton.TweenWrappers.SpriteAccessor;
 
 /**
@@ -49,18 +44,24 @@ public class BossArmComponent extends Component {
                         .beginParallel()
                         .push(
                                 Tween.to(armSprite, SpriteAccessor.TWEEN_XY, 2.3f)
-                                        .delay(flipped ? 0.5f : 0)
-                                        .ease(TweenEquations.easeOutCubic)
+                                        .delay(flipped ? 1.5f : 0)
+                                        .ease(TweenEquations.easeInExpo)
                                         .target(targPosition.x, targPosition.y))
                         .push(Tween.to(armSprite, SpriteAccessor.TWEEN_RGB, 2.3f)
-                                .ease(TweenEquations.easeOutCubic)
-                                .delay(flipped ? 0.5f : 0)
+                                .ease(TweenEquations.easeInExpo)
+                                .delay(flipped ? 1.5f : 0)
                                 .target(1, 1, 1))
                         .push(Tween.to(armSprite, SpriteAccessor.TWEEN_ALPHA, 2.3f)
-                                .ease(TweenEquations.easeOutCubic)
-                                .delay(flipped ? 0.5f : 0)
+                                .ease(TweenEquations.easeInExpo)
+                                .delay(flipped ? 1.5f : 0)
                                 .target(1.f))
                         .end()
+                        .setCallback(new TweenCallback() {
+                            @Override
+                            public void onEvent(int i, BaseTween<?> baseTween) {
+                                GoatonWorld.sendGlobalMessage(new Message("cameraShake",new CamShakeControl(0.05f,15f)));
+                            }
+                        })
                         .start(GoatonWorld.TweenManager);
             }});
 

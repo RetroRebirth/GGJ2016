@@ -7,18 +7,23 @@ import com.teamname.goaton.Prefabs.*;
 import com.teamname.goaton.Scene;
 import com.teamname.goaton.components.BoundsPhysicsComponent;
 import com.teamname.goaton.components.GoatSpawnerComponent;
+import com.teamname.goaton.components.CameraControlComponent;
 
 /**
  * Created by kpidding on 1/30/16.
  */
 public class TestScene extends Scene {
 
-
+    private CameraControlComponent camControl;
 
 
 
     public TestScene()
     {
+        camControl = new CameraControlComponent(camera);
+        GameObject camObj = new GameObject();
+        camObj.addComponent(camControl);
+        addObject(camObj);
     }
 
     @Override
@@ -34,8 +39,7 @@ public class TestScene extends Scene {
             }
         }*/
             //doing physics here?
-        camera.position.set(player.getScreenPosition().x, player.getScreenPosition().y, 0);
-        camera.update();
+        camControl.setCameraPosition(new Vector2(player.getScreenPosition().x, player.getScreenPosition().y));
         super.updateRender(dt,sb);
             //debugRenderer.render(GoatonWorld.world, camera.combined);
     }
