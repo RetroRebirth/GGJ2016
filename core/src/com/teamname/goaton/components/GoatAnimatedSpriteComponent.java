@@ -25,14 +25,15 @@ public class GoatAnimatedSpriteComponent extends AnimatedSpriteRenderComponent {
     private static final Color[] colors = {Color.GRAY,Color.CYAN,Color.GOLD,Color.WHITE};
     private static final String firstSprite = Assets.goat_D;
     public static final float WALKTIME = 0.3f;
-    GameObject.Direction dir = GameObject.Direction.NONE;
+    public static final float STRUGGLETIME = 0.1f;
+    GameObject.Direction dir = GameObject.Direction.DOWN;
     private float throwTimer = 0;
-    private boolean onGround;
+    private boolean onGround = true;
 
     private int walkCycle = 0;
     private float walkDuration = 0.0f;
     private int walkCycleLoop = 3;
-    private GameObject.Direction prevDir = GameObject.Direction.NONE;
+    private GameObject.Direction prevDir = GameObject.Direction.DOWN;
 
     private Color color;
 
@@ -85,15 +86,16 @@ public class GoatAnimatedSpriteComponent extends AnimatedSpriteRenderComponent {
         // Read which direction the goat is moving
         dir = this.gameObject.direction;
         // Keep track of which frame of the cycle we should render
-        if (dir == GameObject.Direction.NONE) {
+        if (onGround && dir == GameObject.Direction.NONE) {
             walkCycle = 0;
-            walkDuration = 0.0f;
+            walkDuration = WALKTIME;
         } else {
-            if (walkDuration >= WALKTIME) {
+            if (walkDuration < 0.0f) {
+                // Increment frame and reset time counter
                 walkCycle = ++walkCycle % walkCycleLoop;
-                walkDuration = 0.0f;
+                walkDuration = onGround ? WALKTIME : STRUGGLETIME;
             } else {
-                walkDuration += dt;
+                walkDuration -= dt;
             }
         }
 
@@ -184,6 +186,7 @@ public class GoatAnimatedSpriteComponent extends AnimatedSpriteRenderComponent {
         }
         else if(onGround)
         {
+            // Goat just landed
             currentSprite.setScale(1.0f);
         }
 
