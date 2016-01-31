@@ -15,7 +15,7 @@ public class PlayerMovementComponent extends Component {
     {
         this.src = src;
     }
-    private boolean holdingGoat = false;
+    public boolean holdingGoat = false;
     @Override
     protected void create() {
         this.on("pickupGoat",new MsgHandler() {

@@ -62,6 +62,19 @@ public class PlayerFactory extends GameObject {
         sprites.put(Assets.player_UL, new Sprite(new Texture(Gdx.files.internal(Assets.player_UL))));
         sprites.put(Assets.player_UR, new Sprite(new Texture(Gdx.files.internal(Assets.player_UR))));
 
+        sprites.put(Assets.playerC_D, new Sprite(new Texture(Gdx.files.internal(Assets.playerC_D))));
+        sprites.put(Assets.playerC_DL, new Sprite(new Texture(Gdx.files.internal(Assets.playerC_DL))));
+        sprites.put(Assets.playerC_DR, new Sprite(new Texture(Gdx.files.internal(Assets.playerC_DR))));
+        sprites.put(Assets.playerC_L, new Sprite(new Texture(Gdx.files.internal(Assets.playerC_L))));
+        sprites.put(Assets.playerC_LL, new Sprite(new Texture(Gdx.files.internal(Assets.playerC_LL))));
+        sprites.put(Assets.playerC_LR, new Sprite(new Texture(Gdx.files.internal(Assets.playerC_LR))));
+        sprites.put(Assets.playerC_R, new Sprite(new Texture(Gdx.files.internal(Assets.playerC_R))));
+        sprites.put(Assets.playerC_RL, new Sprite(new Texture(Gdx.files.internal(Assets.playerC_RL))));
+        sprites.put(Assets.playerC_RR, new Sprite(new Texture(Gdx.files.internal(Assets.playerC_RR))));
+        sprites.put(Assets.playerC_U, new Sprite(new Texture(Gdx.files.internal(Assets.playerC_U))));
+        sprites.put(Assets.playerC_UL, new Sprite(new Texture(Gdx.files.internal(Assets.playerC_UL))));
+        sprites.put(Assets.playerC_UR, new Sprite(new Texture(Gdx.files.internal(Assets.playerC_UR))));
+
         return sprites;
     }
 
