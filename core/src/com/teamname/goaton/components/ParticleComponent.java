@@ -4,7 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.Vector2;
 import com.teamname.goaton.Component;
+import com.teamname.goaton.GoatonWorld;
 import com.teamname.goaton.Message;
 import com.teamname.goaton.MsgHandler;
 
@@ -22,6 +24,7 @@ public class ParticleComponent extends Component
 
     private String filePath;
 
+    private Vector2 deadPosition;
     @Override
     protected void create()
     {
@@ -36,6 +39,38 @@ public class ParticleComponent extends Component
                     } else {
                         setRepeat(false);
                         setRunEffect(false);
+                    }
+
+                }
+            }
+        });
+        on("attackAnim", new MsgHandler() {
+        @Override
+        public void handle(Message msg) {
+
+                if (gameObject.tags.contains("demonboss"))
+                {
+                    if (!runEffect)
+                    {
+                        particleEffect.findEmitter(effectName).durationTimer = 0;
+                        //setRepeat(true);
+                        setRunEffect(true);
+                    }
+
+                }
+            }
+        });
+
+        on("destroy", new MsgHandler() {
+            @Override
+            public void handle(Message msg) {
+
+                if (gameObject.tags.contains("demon"))
+                {
+                    if (!runEffect)
+                    {
+
+                        setRunEffect(true);
                     }
 
                 }
@@ -87,6 +122,13 @@ public class ParticleComponent extends Component
             if(particleEffect.isComplete())
             {
                 runEffect = false;
+                if(gameObject.tags.contains("demon"))
+                {
+                    if(((EnemyComponent)(gameObject.getComponent("EnemyComponent"))).getHealth() <= 0)
+                    {
+                        GoatonWorld.Destroy(gameObject);
+                    }
+                }
             }
         }
 

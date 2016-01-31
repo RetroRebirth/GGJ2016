@@ -23,6 +23,7 @@ public class DemonFactory {
         go.addComponent(new EnemyComponent(1));
         go.addComponent(new DemonAuraComponent());
         go.addComponent(new DemonPositionComponent(pitPos));
+        go.addComponent(new ParticleComponent("art/particleEffects/bloodsplatter.p","bloodout"));
         go.tags.add("demon");
         go.layer = Assets.ACTOR_LAYER;
         return go;

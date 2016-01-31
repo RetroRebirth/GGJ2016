@@ -11,6 +11,8 @@ import com.teamname.goaton.GoatonWorld;
  */
 public class SpriteRenderComponent extends Component {
     protected Sprite sprite;
+    private boolean visible = true;
+
     public SpriteRenderComponent(Sprite sprite)
     {
         this.sprite = sprite;
@@ -32,8 +34,9 @@ public class SpriteRenderComponent extends Component {
 
     @Override
     protected void render(SpriteBatch sb) {
-
-        sprite.draw(sb);
+        if(visible) {
+            sprite.draw(sb);
+        }
     }
 
     @Override
@@ -41,4 +44,7 @@ public class SpriteRenderComponent extends Component {
         return new SpriteRenderComponent(new Sprite(sprite));
     }
 
+    public void setVisible(boolean visible) {
+        this.visible = visible;
+    }
 }

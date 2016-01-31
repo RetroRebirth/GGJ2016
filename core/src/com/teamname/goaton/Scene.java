@@ -14,10 +14,7 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.teamname.goaton.Prefabs.BoundBoxFactory;
-import com.teamname.goaton.Prefabs.DemonBossFactory;
-import com.teamname.goaton.Prefabs.PlayerFactory;
-import com.teamname.goaton.Prefabs.PlayerTriggerFactory;
+import com.teamname.goaton.Prefabs.*;
 import com.teamname.goaton.components.GoatSpawnerComponent;
 
 import java.util.*;
@@ -39,6 +36,9 @@ public abstract class Scene {
     //Queue<GameObject>[] addList;
     protected Queue<GameObject> addList = new LinkedList<GameObject>();
     protected Queue<GameObject> removeList = new LinkedList<GameObject>();
+    //I'm so sorry
+    GameObject removableBarrier;
+    Vector2 bridgePos;
     protected Viewport viewport;
 
     protected Camera camera;
@@ -89,6 +89,12 @@ public abstract class Scene {
     }*/
     public void sendGlobalMessage(Message msg)
     {
+        //*I'm so, so sorry*/
+        if(msg.getMessage().equals("bossDestroyed"))
+        {
+            GoatonWorld.Destroy(removableBarrier);
+            BridgeTileFactory.Create(this,bridgePos,3);
+        }
         for(GameObject obj : objects)
         {
             obj.send(msg);
@@ -207,7 +213,13 @@ public abstract class Scene {
                 for(MapObject mo : l.getObjects())
                 {
                     mo.setVisible(false);
-                    addObject(BoundBoxFactory.Create(mo,false));
+
+                    GameObject go = BoundBoxFactory.Create(mo,false);
+                    addObject(go);
+                    if(mo.getName() != null && mo.getName().equals("RemovableBoundary"))
+                    {
+                        removableBarrier = go;
+                    }
                 }
             }
             else if(l.getName().equals("Actors"))
@@ -236,6 +248,8 @@ public abstract class Scene {
                 goatSpawner.addComponent(new GoatSpawnerComponent());
                 goatSpawner.setPosition(MapObjectToWorld(objects.get("GoatPit")));
                 addObject(goatSpawner);
+
+                bridgePos = MapObjectToWorld(objects.get("BridgeSpawn"));
 
             }
             else if (l.getName().equals("SpawnArea"))

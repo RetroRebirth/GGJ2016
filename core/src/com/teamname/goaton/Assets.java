@@ -11,6 +11,10 @@ public class Assets {
     public final static String player = "art/Player.png";
     public final static String goat = "art/Goat.png";
     public final static String pit = "art/demonhole.png";
+    public final static String heart = "art/heart.png";
+    public final static String player_dead = "art/farmer_dead.png";
+    public final static String heart = "art/heart.png";
+    public final static String player_dead = "art/farmer_dead.png";
 
     // Player sprite assets
     public final static String player_D   = "art/farmer_down.png";
@@ -67,6 +71,7 @@ public class Assets {
     public final static String demon_UL = "art/demon_up-left.png";
     public final static String demon_UR = "art/demon_up-right.png";
     public static String healthBar      = "art/HealthBar.png";
+    public static String bridge         = "art/bridgeTile.png";
 
     // SFX assets
     public final static String goat_Pickup_SFX      = "sfx/goat_pickup.mp3";
@@ -80,5 +85,5 @@ public class Assets {
     // Music assets
     public final static String title_Theme          = "music/title_theme.mp3";
     public final static String main_Intro           = "music/main_theme_intro.mp3";
-    public final static String main_Loop            = "music/main_theme_loop.mp3";
+    public final static String main_Loop            = "music/main_theme_loop.mp3"
 }
