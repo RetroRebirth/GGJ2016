@@ -16,6 +16,7 @@ public class DemonSpawnerComponent extends SpawnerComponent {
         go = DemonFactory.Create(pitPos);
         minTime = 5f;
         maxTime = 15f;
+        initialDelay = 15f;
 
         maxSpawn = 3;
     }
