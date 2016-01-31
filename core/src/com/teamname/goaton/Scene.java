@@ -7,6 +7,7 @@ import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
@@ -224,12 +225,36 @@ public abstract class Scene {
                     }
                 }
             }
+            else if (l.getName().equals("SpawnArea"))
+            {
+                GoatonWorld.SpawnAreas = new ArrayList<Rectangle>();
+
+                for(MapObject mo : l.getObjects())
+                {
+                    MapProperties props = mo.getProperties();
+                    Vector2 newVec = MapObjectToWorld(mo);
+                    float wd = (Float)props.get("width")/GoatonWorld.TILE_SIZE;
+                    float ht = (Float)props.get("height")/GoatonWorld.TILE_SIZE;
+
+                    GoatonWorld.SpawnAreas.add(boundingBox(newVec, wd, ht));
+                }
+            }
         }
     }
 
     private Vector2 MapObjectToWorld(MapObject mo) {
         MapProperties props = mo.getProperties();
+        System.out.println("MapProps :" + props);
         return new Vector2((Float)props.get("x")/GoatonWorld.TILE_SIZE, (Float)props.get("y")/GoatonWorld.TILE_SIZE);
+    }
 
+    private Rectangle boundingBox(Vector2 topLeft, float width, float height) {
+        Rectangle rect = new Rectangle();
+        float botLeftX = topLeft.x;
+        float botLeftY = topLeft.y;
+
+        rect.set(botLeftX, botLeftY, width, height);
+
+        return rect;
     }
 }

@@ -5,9 +5,11 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -24,6 +26,8 @@ public class GoatonWorld {
     public static final Vector2 STAGE_SIZE = new Vector2(3200,3200);
 
     public static TweenManager TweenManager;
+
+    public static ArrayList<Rectangle> SpawnAreas;
     public static <T extends Enum<?>> T RandomEnum(Class<T> clazz){
         int x = GoatonWorld.Random.nextInt(clazz.getEnumConstants().length);
         return clazz.getEnumConstants()[x];

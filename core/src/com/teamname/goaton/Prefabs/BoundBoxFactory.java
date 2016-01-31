@@ -4,7 +4,7 @@ import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapProperties;
 import com.teamname.goaton.GameObject;
 import com.teamname.goaton.components.BoundBoxComponent;
-import javafx.beans.property.MapProperty;
+//import javafx.beans.property.MapProperty;
 
 /**
  * Created by kpidding on 1/30/16.
