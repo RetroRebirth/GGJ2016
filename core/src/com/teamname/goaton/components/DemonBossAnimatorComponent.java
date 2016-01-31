@@ -74,9 +74,11 @@ public class DemonBossAnimatorComponent extends Component {
                         .setCallback(new TweenCallback() {
                             @Override
                             public void onEvent(int i, BaseTween<?> baseTween) {
+
                                 attackAnim = 5f;
                                 ((EnemyComponent)gameObject.getComponent("EnemyComponent")).canBeDamaged = true;
                                 GoatonWorld.sendGlobalMessage(new Message("cameraShake",new CamShakeControl(4.5f,35f)));
+                                GoatonWorld.sendGlobalMessage(new Message("bossSpawnSound"));
                             }
                         })
                         .start(GoatonWorld.TweenManager);

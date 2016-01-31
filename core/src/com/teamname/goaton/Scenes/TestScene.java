@@ -144,7 +144,7 @@ public class TestScene extends Scene {
         //createGoats();
         //createPits();
         //createPitSpawner();
-
+        createSound();
         createPits();
 
         font = new BitmapFont();
@@ -177,6 +177,14 @@ public class TestScene extends Scene {
 
         //}
 
+    }
+
+    private void createSound(){
+        GameObject go = new GameObject();
+
+        go.addComponent(new SoundComponent());
+
+        GameObject.Instantiate(go);
     }
 
 //    private void createPitSpawner() {
