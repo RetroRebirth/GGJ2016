@@ -60,8 +60,8 @@ public class EnemyComponent extends Component {
             ((PlayerMovementComponent) other.getComponent("PlayerMovementComponent")).hit = true;
             if(gameObject.tags.contains("demonboss"))
             {
-                other.getBody().setLinearVelocity(new Vector2(0,-300.0f));
-                other.getBody().applyLinearImpulse(new Vector2(0, -20), new Vector2(0,-400.0f), false);
+                other.getBody().setLinearVelocity(new Vector2(0,-7.50f));
+                other.getBody().applyLinearImpulse(new Vector2(0, -2.5f), new Vector2(0,-4.0f), false);
             }
             else
             {
