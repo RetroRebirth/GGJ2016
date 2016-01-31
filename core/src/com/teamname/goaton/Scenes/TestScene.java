@@ -6,6 +6,7 @@ import com.teamname.goaton.GameObject;
 import com.teamname.goaton.Prefabs.*;
 import com.teamname.goaton.Scene;
 import com.teamname.goaton.components.BoundsPhysicsComponent;
+import com.teamname.goaton.components.DemonSpawnerComponent;
 import com.teamname.goaton.components.GoatSpawnerComponent;
 
 /**

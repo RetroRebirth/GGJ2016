@@ -17,7 +17,7 @@ public class DemonFactory {
     public static GameObject Create(Vector2 pitPos)
     {
         GameObject go = new GameObject();
-        go.addComponent(new GoatMovementComponent());
+        go.addComponent(new DemonMovementComponent());
         go.addComponent(new DemonAnimatedSpriteComponent(LoadSprites()));
         go.addComponent(new DemonPhysicsComponent());
         go.addComponent(new EnemyComponent(3));
