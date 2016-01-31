@@ -55,6 +55,10 @@ public class PlayerMovementComponent extends Component {
 
             }
         }
+        if(src.isGlowButtonPressed())
+        {
+            this.gameObject.send(new Message("glow"));
+        }
         movement.scl(speed);
 
         gameObject.getBody().setLinearVelocity(movement.x, movement.y);

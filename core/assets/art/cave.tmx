@@ -1,27 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="32" tileheight="32" backgroundcolor="#000000" nextobjectid="101">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="32" tileheight="32" backgroundcolor="#000000" nextobjectid="92">
  <tileset firstgid="1" name="cave" tilewidth="32" tileheight="32" tilecount="336">
   <image source="cave.png" width="512" height="672"/>
  </tileset>
- <tileset firstgid="337" name="DemonThing" tilewidth="64" tileheight="64" tilecount="2">
-  <tile id="0">
-   <image width="64" height="64" source="demonboss_body.png"/>
-  </tile>
-  <tile id="1">
-   <image width="64" height="64" source="DemonBossClaw.png"/>
-  </tile>
- </tileset>
- <objectgroup name="Decals">
-  <object id="97" gid="337" x="847" y="416" width="178" height="159"/>
-  <object id="98" gid="2147483985" x="1126" y="415" width="178" height="159"/>
- </objectgroup>
  <layer name="Tile Layer 1" width="64" height="64">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <objectgroup name="WallLayer">
   <object id="87" x="425" y="367" width="112" height="128"/>
+  <object id="88" x="1255" y="235" width="117" height="135"/>
   <object id="89" x="1704" y="365" width="118" height="132"/>
   <object id="90" x="1511" y="1452" width="119" height="129"/>
   <object id="91" x="713" y="1291" width="112" height="128"/>
@@ -79,8 +68,4 @@
   <object id="71" name="BossTrigger" x="1024" y="417" width="96" height="86"/>
  </objectgroup>
  <objectgroup name="Object Layer 5"/>
- <objectgroup name="TopDecals">
-  <object id="99" gid="338" x="905" y="591" width="150" height="178"/>
-  <object id="100" gid="2147483986" x="1091" y="548" width="150" height="178"/>
- </objectgroup>
 </map>

@@ -18,7 +18,6 @@ public class TestScene extends Scene {
 
     public TestScene()
     {
-
     }
 
     @Override
