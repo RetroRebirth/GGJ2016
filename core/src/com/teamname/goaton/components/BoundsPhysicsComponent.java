@@ -9,13 +9,15 @@ import com.teamname.goaton.ObjectTypes;
 /**
  * Created by Simon on 1/30/2016.
  */
-public class BarrierPhysicsComponent extends Component {
+public class BoundsPhysicsComponent extends Component {
     Fixture gFix;
-    Vector2 size;
+    Vector2[] boundVertices;
+    boolean isLoop;
 
-    public BarrierPhysicsComponent(int tileWidth, int tileHeight)
+    public BoundsPhysicsComponent(Vector2[] vertices, boolean isLoop)
     {
-        size = new Vector2(tileWidth,tileHeight);
+        boundVertices = vertices;
+        this.isLoop = isLoop;
     }
 
     @Override
@@ -25,30 +27,32 @@ public class BarrierPhysicsComponent extends Component {
         bodyDef.position.set(this.gameObject.getPosition());
         this.gameObject.addPhysicsBody(GoatonWorld.world.createBody(bodyDef));
 
-        PolygonShape rect = new PolygonShape();
-        rect.setAsBox(size.x,size.y);
+        ChainShape boundaries = new ChainShape();
+
+        boundaries.createLoop(boundVertices);
 
         FixtureDef fixtureDef = new FixtureDef();
-        fixtureDef.shape = rect;
+        fixtureDef.shape = boundaries;
         fixtureDef.filter.categoryBits = ObjectTypes.BOUNDARY;
         fixtureDef.filter.maskBits = ObjectTypes.GOAT |
                                     ObjectTypes.PIT |
                                     ObjectTypes.DEMON |
-                                    ObjectTypes.PLAYER;
+                                    ObjectTypes.PLAYER |
+                                    ObjectTypes.GOAT_AIR;
         fixtureDef.restitution = 0;
 
         gFix = this.gameObject.getBody().createFixture(fixtureDef);
 
-        rect.dispose();
+        boundaries.dispose();
     }
 
     @Override
     public Component cloneComponent() {
-        return new BarrierPhysicsComponent((int)size.x,(int)size.y);
+        return new BoundsPhysicsComponent(boundVertices, isLoop);
     }
 
     @Override
     public String getID() {
-        return "BarrierPhysicsComponent";
+        return "BoundsPhysicsComponent";
     }
 }
