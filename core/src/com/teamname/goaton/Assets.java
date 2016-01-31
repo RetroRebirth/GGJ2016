@@ -13,8 +13,6 @@ public class Assets {
     public final static String pit = "art/demonhole.png";
     public final static String heart = "art/heart.png";
     public final static String player_dead = "art/farmer_dead.png";
-    public final static String heart = "art/heart.png";
-    public final static String player_dead = "art/farmer_dead.png";
 
     // Player sprite assets
     public final static String player_D   = "art/farmer_down.png";
@@ -79,11 +77,12 @@ public class Assets {
     public final static String goat_Toss_SFX        = "sfx/goat_toss.mp3";
     public final static String secret_Toss_SFX      = "sfx/goat_toss_alt.mp3";
     public final static String boss_Entrance_SFX    = "sfx/boss_spawn.mp3";
-    public final static String demon_Spawn_SFX      = "sfx/demon+spawn.mp3";
+    public final static String demon_Spawn_SFX      = "sfx/demon_spawn.mp3";
     public final static String impact_SFX           = "sfx/goat_impact.mp3";
+    public final static String movement_SFX         = "sfx/footsteps_cave.mp3";
 
     // Music assets
     public final static String title_Theme          = "music/title_theme.mp3";
     public final static String main_Intro           = "music/main_theme_intro.mp3";
-    public final static String main_Loop            = "music/main_theme_loop.mp3"
+    public final static String main_Loop            = "music/main_theme_loop.mp3";
 }

@@ -1,5 +1,7 @@
 package com.teamname.goaton;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -44,7 +46,9 @@ public abstract class Scene {
     protected Camera camera;
     protected float viewportScale = 1.0f;
 
-
+    protected Music titleTheme;
+    protected Music mainThemeIntro;
+    protected Music mainThemeLoop;
 
     protected Box2DDebugRenderer debugRenderer = new Box2DDebugRenderer();
 
@@ -132,6 +136,11 @@ public abstract class Scene {
             obj.render(sb);
         }
 
+        if (!mainThemeIntro.isPlaying()) {
+
+            mainThemeIntro.dispose();
+            mainThemeLoop.play();
+        }
         //After all is said and done, finish the remove.
         finishRemove();
         //OrthographicCamera camera2 = new OrthographicCamera(200,200);
@@ -180,6 +189,16 @@ public abstract class Scene {
             {
                 obj.create();
             }
+
+            // Set up and initialize intro music
+            mainThemeIntro = Gdx.audio.newMusic(Gdx.files.internal(Assets.main_Intro));
+            mainThemeIntro.setVolume(0.75f);
+            mainThemeIntro.play();
+
+            // Initialize the main loop; set the volume and set looping to true
+            mainThemeLoop = Gdx.audio.newMusic(Gdx.files.internal(Assets.main_Loop));
+            mainThemeLoop.setVolume(0.75f);
+            mainThemeLoop.isLooping();
         //}
     }
 
