@@ -68,7 +68,6 @@ public class PlayerPickupComponent extends Component {
 
     @Override
     protected void onCollisionEnter(Contact collision, GameObject other) {
-        System.out.println("Got a goat");
         Fixture f1 = collision.getFixtureA();
         Fixture f2 = collision.getFixtureB();
         if (f1.isSensor() || f2.isSensor()) {
@@ -77,7 +76,6 @@ public class PlayerPickupComponent extends Component {
         }
     }
     protected void onCollisionExit(Contact collision, GameObject other) {
-        System.out.println("Lost a goat");
         Fixture f1 = collision.getFixtureA();
         Fixture f2 = collision.getFixtureB();
         if (f1.isSensor() || f2.isSensor()) {
