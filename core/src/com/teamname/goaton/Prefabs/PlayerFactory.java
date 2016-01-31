@@ -41,7 +41,6 @@ public class PlayerFactory extends GameObject {
         go.addComponent(new PlayerPickupComponent());
         go.addComponent(new GoatStackComponent());
         go.addComponent(new ParticleComponent("art/particleEffects/testExplode.p","explode"));
-        go.addComponent(new PlayerHealthComponent());
         go.tags.add("player");
         go.layer = Assets.ACTOR_LAYER;
         return go;
@@ -75,6 +74,8 @@ public class PlayerFactory extends GameObject {
         sprites.put(Assets.playerC_U, new Sprite(new Texture(Gdx.files.internal(Assets.playerC_U))));
         sprites.put(Assets.playerC_UL, new Sprite(new Texture(Gdx.files.internal(Assets.playerC_UL))));
         sprites.put(Assets.playerC_UR, new Sprite(new Texture(Gdx.files.internal(Assets.playerC_UR))));
+
+        sprites.put(Assets.player_dead, new Sprite(new Texture(Gdx.files.internal(Assets.player_dead))));
 
         return sprites;
     }

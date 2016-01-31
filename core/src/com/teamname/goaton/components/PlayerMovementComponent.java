@@ -17,6 +17,7 @@ public class PlayerMovementComponent extends Component {
     }
     public boolean holdingGoat = false;
     public boolean hit = false;
+    public boolean dead = false;
     private final float HIT_STUN = 1.0f;
     private float hitStun = HIT_STUN;
 
@@ -29,6 +30,13 @@ public class PlayerMovementComponent extends Component {
                 }
         });
 
+        this.on("player_dead",new MsgHandler() {
+            @Override
+            public void handle(Message msg) {
+                hit = false;
+                dead = true;
+            }
+        });
     }
 
     @Override
@@ -38,8 +46,16 @@ public class PlayerMovementComponent extends Component {
 
     @Override
     protected void update(float dt) {
-        if (!hit) {
+        if (dead) {
 
+        } else if (hit) {
+            // TODO Knockback animation
+            hitStun -= dt;
+            if (hitStun < 0.0f) {
+                hit = false;
+                hitStun = HIT_STUN;
+            }
+        } else {
             Vector2 movement = new Vector2();
             movement.x += src.getMovementOnAxis(GameInputSource.Axis.X_AXIS);
             movement.y += src.getMovementOnAxis(GameInputSource.Axis.Y_AXIS);
@@ -74,13 +90,6 @@ public class PlayerMovementComponent extends Component {
             gameObject.getBody().setLinearVelocity(movement.x, movement.y);
 
             gameObject.direction = parseDirection(movement);
-        } else {
-            // TODO Knockback animation
-            hitStun -= dt;
-            if (hitStun < 0.0f) {
-                hit = false;
-                hitStun = HIT_STUN;
-            }
         }
     }
 

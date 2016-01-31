@@ -31,8 +31,11 @@ public class EnemyComponent extends Component {
 
         }
         if (other.tags.contains("player")) {
-            // TODO damage player
+            // Damage player
 //            other.getBody().applyForce(100f, 100f, 0f, 0f, false);
+            if (!((PlayerMovementComponent) other.getComponent("PlayerMovementComponent")).hit) {
+                GoatonWorld.sendGlobalMessage(new Message("player_hit"));
+            }
             ((PlayerMovementComponent) other.getComponent("PlayerMovementComponent")).hit = true;
             Vector2 dir = other.getPosition().sub(this.gameObject.getPosition()).nor().scl(10f);
             other.getBody().setLinearVelocity(dir);

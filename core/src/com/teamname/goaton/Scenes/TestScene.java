@@ -43,6 +43,7 @@ public class TestScene extends Scene {
 
         gui = new GameObject();
         gui.addComponent(new GUIBossHealthComponent());
+        gui.addComponent(new PlayerHealthComponent());
         gui.create();
         guiSB = new SpriteBatch();
 

@@ -185,7 +185,10 @@ public class PlayerAnimatedSpriteComponent extends AnimatedSpriteRenderComponent
         }
 
         // Hit stun color shading
-        if (((PlayerMovementComponent) gameObject.getComponent("PlayerMovementComponent")).hit) {
+        if (((PlayerMovementComponent) gameObject.getComponent("PlayerMovementComponent")).dead) {
+//            currentSprite.setColor(Color.WHITE);
+            currentSprite = sprites.get(Assets.player_dead);
+        } else if (((PlayerMovementComponent) gameObject.getComponent("PlayerMovementComponent")).hit) {
             currentSprite.setColor(Color.GRAY);
         } else {
             currentSprite.setColor(Color.WHITE);
