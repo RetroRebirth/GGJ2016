@@ -2,10 +2,7 @@ package com.teamname.goaton.components;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
-import com.teamname.goaton.Component;
-import com.teamname.goaton.Assets;
-import com.teamname.goaton.Message;
-import com.teamname.goaton.MsgHandler;
+import com.teamname.goaton.*;
 
 import java.util.Random;
 import java.util.Timer;
@@ -72,17 +69,27 @@ public class SoundComponent extends Component {
     @Override
     protected void create() {
         // Handles sound for picking up goats (secret and default)
-        on("pickup", new MsgHandler() {
+        on("pickupSound", new MsgHandler() {
             @Override
             public void handle(Message msg) {
-                goatPickupSFX.play(0.5f);
+                if (GoatonWorld.Random.nextFloat() > 0.70f) {
+                    secretPickupSFX.play(1.0f);
+                }
+                else {
+                    goatPickupSFX.play(0.5f);
+                }
             }
         });
         // Handles sound for tossing goats (secret and default)
         on("throwGoatSound", new MsgHandler() {
             @Override
             public void handle(Message msg) {
-                goatTossSFX.play(0.5f);
+                if (GoatonWorld.Random.nextFloat() > 0.70f) {
+                    secretTossSFX.play(1.0f);
+                }
+                else {
+                    goatTossSFX.play(0.5f);
+                }
             }
         });
         // Handles sound for the boss spawn
