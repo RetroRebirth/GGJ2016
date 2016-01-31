@@ -11,4 +11,5 @@ public class ObjectTypes {
     public static final int DEMON = 0x0010;
     public static final int GOAT_DETECTOR = 0x0020;
     public static final int GOAT_AIR = 0x0040 ;
+    public static final short FIRE = 0x0080;
 }

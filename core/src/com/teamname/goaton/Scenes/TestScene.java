@@ -3,10 +3,8 @@ package com.teamname.goaton.Scenes;
 import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
 
 import com.teamname.goaton.GameObject;
 import com.teamname.goaton.Input.ControllerInputSorce;
@@ -37,9 +35,15 @@ public class TestScene extends Scene {
     private float tutorialDuration = TUTORIAL_DUR;
     private boolean displayTutorial = true;
 
+    private boolean runUpdate = true;
     @Override
     public void sendGlobalMessage(Message msg) {
         gui.send(msg);
+        if(msg.equals("gameFinish"))
+        {
+            runUpdate = false;
+        }
+
         super.sendGlobalMessage(msg);
     }
 
@@ -59,6 +63,8 @@ public class TestScene extends Scene {
         gui = new GameObject();
         gui.addComponent(new GUIBossHealthComponent());
         gui.addComponent(new PlayerHealthComponent());
+        gui.addComponent(new CreditsComponent());
+
         gui.create();
         guiSB = new SpriteBatch();
 
@@ -90,7 +96,10 @@ public class TestScene extends Scene {
         }*/
             //doing physics here?
         camControl.setCameraPosition(new Vector2(Scene.Player.getScreenPosition().x, Scene.Player.getScreenPosition().y));
-        super.updateRender(dt, sb);
+        if(runUpdate)
+        {
+            super.updateRender(dt, sb);
+        }
         sb.end();
 
         //viewport.apply();
@@ -99,16 +108,21 @@ public class TestScene extends Scene {
         gui.update(dt);
         gui.render(guiSB);
 
-        if (displayTutorial) {
+        boolean dead = ((PlayerMovementComponent) Scene.Player.getComponent("PlayerMovementComponent")).dead;
+        if (displayTutorial && !dead) {
             if (tutorialDelay > 0f) {
                 tutorialDelay -= dt;
             } else if (tutorialDuration > 0f) {
                 tutorialDuration -= dt;
-                renderTextToScreen();
+                renderTutorialTextToScreen();
             } else {
                 tutorialDelay = TUTORIAL_DELAY;
                 tutorialDuration = TUTORIAL_DUR;
             }
+        }
+
+        if (dead) {
+            renderGameOverTextToScreen();
         }
 
         guiSB.end();
@@ -116,13 +130,12 @@ public class TestScene extends Scene {
             //debugRenderer.render(GoatonWorld.world, camera.combined);
     }
 
-    private void renderTextToScreen() {
-//        font.setColor(0.53f, 0.03f, 0.03f, 1.0f); // Blood-red
-        font.setColor(0.73f, 0.03f, 0.03f, 1.0f); // bright-red
-//        font.setColor(1f, 1f, 1f, 1.0f);
-
-//        font.draw(guiSB, "The Goats of Hell", -60, 160);
+    private void renderTutorialTextToScreen() {
         font.draw(guiSB, "Press [SPACE] to pick up goats!", -100, 48);
+    }
+
+    private void renderGameOverTextToScreen() {
+        font.draw(guiSB, "GAME OVER", -46, 48);
     }
 
     @Override
@@ -135,6 +148,7 @@ public class TestScene extends Scene {
         createPits();
 
         font = new BitmapFont();
+        font.setColor(0.73f, 0.03f, 0.03f, 1.0f); // bright-red
 
         super.create();
 

@@ -5,17 +5,14 @@ import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
-import com.teamname.goaton.Component;
-import com.teamname.goaton.GoatonWorld;
-import com.teamname.goaton.Message;
-import com.teamname.goaton.MsgHandler;
+import com.badlogic.gdx.physics.box2d.*;
+import com.teamname.goaton.*;
 
 /**
  * Created by lejonmcgowan runEffect 1/30/16.
  */
 public class ParticleComponent extends Component
 {
-
     private ParticleEffect particleEffect;
     private boolean runEffect;
 
@@ -52,6 +49,7 @@ public class ParticleComponent extends Component
                 {
                     if (!runEffect)
                     {
+                        gameObject.send(new Message("fireon"));
                         particleEffect.findEmitter(effectName).durationTimer = 0;
                         //setRepeat(true);
                         setRunEffect(true);
@@ -69,7 +67,6 @@ public class ParticleComponent extends Component
                 {
                     if (!runEffect)
                     {
-
                         setRunEffect(true);
                     }
 
@@ -87,6 +84,15 @@ public class ParticleComponent extends Component
         particleEffect.load(Gdx.files.internal(filepath),Gdx.files.internal("art/particleEffects"));
         particleEffect.start();
 
+    }
+
+    @Override
+    protected void onCollisionEnter(Contact collision, GameObject other)
+    {
+        if (collision.getFixtureA().isSensor() || collision.getFixtureB().isSensor()) {
+            return;
+        }
+        //if(other.tags.contains("goat"))
     }
 
     @Override
@@ -121,6 +127,7 @@ public class ParticleComponent extends Component
             particleEffect.draw(sb,Gdx.graphics.getDeltaTime());
             if(particleEffect.isComplete())
             {
+                gameObject.send(new Message("fireoff"));
                 runEffect = false;
                 if(gameObject.tags.contains("demon"))
                 {

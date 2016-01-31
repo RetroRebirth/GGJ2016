@@ -13,9 +13,14 @@ public class ControllerInputSorce implements GameInputSource {
     private int yAx;
     private  int aBtn;
     private int bBtn;
+    private int startBtn;
     private int spinLeftBtn;
     private int spinRightBtn;
-    private boolean btnToggle;
+    private boolean abtnToggle;
+    private boolean lbtnToggle;
+    private boolean rbtnToggle;
+    private boolean resetButtonToggle;
+
 
     public ControllerInputSorce(Controller ctrl)
     {
@@ -26,6 +31,7 @@ public class ControllerInputSorce implements GameInputSource {
             yAx = Xbox.L_STICK_VERTICAL_AXIS;
             aBtn = Xbox.A;
             bBtn = Xbox.B;
+            startBtn = Xbox.START;
             spinLeftBtn = Xbox.L_BUMPER;
             spinRightBtn = Xbox.R_BUMPER;
         }
@@ -58,18 +64,18 @@ public class ControllerInputSorce implements GameInputSource {
 
     @Override
     public boolean isThrowButtonPressed() {
-        if(btnToggle)
+        if(abtnToggle)
         {
             if(!ctrl.getButton(aBtn))
             {
-                btnToggle = false;
+                abtnToggle = false;
             }
 
             return false;
         }
         else if(ctrl.getButton(aBtn))
         {
-            btnToggle = true;
+            abtnToggle = true;
             return true;
         }
         else
@@ -79,50 +85,29 @@ public class ControllerInputSorce implements GameInputSource {
     }
     public boolean isDebugButtonPressed()
     {
-        if(ctrl.getButton(Xbox.X))
-        {
-            return true;
-        }
-        return false;
+       return false;
     }
 
 
     @Override
     public boolean isGlowButtonPressed() {
-        if(btnToggle)
-        {
-            if(!ctrl.getButton(bBtn))
-            {
-                btnToggle = false;
-            }
-
-            return false;
-        }
-        else if(ctrl.getButton(bBtn))
-        {
-            btnToggle = true;
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return false;
     }
 
     @Override
     public boolean isSpinLeftButtonPressed() {
-        if(btnToggle)
+        if(lbtnToggle)
         {
             if(!ctrl.getButton(spinLeftBtn))
             {
-                btnToggle = false;
+                lbtnToggle = false;
             }
 
             return false;
         }
         else if(ctrl.getButton(spinLeftBtn))
         {
-            btnToggle = true;
+            lbtnToggle = true;
             return true;
         }
         else
@@ -133,18 +118,40 @@ public class ControllerInputSorce implements GameInputSource {
 
     @Override
     public boolean isSpinRightButtonPressed() {
-        if(btnToggle)
+        if(rbtnToggle)
         {
             if(!ctrl.getButton(spinRightBtn))
             {
-                btnToggle = false;
+                rbtnToggle = false;
             }
 
             return false;
         }
         else if(ctrl.getButton(spinRightBtn))
         {
-            btnToggle = true;
+            rbtnToggle = true;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean isRestartButtonPressed() {
+        if(resetButtonToggle)
+        {
+            if(!ctrl.getButton(startBtn))
+            {
+                resetButtonToggle = false;
+            }
+
+            return false;
+        }
+        else if(ctrl.getButton(startBtn))
+        {
+            resetButtonToggle = true;
             return true;
         }
         else

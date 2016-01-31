@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
@@ -40,6 +41,7 @@ public abstract class Scene {
     protected Queue<GameObject> removeList = new LinkedList<GameObject>();
     //I'm so sorry
     GameObject removableBarrier;
+
     Vector2 bridgePos;
     protected Viewport viewport;
 
@@ -99,6 +101,7 @@ public abstract class Scene {
             GoatonWorld.Destroy(removableBarrier);
             BridgeTileFactory.Create(this,bridgePos,3);
         }
+
         for(GameObject obj : objects)
         {
             obj.send(msg);
@@ -106,35 +109,43 @@ public abstract class Scene {
     }
 
     public void updateRender(float dt, SpriteBatch sb) {
-        GoatonWorld.world.step(dt, 6, 2);
-        Array<Body> bodies = new Array<Body>();
-        GoatonWorld.world.getBodies(bodies);
-        for (Body b : bodies) {
-            GameObject go = (GameObject) b.getUserData();
-            go.setPosition(b.getPosition());
-        }
 
-        while (!addList.isEmpty()) {
-            GameObject obj = addList.remove();
-            obj.create();
-            objects.add(obj);
-        }
-        objects.sort(new Comparator<GameObject>() {
-            @Override
-            public int compare(GameObject o1, GameObject o2) {
-                int cmp = o1.layer - o2.layer;
-                if(cmp != 0)
-                {
-                    return cmp;
-                }
-                return (int)o2.getScreenPosition().y - (int)o1.getScreenPosition().y;
+
+            GoatonWorld.world.step(dt, 6, 2);
+            Array<Body> bodies = new Array<Body>();
+            GoatonWorld.world.getBodies(bodies);
+            for (Body b : bodies) {
+                GameObject go = (GameObject) b.getUserData();
+                go.setPosition(b.getPosition());
             }
-        });
 
-        for (GameObject obj : objects) {
-            obj.update(dt);
-            obj.render(sb);
-        }
+            while (!addList.isEmpty()) {
+                GameObject obj = addList.remove();
+                obj.create();
+                objects.add(obj);
+            }
+            objects.sort(new Comparator<GameObject>() {
+                @Override
+                public int compare(GameObject o1, GameObject o2) {
+                    int cmp = o1.layer - o2.layer;
+                    if (cmp != 0) {
+                        return cmp;
+                    }
+                    return (int) o2.getScreenPosition().y - (int) o1.getScreenPosition().y;
+                }
+            });
+
+            for (GameObject obj : objects) {
+                obj.update(dt);
+                obj.render(sb);
+            }
+
+            //After all is said and done, finish the remove.
+            finishRemove();
+            //OrthographicCamera camera2 = new OrthographicCamera(200,200);
+            //debugRenderer.render(GoatonWorld.world, camera2.combined);
+
+
 
         if (!mainThemeIntro.isPlaying()) {
 
@@ -145,6 +156,7 @@ public abstract class Scene {
         finishRemove();
         //OrthographicCamera camera2 = new OrthographicCamera(200,200);
         //debugRenderer.render(GoatonWorld.world, camera2.combined);
+
     }
 
     public void updatePhysics(float dt) {
@@ -233,7 +245,7 @@ public abstract class Scene {
                 {
                     mo.setVisible(false);
 
-                    GameObject go = BoundBoxFactory.Create(mo,false);
+                    GameObject go = BoundBoxFactory.Create(mo, false);
                     addObject(go);
                     if(mo.getName() != null && mo.getName().equals("RemovableBoundary"))
                     {
@@ -262,6 +274,7 @@ public abstract class Scene {
                 addObject(Scene.Player);
 
                 addObject(PlayerTriggerFactory.Create(objects.get("BossTrigger"),new Message("spawnBoss"),true));
+                addObject(PlayerTriggerFactory.Create(objects.get("GameEndTrigger"),new Message("gameFinish"),true));
 
                 GameObject goatSpawner = new GameObject();
                 goatSpawner.addComponent(new GoatSpawnerComponent());
