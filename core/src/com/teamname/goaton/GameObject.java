@@ -170,7 +170,7 @@ public class GameObject {
         }
         else
         {
-            position = pos;
+            this.position = new Vector2(pos);
         }
     }
 
@@ -223,7 +223,7 @@ public class GameObject {
         }
         else
         {
-            return new Vector2(position).add(pOffset);
+            return new Vector2(this.position).add(pOffset);
         }
     }
 

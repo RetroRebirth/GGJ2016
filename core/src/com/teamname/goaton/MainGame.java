@@ -57,7 +57,6 @@ public class MainGame extends ApplicationAdapter {
         GoatonWorld.cMap = tileMap;
         GoatonWorld.worldWidth  =  (Integer)tileMap.getProperties().get("width");
         GoatonWorld.worldHeight = (Integer)tileMap.getProperties().get("height");
-
         scene.addMapObjects(tileMap);
 
         GoatonWorld.setScene(scene);

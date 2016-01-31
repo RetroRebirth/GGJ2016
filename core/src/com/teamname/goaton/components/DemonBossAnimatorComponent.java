@@ -103,6 +103,7 @@ public class DemonBossAnimatorComponent extends Component {
         this.on("destroy", new MsgHandler() {
             @Override
             public void handle(Message msg) {
+
                 TweenCallback shakeCB = new TweenCallback() {
                     @Override
                     public void onEvent(int i, BaseTween<?> baseTween) {
@@ -156,6 +157,7 @@ public class DemonBossAnimatorComponent extends Component {
                             @Override
                             public void onEvent(int i, BaseTween<?> baseTween) {
                                 GoatonWorld.sendGlobalMessage(new Message("cameraShake",new CamShakeControl(1.f,80.f)));
+                                GoatonWorld.sendGlobalMessage(new Message("bossDestroyed"));
                             }
                         })
 

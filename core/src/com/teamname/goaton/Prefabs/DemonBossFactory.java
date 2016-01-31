@@ -17,7 +17,7 @@ public class DemonBossFactory {
         GameObject demonBoss = new GameObject();
         demonBoss.addComponent(new DemonBossAnimatorComponent());
         demonBoss.addComponent(new PitPhysicsComponent());
-        demonBoss.addComponent(new EnemyComponent(20));
+        demonBoss.addComponent(new EnemyComponent(1));
         demonBoss.addComponent((new BossArmComponent(new Sprite(new Texture(Gdx.files.internal(Assets.arm))),
                                                         lArm,
                                                         false)));
