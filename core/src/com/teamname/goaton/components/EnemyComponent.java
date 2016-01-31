@@ -37,12 +37,19 @@ public class EnemyComponent extends Component {
         }
         if(other.tags.contains("goat") && canBeDamaged)
         {
-            health-=1;
-            gameObject.send(new Message("damaged"));
-            other.send(new Message("destroy"));
-            GoatonWorld.numGoats--;
-            GoatonWorld.Destroy(other);
+            if(gameObject.tags.contains("demonboss") &&
+                    ((DemonBossPhysicsComponent)gameObject.getComponent("DemonBossPhysicsComponent")).isHitboxOn())
+            {
+                //don't damage demon, push that goat back
+            }
+            else {
 
+                health -= 1;
+                gameObject.send(new Message("damaged"));
+                other.send(new Message("destroy"));
+                GoatonWorld.numGoats--;
+                GoatonWorld.Destroy(other);
+            }
         }
         if (other.tags.contains("player")) {
             // Damage player
@@ -51,7 +58,8 @@ public class EnemyComponent extends Component {
                 GoatonWorld.sendGlobalMessage(new Message("player_hit"));
             }
             ((PlayerMovementComponent) other.getComponent("PlayerMovementComponent")).hit = true;
-            Vector2 dir = other.getPosition().sub(this.gameObject.getPosition()).nor().scl(10f);
+            float pushback = gameObject.tags.contains("demonboss") ? 2.0f : 10.0f;
+            Vector2 dir = other.getPosition().sub(this.gameObject.getPosition()).nor().scl(pushback);
             other.getBody().setLinearVelocity(dir);
         }
         if(health <= 0 && canBeDamaged)

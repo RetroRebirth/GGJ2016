@@ -1,11 +1,15 @@
 package com.teamname.goaton.Scenes;
 
+import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
-//import com.sun.prism.image.ViewPort;
+
 import com.teamname.goaton.GameObject;
+import com.teamname.goaton.Input.ControllerInputSorce;
+import com.teamname.goaton.Input.GameInputSource;
+import com.teamname.goaton.Input.KeyboardInputSource;
 import com.teamname.goaton.Message;
 import com.teamname.goaton.Prefabs.*;
 import com.teamname.goaton.Scene;
@@ -21,6 +25,15 @@ public class TestScene extends Scene {
     //ViewPort guiViewport;
     private  GameObject gui;
     private SpriteBatch guiSB;
+    private BitmapFont font;
+    GameInputSource src;
+
+    private final float TUTORIAL_DUR = 5f;
+    private final float TUTORIAL_DELAY = 15f;
+
+    private float tutorialDelay = TUTORIAL_DELAY;
+    private float tutorialDuration = TUTORIAL_DUR;
+    private boolean displayTutorial = true;
 
     private boolean runUpdate = true;
     @Override
@@ -55,10 +68,22 @@ public class TestScene extends Scene {
         gui.create();
         guiSB = new SpriteBatch();
 
+        if(Controllers.getControllers().size > 0)
+        {
+            src = new ControllerInputSorce(Controllers.getControllers().get(0));
+        }
+        else
+        {
+            src = new KeyboardInputSource();
+        }
     }
 
     @Override
     public void updateRender(float dt, SpriteBatch sb) {
+        if (displayTutorial && src.isThrowButtonPressed()) {
+            displayTutorial = false;
+        }
+
         /*for (int i = 0; i < NUM_LAYERS; i++)
         {
             while (!addList[i].isEmpty())
@@ -82,9 +107,35 @@ public class TestScene extends Scene {
         guiSB.begin();
         gui.update(dt);
         gui.render(guiSB);
+
+        boolean dead = ((PlayerMovementComponent) Scene.Player.getComponent("PlayerMovementComponent")).dead;
+        if (displayTutorial && !dead) {
+            if (tutorialDelay > 0f) {
+                tutorialDelay -= dt;
+            } else if (tutorialDuration > 0f) {
+                tutorialDuration -= dt;
+                renderTutorialTextToScreen();
+            } else {
+                tutorialDelay = TUTORIAL_DELAY;
+                tutorialDuration = TUTORIAL_DUR;
+            }
+        }
+
+        if (dead) {
+            renderGameOverTextToScreen();
+        }
+
         guiSB.end();
 
             //debugRenderer.render(GoatonWorld.world, camera.combined);
+    }
+
+    private void renderTutorialTextToScreen() {
+        font.draw(guiSB, "Press [SPACE] to pick up goats!", -100, 48);
+    }
+
+    private void renderGameOverTextToScreen() {
+        font.draw(guiSB, "GAME OVER", -46, 48);
     }
 
     @Override
@@ -96,6 +147,8 @@ public class TestScene extends Scene {
 
         createPits();
 
+        font = new BitmapFont();
+        font.setColor(0.73f, 0.03f, 0.03f, 1.0f); // bright-red
 
         super.create();
 
