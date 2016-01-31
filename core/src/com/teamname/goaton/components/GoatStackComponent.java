@@ -31,7 +31,11 @@ public class GoatStackComponent extends Component {
                 {
                     cGoat.setPosition(gameObject.getPosition().add(new Vector2(0,1)));
                     gameObject.removeChild(cGoat);
-                    cGoat.getBody().setLinearVelocity(calcGoatThrowVelocity());
+                    //cGoat.getBody().setLinearVelocity(calcGoatThrowVelocity());
+                    Vector2 mov = calcGoatThrowVelocity();
+                    cGoat.getBody().applyForceToCenter(new Vector2(mov.x * 50, mov.y * 50), true);
+                    //cGoat.getBody().applyForceToCenter(new Vector2(-mov.y * 20, mov.x * 20), true);
+                    //cGoat.getBody())
                     cGoat.send(new Message("throw"));
                     cGoat = null;
                 }

@@ -1,5 +1,6 @@
 package com.teamname.goaton.components;
 
+import com.badlogic.gdx.math.Vector2;
 import com.teamname.goaton.Component;
 import com.teamname.goaton.GameObject;
 import com.teamname.goaton.GoatonWorld;
@@ -10,12 +11,12 @@ import com.teamname.goaton.Prefabs.PitFactory;
  */
 public class SpawnerComponent extends Component {
     private float timeBetweenSpawn;
-    private float minTime = 1f;
-    private float maxTime = 2f;
+    protected float minTime = 1f;
+    protected float maxTime = 2f;
 
     private float spawnPerRound;
-    private int minSpawn = 1;
-    private int maxSpawn = 10;
+    protected int minSpawn = 1;
+    protected int maxSpawn = 10;
 
     GameObject go;
 

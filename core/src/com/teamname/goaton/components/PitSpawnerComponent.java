@@ -8,6 +8,7 @@ import com.teamname.goaton.Prefabs.PitFactory;
  */
 public class PitSpawnerComponent extends SpawnerComponent {
 
+
     public PitSpawnerComponent() {
         super();
         go = PitFactory.Create();
