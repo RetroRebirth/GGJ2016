@@ -16,7 +16,7 @@ public class DemonPositionComponent extends PositionComponent {
 
     @Override
     protected void create() {
-        System.out.println("pitPos: " + pitPos);
+//        System.out.println("pitPos: " + pitPos);
         gameObject.setPosition(pitPos);
     }
 
