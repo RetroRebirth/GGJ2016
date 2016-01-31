@@ -62,7 +62,14 @@ public class DemonBossPhysicsComponent extends Component {
         on("fireon", new MsgHandler() {
             @Override
             public void handle(Message msg) {
-                setMaskBits(true);
+                new java.util.Timer().schedule(
+                        new java.util.TimerTask() {
+                            @Override
+                            public void run() {
+                                setMaskBits(true);
+                            }
+                        }, 500);
+
             }
         });
 
