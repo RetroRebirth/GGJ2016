@@ -77,6 +77,8 @@ public class PlayerMovementComponent extends Component {
             } else {
                 direction = GameObject.Direction.DOWN;
             }
+        } else if (movement.len() > 0.0) {
+            direction = this.gameObject.direction;
         }
 
         return direction;
