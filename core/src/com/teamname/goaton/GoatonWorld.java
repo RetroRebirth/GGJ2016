@@ -19,6 +19,7 @@ public class GoatonWorld {
     public static Random Random = new Random();
     public static final int TILE_SIZE = 32;
     public static final Vector2 STAGE_SIZE = new Vector2(3200,3200);
+    
     public static TweenManager TweenManager;
     public static <T extends Enum<?>> T RandomEnum(Class<T> clazz){
         int x = GoatonWorld.Random.nextInt(clazz.getEnumConstants().length);
@@ -42,8 +43,8 @@ public class GoatonWorld {
     public static void setScene(Scene newScene)
     {
         GoatonWorld.scene = newScene;
-        GoatonWorld.worldHeight = scene.getCamera().viewportHeight/TILE_SIZE;
-        GoatonWorld.worldWidth = scene.getCamera().viewportWidth/TILE_SIZE;
+        //GoatonWorld.worldHeight = scene.getCamera().viewportHeight/TILE_SIZE;
+        //GoatonWorld.worldWidth = scene.getCamera().viewportWidth/TILE_SIZE;
         newScene.create();
         world.setContactListener(new CollisionListener());
 

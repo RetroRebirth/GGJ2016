@@ -13,8 +13,8 @@ public class Assets {
     public final static String player_DL  = "art/farmer_down-left.png";
     public final static String player_DR  = "art/farmer_down-right.png";
     public final static String player_L   = "art/farmer_left.png";
-    public final static String player_LL  = "art/farmer_left-left.png";
-    public final static String player_LR  = "art/farmer_left-right.png";
+    public final static String player_LL  = "art/farmer_left-right.png";
+    public final static String player_LR  = "art/farmer_left-left.png";
     public final static String player_R   = "art/farmer_right.png";
     public final static String player_RL  = "art/farmer_right-left.png";
     public final static String player_RR  = "art/farmer_right-right.png";

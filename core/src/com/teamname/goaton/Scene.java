@@ -3,10 +3,18 @@ package com.teamname.goaton;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.MapProperties;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.teamname.goaton.Prefabs.BoundBoxFactory;
+import com.teamname.goaton.Prefabs.DemonBossFactory;
+import com.teamname.goaton.Prefabs.PlayerFactory;
 
 import java.util.*;
 
@@ -18,7 +26,7 @@ public abstract class Scene {
     public static final int ENTITY_LAYER = 1;
     public static final int GOAT_LAYER = 2;
     public static final int NUM_LAYERS = 3;*/
-
+    protected GameObject player;
     private float timer = 0;
     protected HashSet<GameObject> objects = new HashSet<GameObject>();
     protected List<GameObject>[] layers;
@@ -103,7 +111,8 @@ public abstract class Scene {
 
         //After all is said and done, finish the remove.
         finishRemove();
-        //debugRenderer.render(GoatonWorld.world, camera.combined);
+        OrthographicCamera camera2 = new OrthographicCamera(200,200);
+        debugRenderer.render(GoatonWorld.world, camera2.combined);
     }
 
     public void updatePhysics(float dt) {
@@ -163,5 +172,51 @@ public abstract class Scene {
     public void removeObject(GameObject other) {
         other.send(new Message("destroy"));
         removeList.add(other);
+    }
+
+    public void addMapObjects(TiledMap tileMap) {
+        for (MapLayer l : tileMap.getLayers())
+        {
+            if(l.getName().equals("WallLayer"))
+            {
+                for(MapObject mo : l.getObjects())
+                {
+                    mo.setVisible(false);
+                    addObject(BoundBoxFactory.Create(mo,true));
+                }
+            }
+            else if(l.getName().equals("BoundaryBarrier"))
+            {
+                for(MapObject mo : l.getObjects())
+                {
+                    mo.setVisible(false);
+                    addObject(BoundBoxFactory.Create(mo,false));
+                }
+            }
+            else if(l.getName().equals("Actors"))
+            {
+                for(MapObject mo : l.getObjects())
+                {
+                    if(mo.getName().equals("BossSpawn"))
+                    {
+                        GameObject boss = DemonBossFactory.Create();
+                        boss.setPosition(MapObjectToWorld(mo));
+                        addObject(boss);
+                    }
+                    else if(mo.getName().equals("PlayerSpawn"))
+                    {
+                        player = PlayerFactory.Create();
+                        player.setPosition(MapObjectToWorld(mo));
+                        addObject(player);
+                    }
+                }
+            }
+        }
+    }
+
+    private Vector2 MapObjectToWorld(MapObject mo) {
+        MapProperties props = mo.getProperties();
+        return new Vector2((Float)props.get("x")/GoatonWorld.TILE_SIZE, (Float)props.get("y")/GoatonWorld.TILE_SIZE);
+
     }
 }

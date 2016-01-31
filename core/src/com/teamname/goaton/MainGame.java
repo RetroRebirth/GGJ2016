@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
@@ -29,7 +30,7 @@ public class MainGame extends ApplicationAdapter {
     //map stuff
     private TiledMap tileMap;
     private OrthogonalTiledMapRenderer tileMapRenderer;
-
+    TiledMapTileLayer layer1, layer2, layer3;
 	Sprite img;
     ShaderProgram testProgram;
 
@@ -51,36 +52,42 @@ public class MainGame extends ApplicationAdapter {
         scene = new TestScene();
 		scene.getCamera().position.set(scene.getCamera().viewportWidth/2,scene.getCamera().viewportHeight/2,0);
 
-        tileMap = new TmxMapLoader().load("art/testmap.tmx");
+        tileMap = new TmxMapLoader().load("art/cave.tmx");
         tileMapRenderer = new OrthogonalTiledMapRenderer(tileMap);
+        GoatonWorld.worldWidth  =  (Integer)tileMap.getProperties().get("width");
+        GoatonWorld.worldHeight = (Integer)tileMap.getProperties().get("height");
 
+        scene.addMapObjects(tileMap);
 
-		GoatonWorld.setScene(scene);
-	}
+        GoatonWorld.setScene(scene);
+        layer1 = (TiledMapTileLayer) tileMap.getLayers().get("Tile Layer 1");
+        layer2 = (TiledMapTileLayer) tileMap.getLayers().get("PillarLayer");
+        layer3 = (TiledMapTileLayer) tileMap.getLayers().get("PillarLayerOverlay");
+
+    }
 
 	@Override
 	public void render ()
 	{
 
-		Gdx.gl.glClearColor(0.35f,0.89f,0.89f,1.0f);
+		Gdx.gl.glClearColor(0.f,0.f,0.f,1.0f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		batch.setProjectionMatrix(scene.getCamera().combined);
         update();
 
         tileMapRenderer.setView((OrthographicCamera) scene.getCamera());
+
         tileMapRenderer.render();
         batch.begin();
         GoatonWorld.updateRender(1 / 60.f, batch);
         batch.end();
-
         //scene.getCamera().translate(1,1,0);
         scene.getCamera().update();
 
     }
     public void update()
     {
-
 	}
 
 	@Override

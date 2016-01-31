@@ -28,6 +28,7 @@ public class PlayerPickupComponent extends Component {
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = arc;
         fixtureDef.isSensor = true;
+
         fixtureDef.filter.categoryBits = ObjectTypes.GOAT_DETECTOR;
         fixtureDef.filter.maskBits = ObjectTypes.GOAT;
 
