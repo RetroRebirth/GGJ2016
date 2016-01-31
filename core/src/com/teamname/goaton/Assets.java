@@ -66,4 +66,18 @@ public class Assets {
     public final static String demon_U  = "art/demon_up.png";
     public final static String demon_UL = "art/demon_up-left.png";
     public final static String demon_UR = "art/demon_up-right.png";
+
+    // SFX assets
+    public final static String goat_Pickup_SFX      = "sfx/goat_pickup.mp3";
+    public final static String secret_Pickup_SFX    = "sfx/goat_pickup_alt.mp3";
+    public final static String goat_Toss_SFX        = "sfx/goat_toss.mp3";
+    public final static String secret_Toss_SFX      = "sfx/goat_toss_alt.mp3";
+    public final static String boss_Entrance_SFX    = "sfx/boss_spawn.mp3";
+    public final static String demon_Spawn_SFX      = "sfx/demon+spawn.mp3";
+    public final static String impact_SFX           = "sfx/goat_impact.mp3";
+
+    // Music assets
+    public final static String title_Theme          = "music/title_theme.mp3";
+    public final static String main_Intro           = "music/main_theme_intro.mp3";
+    public final static String main_Loop            = "music/main_theme_loop.mp3";
 }
