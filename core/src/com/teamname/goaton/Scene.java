@@ -30,6 +30,7 @@ public abstract class Scene {
     private float timer = 0;
 
     protected List<GameObject> objects = new LinkedList<GameObject>();
+
     protected List<GameObject>[] layers;
     //Queue<GameObject>[] addList;
     protected Queue<GameObject> addList = new LinkedList<GameObject>();

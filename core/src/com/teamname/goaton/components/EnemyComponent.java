@@ -25,6 +25,7 @@ public class EnemyComponent extends Component {
         if(other.tags.contains("goat"))
         {
             health-=1;
+            gameObject.send(new Message("damaged"));
             other.send(new Message("destroy"));
             GoatonWorld.Destroy(other);
 
