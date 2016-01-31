@@ -50,7 +50,8 @@ public class TestScene extends Scene {
         this.player = createPlayer();
         addObject(this.player);
         createGoats();
-        createPits();
+        //createPits();
+        createPitSpawner();
         addObject(DemonBossFactory.Create());
         super.create();
 
@@ -75,5 +76,9 @@ public class TestScene extends Scene {
             GameObject newPit = GameObject.Instantiate(pit);
         }
 
+    }
+
+    private void createPitSpawner() {
+        GameObject.Instantiate(PitSpawnerFactory.Create());
     }
 }
