@@ -31,7 +31,7 @@ public abstract class Scene {
     public static final int ENTITY_LAYER = 1;
     public static final int GOAT_LAYER = 2;
     public static final int NUM_LAYERS = 3;*/
-    protected GameObject player;
+    public static GameObject Player;
     private float timer = 0;
 
     protected List<GameObject> objects = new LinkedList<GameObject>();
@@ -227,9 +227,9 @@ public abstract class Scene {
                 boss.setPosition(MapObjectToWorld(objects.get("BossSpawn")));
                 addObject(boss);
 
-                player = PlayerFactory.Create();
-                player.setPosition(MapObjectToWorld(objects.get("PlayerSpawn")));
-                addObject(player);
+                Scene.Player = PlayerFactory.Create();
+                Scene.Player.setPosition(MapObjectToWorld(objects.get("PlayerSpawn")));
+                addObject(Scene.Player);
 
                 addObject(PlayerTriggerFactory.Create(objects.get("BossTrigger"),new Message("spawnBoss"),true));
 

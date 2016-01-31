@@ -40,7 +40,7 @@ public class TestScene extends Scene {
             }
         }*/
             //doing physics here?
-        camControl.setCameraPosition(new Vector2(player.getScreenPosition().x, player.getScreenPosition().y));
+        camControl.setCameraPosition(new Vector2(Scene.Player.getScreenPosition().x, Scene.Player.getScreenPosition().y));
         super.updateRender(dt,sb);
             //debugRenderer.render(GoatonWorld.world, camera.combined);
     }
