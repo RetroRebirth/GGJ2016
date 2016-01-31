@@ -19,7 +19,6 @@ import com.teamname.goaton.Prefabs.DemonBossFactory;
 import com.teamname.goaton.Prefabs.PlayerFactory;
 import com.teamname.goaton.Prefabs.PlayerTriggerFactory;
 import com.teamname.goaton.components.GoatSpawnerComponent;
-import com.teamname.goaton.components.GoatStackComponent;
 
 import java.util.*;
 
@@ -77,7 +76,7 @@ public abstract class Scene {
         while(!removeList.isEmpty())
         {
             GameObject go = removeList.remove();
-            go.destory();
+            go.destroy();
             objects.remove(go);
             GoatonWorld.world.destroyBody(go.getBody());
         }

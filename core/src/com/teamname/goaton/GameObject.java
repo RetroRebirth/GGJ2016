@@ -93,7 +93,7 @@ public class GameObject {
         components.put(c.getID(),c);
 
     }
-    public void destory()
+    public void destroy()
     {
         while(!messages.isEmpty())
         {

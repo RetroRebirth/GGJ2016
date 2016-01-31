@@ -17,22 +17,30 @@ public class DemonPhysicsComponent extends Component {
         this.gameObject.addPhysicsBody(GoatonWorld.world.createBody(bodyDef));
 
         CircleShape circle = new CircleShape();
-        circle.setRadius(0.5f);
+        circle.setRadius(0.8f);
 
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = circle;
         fixtureDef.filter.categoryBits = ObjectTypes.DEMON;
         fixtureDef.filter.maskBits = ObjectTypes.GOAT_AIR |
                                     ObjectTypes.BOUNDARY |
-                                    ObjectTypes.PIT |
                                     ObjectTypes.DEMON |
                                     ObjectTypes.PLAYER;
-        fixtureDef.restitution = 0;
+        fixtureDef.restitution = 0f;
 
         gFix = this.gameObject.getBody().createFixture(fixtureDef);
 
         circle.dispose();
     }
+
+    @Override
+    protected void onCollisionEnter(Contact collision, GameObject other) {
+        if (other.getBody().getFixtureList().get(0).getFilterData().categoryBits == ObjectTypes.BOUNDARY ||
+                other.getBody().getFixtureList().get(0).getFilterData().categoryBits == ObjectTypes.PLAYER) {//refactor me?
+            this.gameObject.send(new Message("hit"));
+        }
+    }
+
 
     @Override
     public Component cloneComponent() {
