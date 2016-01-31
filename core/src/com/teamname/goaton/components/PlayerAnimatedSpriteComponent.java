@@ -63,7 +63,6 @@ public class PlayerAnimatedSpriteComponent extends AnimatedSpriteRenderComponent
             }
         }
 
-        // TODO check for carry or normal sprite
         // Render the sprite based on the direction, walk cycle, and if you're carrying a goat
         if (((PlayerMovementComponent) this.gameObject.getComponent("PlayerMovementComponent")).holdingGoat) {
             switch (dir) {
