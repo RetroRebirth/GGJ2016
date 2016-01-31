@@ -19,7 +19,7 @@ public class PlayerHealthComponent extends Component {
     private final float GUI_Y = 132;
 
     private final int MAX_HEALTH = 3;
-
+    private boolean showGui = true;
     public int health = MAX_HEALTH;
     protected List<Sprite> sprites;
 
@@ -49,14 +49,24 @@ public class PlayerHealthComponent extends Component {
                 }
             }
         });
+        this.on("gameFinish", new MsgHandler() {
+            @Override
+            public void handle(Message msg) {
+                showGui = false;
+            }
+        });
     }
 
     @Override
     protected void render(SpriteBatch sb) {
-        super.render(sb);
-        // Render health icons
-        for(Sprite s : sprites) {
-            s.draw(sb);
+        if(showGui) {
+
+
+            super.render(sb);
+            // Render health icons
+            for (Sprite s : sprites) {
+                s.draw(sb);
+            }
         }
     }
 

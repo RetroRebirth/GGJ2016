@@ -22,9 +22,15 @@ public class TestScene extends Scene {
     private  GameObject gui;
     private SpriteBatch guiSB;
 
+    private boolean runUpdate = true;
     @Override
     public void sendGlobalMessage(Message msg) {
         gui.send(msg);
+        if(msg.equals("gameFinish"))
+        {
+            runUpdate = false;
+        }
+
         super.sendGlobalMessage(msg);
     }
 
@@ -44,6 +50,8 @@ public class TestScene extends Scene {
         gui = new GameObject();
         gui.addComponent(new GUIBossHealthComponent());
         gui.addComponent(new PlayerHealthComponent());
+        gui.addComponent(new CreditsComponent());
+
         gui.create();
         guiSB = new SpriteBatch();
 
@@ -63,7 +71,10 @@ public class TestScene extends Scene {
         }*/
             //doing physics here?
         camControl.setCameraPosition(new Vector2(Scene.Player.getScreenPosition().x, Scene.Player.getScreenPosition().y));
-        super.updateRender(dt, sb);
+        if(runUpdate)
+        {
+            super.updateRender(dt, sb);
+        }
         sb.end();
 
         //viewport.apply();
