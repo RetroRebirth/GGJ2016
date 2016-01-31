@@ -16,17 +16,17 @@ import java.util.Queue;
 /**
  * Created by kpidding on 1/30/16.
  */
-public class Scene {
+public abstract class Scene {
     /*public static final int BG_LAYER = 0;
     public static final int ENTITY_LAYER = 1;
     public static final int GOAT_LAYER = 2;
     public static final int NUM_LAYERS = 3;*/
 
     private float timer = 0;
-    List<GameObject> objects = new ArrayList<GameObject>();
-    List<GameObject>[] layers;
+    protected List<GameObject> objects = new ArrayList<GameObject>();
+    protected List<GameObject>[] layers;
     //Queue<GameObject>[] addList;
-    Queue<GameObject> addList = new LinkedList<GameObject>();
+    protected Queue<GameObject> addList = new LinkedList<GameObject>();
     protected Viewport viewport;
 
     protected Camera camera;
@@ -34,13 +34,13 @@ public class Scene {
 
 
 
-    private Box2DDebugRenderer debugRenderer = new Box2DDebugRenderer();
+    protected Box2DDebugRenderer debugRenderer = new Box2DDebugRenderer();
 
 
     public Scene ()
     {
         camera = new OrthographicCamera();
-        viewport = new StretchViewport(1280 / 2,720 / 2,camera);
+        viewport = new StretchViewport(1280,720,camera);
         viewport.apply();
 
         /*
@@ -70,8 +70,8 @@ public class Scene {
             obj.send(msg);
         }
     }
-    public void updateRender(float dt, SpriteBatch sb)
-    {
+
+    public void updateRender(float dt, SpriteBatch sb) {
         /*for (int i = 0; i < NUM_LAYERS; i++)
         {
             while (!addList[i].isEmpty())
@@ -84,15 +84,13 @@ public class Scene {
         }*/
         //doing physics here?
 
-        while (!addList.isEmpty())
-        {
+        while (!addList.isEmpty()) {
             GameObject obj = addList.remove();
             obj.create();
             objects.add(obj);
         }
 
-        for(GameObject obj : objects)
-        {
+        for (GameObject obj : objects) {
             obj.update(dt);
             obj.render(sb);
         }
@@ -100,16 +98,12 @@ public class Scene {
         GoatonWorld.world.step(dt, 6, 2);
         Array<Body> bodies = new Array<Body>();
         GoatonWorld.world.getBodies(bodies);
-        for(Body b : bodies)
-        {
-            GameObject go = (GameObject)b.getUserData();
+        for (Body b : bodies) {
+            GameObject go = (GameObject) b.getUserData();
             go.setPosition(b.getPosition());
         }
 
-        debugRenderer.render(GoatonWorld.world, camera.combined);
-
-
-
+        //debugRenderer.render(GoatonWorld.world, camera.combined);
     }
 
     public void updatePhysics(float dt) {
