@@ -42,6 +42,12 @@ public class GoatMovementComponent extends Component {
                 update = true;
             }
         });
+        this.on("suckIntoHole", new MsgHandler() {
+            @Override
+            public void handle(Message msg) {
+            update = false;
+            }
+        })
     }
 
     @Override
